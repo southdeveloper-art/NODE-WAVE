@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let particles = [];
   const particleCount = 60;
+  let mouse = { x: -9999, y: -9999 };
+
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
 
   const resize = () => {
     canvas.width = window.innerWidth;
@@ -39,6 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     update() {
+      // Mouse repulsion wave
+      const dx = this.x - mouse.x;
+      const dy = this.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const repelRadius = 120;
+      if (dist < repelRadius && dist > 0) {
+        const force = (repelRadius - dist) / repelRadius;
+        this.x += (dx / dist) * force * 3;
+        this.y += (dy / dist) * force * 3;
+      }
+
       this.x += this.vx;
       this.y += this.vy;
 
@@ -197,7 +214,10 @@ function initHUD() {
   }
 }
 
+
 // DDoS Mitigation Logic
+
+
 function initDDoS() {
   const counterEl = document.getElementById('ddos-counter');
   let count = 324629;
