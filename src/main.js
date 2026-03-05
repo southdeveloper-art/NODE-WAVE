@@ -433,9 +433,10 @@ function initDDoS() {
       }
     }
 
-    function drawWave(data, color, fill) {
+    function drawWave(data, color, fill, dashed = false) {
       const W = trafficCanvas.width, H = trafficCanvas.height;
       ctx.beginPath();
+      ctx.setLineDash(dashed ? [3, 4] : []);
       ctx.moveTo(0, H);
 
       data.forEach((v, i) => {
@@ -445,15 +446,28 @@ function initDDoS() {
       });
 
       ctx.strokeStyle = color;
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = dashed ? 1 : 1.5;
       ctx.stroke();
 
       if (fill) {
+        ctx.setLineDash([]);
         ctx.lineTo(W, H);
         ctx.lineTo(0, H);
         ctx.fillStyle = fill;
         ctx.fill();
       }
+      ctx.setLineDash([]);
+    }
+
+    function drawReferenceLine() {
+      const W = trafficCanvas.width, H = trafficCanvas.height;
+      ctx.beginPath();
+      ctx.setLineDash([2, 5]);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.moveTo(0, H * 0.7);
+      ctx.lineTo(W, H * 0.7);
+      ctx.stroke();
+      ctx.setLineDash([]);
     }
 
     function drawTraffic() {
@@ -462,10 +476,12 @@ function initDDoS() {
       ctx.clearRect(0, 0, trafficCanvas.width, trafficCanvas.height);
 
       drawGrid();
+      drawReferenceLine();
       updateData();
 
-      // Malicious behind Clean
-      drawWave(malData, '#ff4d4d', 'rgba(255, 77, 77, 0.15)');
+      // Malicious: Dashed (Red)
+      drawWave(malData, '#ff4d4d', 'rgba(255, 77, 77, 0.05)', true);
+      // Clean: Solid fill (Orange)
       drawWave(cleanData, '#FF7000', 'rgba(255, 112, 0, 0.15)');
 
       t += 1;
