@@ -726,6 +726,53 @@ section {
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-credit {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.footer-credit a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 800;
+  transition: var(--transition);
+}
+
+.footer-credit a:hover {
+  text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.heart {
+  display: inline-block;
+  color: #ff4d4d;
+  animation: heart-beat 1.5s infinite ease-in-out;
+}
+
+@keyframes heart-beat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 /* Animations */
