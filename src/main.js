@@ -701,17 +701,60 @@ function initLoginModal() {
 
   updateUI();
 
-  // Detect OAuth return (Mock for frontend demo)
+  // Detect OAuth return
   if (window.location.hash.includes('access_token')) {
-    if (loginModal && loginView && onboardingView) {
-      loginModal.classList.add('active');
-      loginView.style.display = 'none';
-      onboardingView.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-      // Clear hash
-      history.replaceState(null, null, ' ');
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const token = params.get('access_token');
+
+    if (token) {
+      // Fetch user info from Google
+      fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.email) {
+            localStorage.setItem('userEmail', data.email);
+            const profile = JSON.parse(localStorage.getItem('userProfile'));
+
+            if (!profile) {
+              // Show onboarding if no profile yet
+              if (loginModal && loginView && onboardingView) {
+                loginModal.classList.add('active');
+                loginView.style.display = 'none';
+                onboardingView.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+              }
+            }
+            checkAdminAccess();
+          }
+        });
     }
+
+    // Clear hash
+    history.replaceState(null, null, ' ');
   }
+
+  const checkAdminAccess = () => {
+    const adminEmails = ['dhanushdaggumilli@gmail.com', 'rocky@nodewave.in']; // Whitelist
+    const email = localStorage.getItem('userEmail');
+    const isAdmin = adminEmails.includes(email);
+
+    const adminContent = document.getElementById('admin-dashboard-content');
+    const accessDenied = document.getElementById('access-denied');
+
+    if (window.location.pathname.includes('/admin')) {
+      if (isAdmin) {
+        if (adminContent) adminContent.classList.add('active');
+        if (accessDenied) accessDenied.classList.remove('active');
+      } else {
+        if (adminContent) adminContent.classList.remove('active');
+        if (accessDenied) accessDenied.classList.add('active');
+      }
+    }
+  };
+
+  checkAdminAccess();
 
   if (loginTrigger && loginModal) {
     loginTrigger.addEventListener('click', (e) => {

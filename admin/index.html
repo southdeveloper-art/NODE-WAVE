@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | NodeWave</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .admin-page {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0.5rem 0;
+            font-family: var(--font-accent);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .admin-section {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            padding: 1rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--glass-border);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(52, 168, 83, 0.1);
+            color: #34A853;
+        }
+
+        .admin-access-denied {
+            display: none;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .admin-access-denied.active {
+            display: block;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-overlay"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
+                    WAVE</a>
+            </div>
+            <div class="user-profile-nav" id="user-profile-nav">
+                <div class="user-avatar" id="user-avatar-initials">AD</div>
+                <div class="user-info-text">
+                    <span class="user-nav-name" id="user-nav-name">Admin</span>
+                    <span class="user-nav-username" id="user-nav-username">Dashboard</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container admin-page">
+        <!-- Access Denied -->
+        <div id="access-denied" class="admin-access-denied">
+            <h1 class="hero-title" style="font-size: 3rem;">Access Denied</h1>
+            <p style="color: var(--text-muted); margin-top: 1rem;">This area is reserved for NodeWave administrators
+                only.</p>
+            <a href="/" class="btn btn-primary" style="margin-top: 2rem; display: inline-block;">Return Home</a>
+        </div>
+
+        <!-- Admin Content -->
+        <div id="admin-dashboard-content" class="admin-content">
+            <div class="reveal">
+                <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 2rem;">Admin Dashboard</h1>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Total Users</span>
+                        <div class="stat-value">1,284</div>
+                        <span style="color: #34A853; font-size: 0.8rem;">↑ 12% from last month</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Active Servers</span>
+                        <div class="stat-value">42</div>
+                        <span style="color: var(--primary); font-size: 0.8rem;">Stable (100% Uptime)</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Revenue</span>
+                        <div class="stat-value">$14.2k</div>
+                        <span style="color: #34A853; font-size: 0.8rem;">↑ 5% this week</span>
+                    </div>
+                </div>
+
+                <div class="admin-section reveal">
+                    <h2>Recent Connections</h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Joined</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>rocky._.dev</td>
+                                    <td>rocky@nodewave.in</td>
+                                    <td><span class="status-badge status-active">Online</span></td>
+                                    <td>Mar 5, 2026</td>
+                                </tr>
+                                <tr>
+                                    <td>System Admin</td>
+                                    <td>admin@nodewave.in</td>
+                                    <td><span class="status-badge status-active">Online</span></td>
+                                    <td>Jan 12, 2026</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
