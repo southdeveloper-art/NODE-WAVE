@@ -748,8 +748,16 @@ function initLoginModal() {
         if (adminContent) adminContent.classList.add('active');
         if (accessDenied) accessDenied.classList.remove('active');
       } else {
+        // If not admin, show access denied
         if (adminContent) adminContent.classList.remove('active');
         if (accessDenied) accessDenied.classList.add('active');
+
+        // If not logged in at all, prompt for login
+        if (!email && loginModal) {
+          loginModal.classList.add('active');
+          if (loginView) loginView.style.display = 'block';
+          if (onboardingView) onboardingView.style.display = 'none';
+        }
       }
     }
   };
