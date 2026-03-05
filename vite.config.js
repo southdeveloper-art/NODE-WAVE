@@ -2,10 +2,11 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
     base: '/',
+    appType: 'mpa',
     build: {
         rollupOptions: {
             input: {
-                main: 'index.html',
+                index: 'index.html',
                 mitigation: 'mitigation.html'
             }
         }
@@ -15,7 +16,7 @@ export default defineConfig({
             name: 'html-rewrite',
             configureServer(server) {
                 server.middlewares.use((req, res, next) => {
-                    if (req.url === '/mitigation') {
+                    if (req.url === '/mitigation' || req.url === '/mitigation/') {
                         req.url = '/mitigation.html';
                     }
                     next();

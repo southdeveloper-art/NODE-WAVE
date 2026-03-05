@@ -4,7 +4,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  // Background Canvas Effect
+  // 1. Immediate Reveal Logic (Priority)
+  const reveals = document.querySelectorAll('.reveal');
+  const revealOnScroll = () => {
+    const triggerBottom = window.innerHeight * 0.95;
+    reveals.forEach(reveal => {
+      const revealTop = reveal.getBoundingClientRect().top;
+      if (revealTop < triggerBottom) {
+        reveal.classList.add('active');
+      }
+    });
+  };
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll(); // Initial check
+
+  // 2. Mobile Menu Logic
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // 3. Background Canvas Effect
   const canvas = document.createElement('canvas');
   canvas.id = 'bg-canvas';
   document.body.prepend(canvas);
@@ -15,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.prepend(gridDiv);
 
   let particles = [];
-  const particleCount = window.innerWidth < 768 ? 40 : 70; // Reduced count
+  const particleCount = window.innerWidth < 768 ? 40 : 70;
   let mouse = { x: -9999, y: -9999 };
 
   window.addEventListener('mousemove', e => {
@@ -27,51 +61,35 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   };
-
   window.addEventListener('resize', resize);
   resize();
 
   class Particle {
-    constructor() {
-      this.init();
-    }
-
+    constructor() { this.init(); }
     init() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
       this.vx = (Math.random() - 0.5) * 0.5;
       this.vy = (Math.random() - 0.5) * 0.5;
       this.radius = Math.random() * 2 + 1;
-      this.ox = this.x; // origin x
-      this.oy = this.y; // origin y
     }
-
     update() {
-      // Strong mouse repulsion wave
       const dx = this.x - mouse.x;
       const dy = this.y - mouse.y;
-      const distSq = dx * dx + dy * dy; // Use distance squared
+      const distSq = dx * dx + dy * dy;
       const repelRadius = 150;
       const repelRadiusSq = repelRadius * repelRadius;
-
       if (distSq < repelRadiusSq && distSq > 0) {
         const dist = Math.sqrt(distSq);
         const force = (repelRadius - dist) / repelRadius;
         this.vx += (dx / dist) * force * 1.5;
         this.vy += (dy / dist) * force * 1.5;
       }
-
-      // Damping so velocity doesn't grow forever
-      this.vx *= 0.94;
-      this.vy *= 0.94;
-
-      this.x += this.vx;
-      this.y += this.vy;
-
+      this.vx *= 0.94; this.vy *= 0.94;
+      this.x += this.vx; this.y += this.vy;
       if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
       if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
-
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -80,98 +98,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
+  for (let i = 0; i < particleCount; i++) particles.push(new Particle());
 
   const animate = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     particles.forEach((p, i) => {
-      p.update();
-      p.draw();
-
+      p.update(); p.draw();
       const maxDist = 120;
       const maxDistSq = maxDist * maxDist;
-
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dx = p.x - p2.x;
         const dy = p.y - p2.y;
         const distSq = dx * dx + dy * dy;
-
         if (distSq < maxDistSq) {
+          const dist = Math.sqrt(distSq);
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(255, 112, 0, ${0.15 * (1 - dist / 150)})`;
+          ctx.strokeStyle = `rgba(255, 112, 0, ${0.15 * (1 - dist / maxDist)})`;
           ctx.lineWidth = 1;
           ctx.stroke();
         }
       }
     });
-
     requestAnimationFrame(animate);
   };
-
   animate();
 
-  // Smooth scroll for anchors
+  // 4. Heavy Dashboards (Safe Initialization)
+  try {
+    initHUD();
+    initDDoS();
+    initGlobalTelemetry();
+    initBootLog();
+  } catch (e) {
+    console.warn("Dashboard initialization failed:", e);
+  }
+
+  // 5. Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const targetId = this.getAttribute('href');
       if (targetId === '#') return;
-
       const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
+      if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
     });
   });
-
-  // Reveal on Scroll Logic
-  const reveals = document.querySelectorAll('.reveal');
-  const revealOnScroll = () => {
-    const triggerBottom = window.innerHeight * 0.9;
-    reveals.forEach(reveal => {
-      const revealTop = reveal.getBoundingClientRect().top;
-      if (revealTop < triggerBottom) {
-        reveal.classList.add('active');
-      }
-    });
-  };
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
-
-  // Mobile Menu Logic
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (mobileToggle && mobileMenu) {
-    mobileToggle.addEventListener('click', () => {
-      mobileToggle.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Close on link click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-
-  // Initialize HUD, DDoS, and Telemetry
-  initHUD();
-  initDDoS();
-  initGlobalTelemetry();
-  initBootLog();
 });
 
 // HUD Dashboard Logic
