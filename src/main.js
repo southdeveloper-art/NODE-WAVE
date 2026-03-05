@@ -362,66 +362,97 @@ function initDDoS() {
   if (trafficCanvas) {
     const ctx = trafficCanvas.getContext('2d');
     let t = 0;
-    const N = 100;
-    const PI2 = Math.PI * 2;
+    const historyN = 150;
+    const cleanData = new Array(historyN).fill(0);
+    const malData = new Array(historyN).fill(0);
 
-    function wave(i, t,
-      a1, f1, s1,
-      a2, f2, s2,
-      a3, f3, s3,
-      a4, f4, s4,
-      a5, f5, s5,
-      noise, noiseSeeds
-    ) {
-      return (
-        a1 * Math.sin(i * f1 + t * s1) +
-        a2 * Math.sin(i * f2 + t * s2 + PHI) +
-        a3 * Math.sin(i * f3 + t * s3 + E) +
-        a4 * Math.cos(i * f4 + t * s4 * PHI) +
-        a5 * Math.cos(i * f5 + t * s5 * E) +
-        noise * Math.sin(noiseSeeds[i] + t * 0.007)
-      );
+    // Simulation state
+    let attackActive = false;
+    let attackTimer = 0;
+    let attackPeak = 0;
+
+    function updateData() {
+      // 1. Clean Traffic: Stable baseline + diurnal-ish wave + noise
+      const cleanBase = 35 + 5 * Math.sin(t * 0.01);
+      const cleanNoise = Math.random() * 4;
+      cleanData.push(cleanBase + cleanNoise);
+      if (cleanData.length > historyN) cleanData.shift();
+
+      // 2. Malicious Traffic: Spikes/Attacks
+      if (!attackActive && Math.random() < 0.005) {
+        attackActive = true;
+        attackTimer = 0;
+        attackPeak = 40 + Math.random() * 50; // Random attack intensity
+      }
+
+      if (attackActive) {
+        attackTimer++;
+        // Attack envelope: Fast ramp up, slower decay
+        let val = 0;
+        if (attackTimer < 10) {
+          val = (attackTimer / 10) * attackPeak;
+        } else {
+          val = attackPeak * Math.exp(-(attackTimer - 10) * 0.05);
+        }
+
+        // Add jitter to malicious
+        val += (Math.random() - 0.5) * 10;
+        malData.push(Math.max(0, val));
+
+        if (attackTimer > 100 && val < 1) {
+          attackActive = false;
+        }
+      } else {
+        // Quiet state
+        malData.push(Math.random() * 2);
+      }
+      if (malData.length > historyN) malData.shift();
     }
 
-    function buildClean(H) {
-      // Smooth, rolling ocean-like waves - High velocity
-      return Array.from({ length: N }, (_, i) => {
-        const x = i / (N - 1);
-        // Base rolling motion - Significantly faster
-        const base = Math.sin(x * Math.PI * 1.5 + t * 0.045);
-        // High frequency detail - Significantly faster
-        const detail = 0.15 * Math.sin(x * Math.PI * 3.7 - t * 0.09);
-        // Slow swelling motion - Slightly faster
-        const swell = 0.5 + 0.5 * Math.sin(t * 0.015);
+    function drawGrid() {
+      const W = trafficCanvas.width, H = trafficCanvas.height;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 0.5;
 
-        return H * 0.5 + (H * 0.25 * base + H * 0.05 * detail) * swell;
-      });
-    }
+      // Vertical lines
+      const stepX = W / 10;
+      for (let x = 0; x <= W; x += stepX) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
 
-    function buildMal(H) {
-      // Sharper, more aggressive but structured "malicious" waves - High velocity
-      return Array.from({ length: N }, (_, i) => {
-        const x = i / (N - 1);
-        // Sharp peaks - Significantly increased speed
-        const peaks = Math.abs(Math.sin(x * Math.PI * 2.8 + t * 0.15));
-        // Turbulent secondary wave - Significantly increased speed
-        const turbulence = 0.3 * Math.sin(x * Math.PI * 6.2 - t * 0.25);
-
-        return H * 0.2 + H * 0.3 * peaks + H * 0.05 * turbulence;
-      });
+      // Horizontal lines
+      const stepY = H / 5;
+      for (let y = 0; y <= H; y += stepY) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+      }
     }
 
     function drawWave(data, color, fill) {
       const W = trafficCanvas.width, H = trafficCanvas.height;
       ctx.beginPath();
-      ctx.moveTo(0, H - data[0]);
-      data.forEach((v, i) => ctx.lineTo((W / (N - 1)) * i, H - Math.max(0, Math.min(H, v))));
+      ctx.moveTo(0, H);
+
+      data.forEach((v, i) => {
+        const x = (W / (historyN - 1)) * i;
+        const y = H - (v / 100) * H;
+        ctx.lineTo(x, y);
+      });
+
       ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
+
       if (fill) {
-        ctx.lineTo(W, H); ctx.lineTo(0, H);
-        ctx.fillStyle = fill; ctx.fill();
+        ctx.lineTo(W, H);
+        ctx.lineTo(0, H);
+        ctx.fillStyle = fill;
+        ctx.fill();
       }
     }
 
@@ -430,8 +461,12 @@ function initDDoS() {
       trafficCanvas.height = trafficCanvas.offsetHeight;
       ctx.clearRect(0, 0, trafficCanvas.width, trafficCanvas.height);
 
-      drawWave(buildClean(trafficCanvas.height), '#FF7000', 'rgba(255, 112, 0, 0.12)');
-      drawWave(buildMal(trafficCanvas.height), '#ff4d4d', 'rgba(255, 77, 77, 0.12)');
+      drawGrid();
+      updateData();
+
+      // Malicious behind Clean
+      drawWave(malData, '#ff4d4d', 'rgba(255, 77, 77, 0.15)');
+      drawWave(cleanData, '#FF7000', 'rgba(255, 112, 0, 0.15)');
 
       t += 1;
       requestAnimationFrame(drawTraffic);
