@@ -849,6 +849,9 @@ section {
   font-family: var(--font-accent);
   font-weight: 600;
   letter-spacing: 1px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
 .footer-credit a {
