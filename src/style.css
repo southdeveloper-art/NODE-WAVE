@@ -324,7 +324,7 @@ section {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
 }
 
@@ -865,6 +865,29 @@ section {
   text-shadow: 0 0 10px var(--primary-glow);
 }
 
+/* Mobile Footer Adjustments */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .footer-brand p {
+    margin: 0 auto;
+  }
+
+  .footer-copyright {
+    margin: 1.5rem auto 0;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 2rem;
+  }
+}
+
 .heart {
   display: inline-block;
   color: #ff4d4d;
@@ -1251,10 +1274,12 @@ section {
 @media (max-width: 992px) {
   .diag-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .guaranteed-resources-wrapper {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
@@ -1262,15 +1287,16 @@ section {
   .diag-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.2rem;
   }
 
   .diag-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .gr-metrics {
     flex-direction: column;
+    gap: 1rem;
   }
 
   .single-metric .gr-metric-box {
@@ -1278,11 +1304,28 @@ section {
   }
 
   .hud-outer {
-    padding: 1.5rem 1rem;
+    padding: 1.2rem 0.8rem;
   }
 
   .gr-card {
     padding: 1.5rem;
+  }
+
+  .ddos-banner-card {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 2.5rem 1.5rem !important;
+    gap: 2rem !important;
+  }
+
+  .ddos-banner-icon {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .ddos-banner-icon svg {
+    width: 40px !important;
+    height: 40px !important;
   }
 }
 
@@ -2584,6 +2627,21 @@ section {
   /* FAQ Grid Mobile */
   .faq-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Spacing Fixes for Merged Sections */
+  .hud-theme {
+    padding: 4rem 0 !important;
+  }
+
+  .cluster-status-section {
+    padding: 4rem 0 !important;
+    margin-top: 0;
+  }
+
+  .section-title {
+    margin-bottom: 2rem !important;
   }
 }
 
