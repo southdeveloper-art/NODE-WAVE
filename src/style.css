@@ -24,6 +24,13 @@
   box-sizing: border-box;
 }
 
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
 html {
   scroll-behavior: smooth;
 }
