@@ -919,7 +919,7 @@ section {
 /* HUD Dashboard Section */
 .hud-theme {
   padding: 0 0 5rem 0;
-  margin-top: -5rem;
+  margin-top: 2rem;
   perspective: 1000px;
 }
 
