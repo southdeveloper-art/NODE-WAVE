@@ -11,7 +11,9 @@ export default defineConfig({
                 gcs: resolve(__dirname, 'gcs/index.html'),
                 gds: resolve(__dirname, 'gds/index.html'),
                 mitigation: resolve(__dirname, 'mitigation/index.html'),
-                admin: resolve(__dirname, 'admin/index.html')
+                admin: resolve(__dirname, 'admin/index.html'),
+                faq: resolve(__dirname, 'faq/index.html'),
+                plans: resolve(__dirname, 'plans/index.html')
             }
         }
     },
@@ -20,7 +22,7 @@ export default defineConfig({
             name: 'html-rewrite',
             configureServer(server) {
                 server.middlewares.use((req, res, next) => {
-                    const pages = ['gcs', 'gds', 'mitigation', 'admin'];
+                    const pages = ['gcs', 'gds', 'mitigation', 'admin', 'faq', 'plans'];
                     const url = req.url.split('?')[0];
                     if (pages.includes(url.replace(/\//g, ''))) {
                         req.url = `/${url.replace(/\//g, '')}/index.html`;
