@@ -219,13 +219,54 @@ function initDDoS() {
   if (trafficCanvas) {
     const ctx = trafficCanvas.getContext('2d');
     let t = 0;
-    const N = 80; // number of points
+    const N = 100;
+    const PHI = 1.6180339887;  // golden ratio — guarantees no visible period
+    const E = 2.7182818284;
+    const PI2 = Math.PI * 2;
 
-    function buildWave(bigAmp, bigFreq, bigSpeed, smallAmp, smallFreq, smallSpeed, base) {
+    // Noise seed per point so each x has an independent drift
+    const noiseSeedC = Array.from({ length: N }, () => Math.random() * 1000);
+    const noiseSeedM = Array.from({ length: N }, () => Math.random() * 1000);
+
+    function wave(i, t,
+      a1, f1, s1,
+      a2, f2, s2,
+      a3, f3, s3,
+      a4, f4, s4,
+      a5, f5, s5,
+      noise, noiseSeeds
+    ) {
+      return (
+        a1 * Math.sin(i * f1 + t * s1) +
+        a2 * Math.sin(i * f2 + t * s2 + PHI) +
+        a3 * Math.sin(i * f3 + t * s3 + E) +
+        a4 * Math.cos(i * f4 + t * s4 * PHI) +
+        a5 * Math.cos(i * f5 + t * s5 * E) +
+        noise * Math.sin(noiseSeeds[i] + t * 0.007)
+      );
+    }
+
+    function buildClean(H) {
+      // Big rolling wave — amplitude modulated so it swells and falls
       return Array.from({ length: N }, (_, i) => {
-        const big = bigAmp * Math.sin(i * bigFreq + t * bigSpeed);
-        const small = smallAmp * Math.sin(i * smallFreq + t * smallSpeed);
-        return base + big + small;
+        const x = i / N;
+        const envelope = 0.5 + 0.5 * Math.sin(x * Math.PI * 1.3 + t * 0.007);
+        const wave1 = Math.sin(x * Math.PI * 2.1 + t * 0.013) * envelope;
+        const wave2 = 0.3 * Math.sin(x * Math.PI * 4.7 + t * 0.021 + PHI);
+        return H * 0.55 + H * 0.28 * wave1 + H * 0.07 * wave2;
+      });
+    }
+
+    function buildMal(H) {
+      // Choppier waves — faster, more turbulent, lower baseline
+      return Array.from({ length: N }, (_, i) => {
+        const x = i / N;
+        // Main chop wave
+        const chop = Math.sin(x * Math.PI * 3.7 + t * 0.029) *
+          (0.4 + 0.6 * Math.sin(x * Math.PI * 1.9 + t * 0.017 + E));
+        // Secondary smaller wave going the other direction
+        const cross = 0.35 * Math.sin(x * Math.PI * 5.3 - t * 0.021 + PHI);
+        return H * 0.30 + H * 0.20 * chop + H * 0.08 * cross;
       });
     }
 
@@ -233,7 +274,7 @@ function initDDoS() {
       const W = trafficCanvas.width, H = trafficCanvas.height;
       ctx.beginPath();
       ctx.moveTo(0, H - data[0]);
-      data.forEach((v, i) => ctx.lineTo((W / (N - 1)) * i, H - v));
+      data.forEach((v, i) => ctx.lineTo((W / (N - 1)) * i, H - Math.max(0, Math.min(H, v))));
       ctx.strokeStyle = color;
       ctx.lineWidth = 2;
       ctx.stroke();
@@ -248,22 +289,8 @@ function initDDoS() {
       trafficCanvas.height = trafficCanvas.offsetHeight;
       ctx.clearRect(0, 0, trafficCanvas.width, trafficCanvas.height);
 
-      // Clean traffic: big slow waves + tiny ripples
-      const clean = buildWave(
-        trafficCanvas.height * 0.28, 0.08, 0.025,   // big wave
-        trafficCanvas.height * 0.04, 0.55, 0.18,    // small ripple
-        trafficCanvas.height * 0.38                  // baseline
-      );
-
-      // Malicious traffic: big aggressive waves + jagged noise
-      const mal = buildWave(
-        trafficCanvas.height * 0.18, 0.14, 0.045,
-        trafficCanvas.height * 0.06, 0.9, 0.3,
-        trafficCanvas.height * 0.22
-      );
-
-      drawWave(clean, '#FF7000', 'rgba(255, 112, 0, 0.12)');
-      drawWave(mal, '#ff4d4d', 'rgba(255, 77, 77, 0.12)');
+      drawWave(buildClean(trafficCanvas.height), '#FF7000', 'rgba(255, 112, 0, 0.12)');
+      drawWave(buildMal(trafficCanvas.height), '#ff4d4d', 'rgba(255, 77, 77, 0.12)');
 
       t += 1;
       requestAnimationFrame(drawTraffic);
