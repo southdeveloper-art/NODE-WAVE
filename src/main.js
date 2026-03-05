@@ -1,12 +1,13 @@
 import './style.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-
+  console.log("NW-DEBUG: CORE LOADED");
 
 
   // 1. Immediate Reveal Logic (Priority)
   const reveals = document.querySelectorAll('.reveal');
   const revealOnScroll = () => {
+    console.log(`NW-DEBUG: REVEALING ${reveals.length} ELEMENTS`);
     const triggerBottom = window.innerHeight * 0.95;
     reveals.forEach(reveal => {
       const revealTop = reveal.getBoundingClientRect().top;

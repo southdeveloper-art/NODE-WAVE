@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 
 export default defineConfig({
     base: '/',
@@ -6,8 +7,8 @@ export default defineConfig({
     build: {
         rollupOptions: {
             input: {
-                index: 'index.html',
-                mitigation: 'mitigation.html'
+                main: resolve(__dirname, 'index.html'),
+                mitigation: resolve(__dirname, 'mitigation/index.html')
             }
         }
     },
