@@ -489,7 +489,7 @@ function initDDoS() {
       // Clean: Solid fill (Orange)
       drawWave(cleanData, '#FF7000', 'rgba(255, 112, 0, 0.15)');
 
-      t += 1;
+      t += 2;
       requestAnimationFrame(drawTraffic);
     }
     drawTraffic();
