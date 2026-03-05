@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.prepend(gridDiv);
 
   let particles = [];
-  const particleCount = 100;
+  const particleCount = window.innerWidth < 768 ? 40 : 70; // Reduced count
   let mouse = { x: -9999, y: -9999 };
 
   window.addEventListener('mousemove', e => {
@@ -50,17 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
       // Strong mouse repulsion wave
       const dx = this.x - mouse.x;
       const dy = this.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const repelRadius = 200;
-      if (dist < repelRadius && dist > 0) {
+      const distSq = dx * dx + dy * dy; // Use distance squared
+      const repelRadius = 150;
+      const repelRadiusSq = repelRadius * repelRadius;
+
+      if (distSq < repelRadiusSq && distSq > 0) {
+        const dist = Math.sqrt(distSq);
         const force = (repelRadius - dist) / repelRadius;
-        this.vx += (dx / dist) * force * 2;
-        this.vy += (dy / dist) * force * 2;
+        this.vx += (dx / dist) * force * 1.5;
+        this.vy += (dy / dist) * force * 1.5;
       }
 
       // Damping so velocity doesn't grow forever
-      this.vx *= 0.92;
-      this.vy *= 0.92;
+      this.vx *= 0.94;
+      this.vy *= 0.94;
 
       this.x += this.vx;
       this.y += this.vy;
@@ -69,11 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
 
-
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 112, 0, 0.3)';
+      ctx.fillStyle = 'rgba(255, 112, 0, 0.2)';
       ctx.fill();
     }
   }
@@ -89,13 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
       p.update();
       p.draw();
 
+      const maxDist = 120;
+      const maxDistSq = maxDist * maxDist;
+
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dx = p.x - p2.x;
         const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
 
-        if (dist < 150) {
+        if (distSq < maxDistSq) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);

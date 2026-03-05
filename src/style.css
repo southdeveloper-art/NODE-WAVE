@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap');
+/* Fonts handled in index.html for better performance */
 
 :root {
   --primary: #FF7000;
@@ -2196,6 +2196,7 @@ section {
     height: 40px;
   }
 }
+
 /* --- MOBILE RESPONSIVENESS OVERRIDES --- */
 
 /* Mobile Menu & Toggle */
@@ -2273,7 +2274,9 @@ section {
 
 /* Base Responsive Overrides */
 @media (max-width: 992px) {
-  .nav-links, .nav-cta {
+
+  .nav-links,
+  .nav-cta {
     display: none;
   }
 
@@ -2340,7 +2343,8 @@ section {
     align-items: center !important;
   }
 
-  .left-align, .right-align {
+  .left-align,
+  .right-align {
     text-align: center !important;
     align-items: center !important;
   }
@@ -2385,7 +2389,8 @@ section {
     gap: 4rem;
   }
 
-  .osi-left, .osi-right {
+  .osi-left,
+  .osi-right {
     align-items: center;
     text-align: center;
     padding: 0;
