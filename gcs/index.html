@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodeWave | GCS - Game Compute Servers</title>
+    <meta name="description" content="High-performance GCS game server plans powered by Ryzen 9 9900X.">
+
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap"
+        rel="stylesheet">
+    <noscript>
+        <style>
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="navbar">
+            <div class="container nav-content">
+                <div class="logo">
+                    <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
+                        WAVE</a>
+                </div>
+                <nav class="nav-links">
+                    <a href="/#features">Features</a>
+                    <a href="/#servers">Game Servers</a>
+                    <a href="/#vps">VPS</a>
+                    <a href="/#contact">Contact</a>
+                </nav>
+                <div class="nav-cta">
+                    <a href="#" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
+                    <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu" id="mobile-menu">
+                <nav class="mobile-nav-links">
+                    <a href="/#features">Features</a>
+                    <a href="/#servers">Game Servers</a>
+                    <a href="/#vps">VPS</a>
+                    <a href="/#contact">Contact</a>
+                    <div class="mobile-cta">
+                        <a href="#" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main style="padding-top: 15rem; padding-bottom: 10rem;">
+            <div class="container">
+                <div class="text-center mb-12 reveal">
+                    <h1 class="hero-title" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">NODEWAVE <span
+                            class="text-orange">GCS</span></h1>
+                    <p class="hero-subtitle" style="margin: 0 auto 3rem;">Powered by Ryzen 9900x series processors with
+                        high-speed DDR5 memory and NVMe storage, GCS nodes deliver reliable performance for small to
+                        medium servers. All traffic is filtered through our global Game DDoS mitigation network to
+                        protect against any large attack vectors and maintain server stability.</p>
+                </div>
+
+                <!-- Region Selection -->
+                <div class="mt-8 mb-12 reveal">
+                    <h2 class="section-title" style="margin-bottom: 3rem; font-size: 2.5rem;">SELECT <span
+                            class="text-orange">REGION</span></h2>
+                    <div class="features-grid region-selector"
+                        style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                        <!-- Frankfurt (Default Active) -->
+                        <div class="feature-card region-card active reveal" data-region="fra"
+                            style="padding: 1.5rem; text-align: center; cursor: pointer; border: 1px solid var(--primary); background: rgba(255,112,0,0.05);">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">FRANKFURT</h3>
+                            <p style="color: var(--primary); font-weight: 800; font-size: 0.8rem;">ACTIVE NOW</p>
+                        </div>
+                        <!-- London -->
+                        <div class="feature-card region-card reveal" data-region="lon"
+                            style="padding: 1.5rem; text-align: center; cursor: pointer; opacity: 0.6;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">LONDON</h3>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Coming Soon</p>
+                        </div>
+                        <!-- Amsterdam -->
+                        <div class="feature-card region-card reveal" data-region="ams"
+                            style="padding: 1.5rem; text-align: center; cursor: pointer; opacity: 0.6;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">AMSTERDAM</h3>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Coming Soon</p>
+                        </div>
+                        <!-- Mumbai -->
+                        <div class="feature-card region-card reveal" data-region="mumbai"
+                            style="padding: 1.5rem; text-align: center; cursor: pointer; opacity: 0.6;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">MUMBAI</h3>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Coming Soon</p>
+                        </div>
+                        <!-- Singapore -->
+                        <div class="feature-card region-card reveal" data-region="sgp"
+                            style="padding: 1.5rem; text-align: center; cursor: pointer; opacity: 0.6;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">SINGAPORE</h3>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GCS Pricing Grid (Frankfurt) -->
+                <div id="plans-fra" class="plans-container">
+                    <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                        <!-- Plan 1 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
+                                        Speed: 4.4GHz - 5.7GHz</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">2 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€19
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    8GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    120GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 2 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
+                                        Speed: 4.4GHz - 5.7GHz</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">3 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€27
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    10GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    160GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 3 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
+                                        Speed: 4.4GHz - 5.7GHz</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">4 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€36
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    12GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    200GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 4 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
+                                        Speed: 4.4GHz - 5.7GHz</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">5 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€47
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    16GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    260GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 5 (Most Popular) -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border: 1px solid var(--primary); background: rgba(255,112,0,0.03);">
+                            <div
+                                style="position: absolute; top: 0; right: 0; background: var(--primary); color: #000; padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 900; border-bottom-left-radius: 4px;">
+                                MOST POPULAR ⭐</div>
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
+                                        Speed: 4.4GHz - 5.7GHz</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">6 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€58
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    20GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    320GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 6 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
+                                        Speed: 4.4GHz - 5.7GHz</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">8 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€72
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    24GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    420GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 7 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">10 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€99
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    32GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    550GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 8 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">12 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€119
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    40GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    700GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 9 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">14 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€139
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    48GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    850GB NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+
+                        <!-- Plan 10 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <!-- Processor Detail -->
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        Processor</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9900X</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">16 vCPU</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€159
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    56GB
+                                    DDR5</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1TB
+                                    NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1
+                                    Gbit network</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Coming Soon Placeholder -->
+                <div id="plans-soon" class="plans-container reveal"
+                    style="display: none; text-align: center; padding: 5rem 2rem; background: rgba(10,10,10,0.4); border-radius: 12px; border: 1px dashed var(--glass-border);">
+                    <h2 class="text-orange" style="font-size: 2.5rem; margin-bottom: 1rem;">COMING SOON</h2>
+                    <p class="text-muted" style="font-size: 1.2rem;">We are currently scaling our infrastructure to this
+                        region. Stay tuned for updates!</p>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const regionCards = document.querySelectorAll('.region-card');
+                        const plansFra = document.getElementById('plans-fra');
+                        const plansSoon = document.getElementById('plans-soon');
+
+                        regionCards.forEach(card => {
+                            card.addEventListener('click', () => {
+                                // Reset all cards styling
+                                regionCards.forEach(c => {
+                                    c.style.opacity = '0.6';
+                                    c.style.border = '1px solid var(--glass-border)';
+                                    c.style.background = 'rgba(10, 10, 10, 0.4)';
+                                });
+
+                                // Activate clicked card
+                                card.style.opacity = '1';
+                                card.style.border = '1px solid var(--primary)';
+                                card.style.background = 'rgba(255, 112, 0, 0.05)';
+
+                                const region = card.getAttribute('data-region');
+                                if (region === 'fra') {
+                                    plansFra.style.display = 'block';
+                                    plansSoon.style.display = 'none';
+                                } else {
+                                    plansFra.style.display = 'none';
+                                    plansSoon.style.display = 'block';
+                                }
+                            });
+                        });
+                    });
+                </script>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand reveal">
+                    <div class="logo"><span class="text-orange">NODE</span>WAVE</div>
+                    <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
+                        communities worldwide.</p>
+                </div>
+                <div class="footer-links reveal">
+                    <h4>NETWORKS</h4>
+                    <a href="#">Game Hosting</a>
+                    <a href="#">VPS Solutions</a>
+                    <a href="#">VDS Hosting</a>
+                    <a href="#">Dedicated</a>
+                </div>
+                <div class="footer-links reveal">
+                    <h4>SUPPORT</h4>
+                    <a href="#">Knowledgebase</a>
+                    <a href="#">Discord Support</a>
+                    <a href="#">Billing Portal</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-bottom container reveal">
+                <p>&copy; 2026 Node Wave Hosting. All rights reserved. Designed with passion for gamers.</p>
+                <div class="footer-credit">
+                    Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
+                        rel="noopener noreferrer">rocky._.dev</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
