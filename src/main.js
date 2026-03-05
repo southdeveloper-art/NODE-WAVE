@@ -222,7 +222,47 @@ function initHUD() {
 }
 
 
+// ─── Mouse Ripple Wave ──────────────────────────────────────────────────────
+(function initRipple() {
+  const rc = document.createElement('canvas');
+  rc.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
+  document.body.appendChild(rc);
+  const rctx = rc.getContext('2d');
+
+  const resize = () => { rc.width = window.innerWidth; rc.height = window.innerHeight; };
+  window.addEventListener('resize', resize);
+  resize();
+
+  const ripples = [];
+  let lastTime = 0;
+
+  window.addEventListener('mousemove', e => {
+    const now = Date.now();
+    if (now - lastTime < 60) return; // emit every 60ms max
+    lastTime = now;
+    ripples.push({ x: e.clientX, y: e.clientY, r: 0, maxR: 80, alpha: 0.6 });
+  });
+
+  function animateRipples() {
+    rctx.clearRect(0, 0, rc.width, rc.height);
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const rp = ripples[i];
+      rp.r += 3;
+      rp.alpha -= 0.025;
+      if (rp.alpha <= 0) { ripples.splice(i, 1); continue; }
+      rctx.beginPath();
+      rctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+      rctx.strokeStyle = `rgba(255,112,0,${rp.alpha})`;
+      rctx.lineWidth = 2;
+      rctx.stroke();
+    }
+    requestAnimationFrame(animateRipples);
+  }
+  animateRipples();
+})();
+
 // DDoS Mitigation Logic
+
 
 
 function initDDoS() {
