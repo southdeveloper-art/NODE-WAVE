@@ -276,6 +276,22 @@ function initDDoS() {
     if (counterEl) counterEl.textContent = count.toLocaleString();
   }, 3000);
 
+  // Live Telemetry Fluctuation
+  const ingressEl = document.getElementById('live-ingress');
+  const packetsEl = document.getElementById('live-packets');
+
+  if (ingressEl && packetsEl) {
+    setInterval(() => {
+      // Ingress: 1.02 to 55.8 Gbps
+      const ingressVal = (1.02 + Math.random() * (55.8 - 1.02)).toFixed(2);
+      // Packets: 1.08 to 8.05 Mpps
+      const packetsVal = (1.08 + Math.random() * (8.05 - 1.08)).toFixed(2);
+
+      ingressEl.innerHTML = `${ingressVal} <small>Gbps</small>`;
+      packetsEl.innerHTML = `${packetsVal} <small>Mpps</small>`;
+    }, 2000);
+  }
+
   const trafficCanvas = document.getElementById('traffic-monitor');
   if (trafficCanvas) {
     const ctx = trafficCanvas.getContext('2d');
