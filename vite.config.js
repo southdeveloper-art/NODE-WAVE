@@ -18,7 +18,7 @@ export default defineConfig({
             configureServer(server) {
                 server.middlewares.use((req, res, next) => {
                     if (req.url === '/mitigation' || req.url === '/mitigation/') {
-                        req.url = '/mitigation.html';
+                        req.url = '/mitigation/index.html';
                     }
                     next();
                 });
