@@ -467,7 +467,12 @@ function initDDoS() {
       ctx.moveTo(0, H * 0.7);
       ctx.lineTo(W, H * 0.7);
       ctx.stroke();
+
+      // Label
       ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.font = '8px font-mono';
+      ctx.fillText('7.7 Mbps', W - 40, H * 0.7 - 5);
     }
 
     function drawTraffic() {
