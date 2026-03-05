@@ -671,25 +671,60 @@ function initBootLog() {
 }
 
 
-// Login Modal Toggle Logic
+// Login & Profile Management Logic
 function initLoginModal() {
   const loginTrigger = document.getElementById('login-trigger');
   const loginModal = document.getElementById('login-modal');
   const modalClose = document.getElementById('modal-close');
+  const navCta = document.getElementById('nav-cta');
+  const userProfileNav = document.getElementById('user-profile-nav');
+
+  const loginView = document.getElementById('login-view-content');
+  const onboardingView = document.getElementById('onboarding-view-content');
+
+  const saveProfileBtn = document.getElementById('save-profile');
+  const googleLoginBtn = document.getElementById('google-login');
+
+  // Check for profile on load
+  const updateUI = () => {
+    const profile = JSON.parse(localStorage.getItem('userProfile'));
+    if (profile && navCta && userProfileNav) {
+      navCta.style.display = 'none';
+      userProfileNav.style.display = 'flex';
+
+      const initials = profile.name.split(' ').map(n => n[0]).join('').toUpperCase();
+      document.getElementById('user-avatar-initials').innerText = initials;
+      document.getElementById('user-nav-name').innerText = profile.name;
+      document.getElementById('user-nav-username').innerText = `@${profile.username}`;
+    }
+  };
+
+  updateUI();
+
+  // Detect OAuth return (Mock for frontend demo)
+  if (window.location.hash.includes('access_token')) {
+    if (loginModal && loginView && onboardingView) {
+      loginModal.classList.add('active');
+      loginView.style.display = 'none';
+      onboardingView.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      // Clear hash
+      history.replaceState(null, null, ' ');
+    }
+  }
 
   if (loginTrigger && loginModal) {
-    const googleLoginBtn = document.getElementById('google-login');
-
     loginTrigger.addEventListener('click', (e) => {
       e.preventDefault();
       loginModal.classList.add('active');
+      loginView.style.display = 'block';
+      onboardingView.style.display = 'none';
       document.body.style.overflow = 'hidden';
     });
 
     const initiateGoogleLogin = () => {
-      // Placeholder Client ID - User needs to update this
       const CLIENT_ID = '469545887730-l6dge91uq17a5s86rhph8il8h830o6n1.apps.googleusercontent.com';
-      const REDIRECT_URI = window.location.origin;
+      const REDIRECT_URI = window.location.origin + window.location.pathname;
       const SCOPE = 'email profile';
       const AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent(SCOPE)}`;
 
@@ -698,6 +733,23 @@ function initLoginModal() {
 
     if (googleLoginBtn) {
       googleLoginBtn.addEventListener('click', initiateGoogleLogin);
+    }
+
+    if (saveProfileBtn) {
+      saveProfileBtn.addEventListener('click', () => {
+        const name = document.getElementById('full-name').value;
+        const username = document.getElementById('username').value;
+        const phone = document.getElementById('phone-number').value;
+
+        if (name && username && phone) {
+          const profile = { name, username, phone };
+          localStorage.setItem('userProfile', JSON.stringify(profile));
+          updateUI();
+          closeModal();
+        } else {
+          alert('Please fill in all fields');
+        }
+      });
     }
 
     const closeModal = () => {
@@ -709,18 +761,32 @@ function initLoginModal() {
       modalClose.addEventListener('click', closeModal);
     }
 
-    // Close on overlay click
     loginModal.addEventListener('click', (e) => {
       if (e.target === loginModal) {
         closeModal();
       }
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && loginModal.classList.contains('active')) {
         closeModal();
       }
     });
+
+    // Make profile nav clickable to "edit" (show onboarding again)
+    if (userProfileNav) {
+      userProfileNav.addEventListener('click', () => {
+        const profile = JSON.parse(localStorage.getItem('userProfile'));
+        if (profile) {
+          document.getElementById('full-name').value = profile.name;
+          document.getElementById('username').value = profile.username;
+          document.getElementById('phone-number').value = profile.phone;
+        }
+        loginModal.classList.add('active');
+        loginView.style.display = 'none';
+        onboardingView.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+    }
   }
 }
