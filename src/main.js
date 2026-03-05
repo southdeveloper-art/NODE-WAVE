@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDDoS();
     initGlobalTelemetry();
     initBootLog();
+    initFAQ();
   } catch (e) {
     console.warn("Dashboard initialization failed:", e);
   }
@@ -163,6 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+  // 7. FAQ Accordion Logic
+  function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Close others if desired
+        faqItems.forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.toggle('active');
+      });
+    });
+  }
 
   // HUD Dashboard Logic
   function initHUD() {
@@ -960,10 +975,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-
-  initHUD();
-  initDDoS();
-  initGlobalTelemetry();
-  initBootLog();
-  initLoginModal();
 });

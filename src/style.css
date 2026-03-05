@@ -2365,7 +2365,7 @@ section {
 .faq-item {
   display: flex;
   gap: 1.5rem;
-  padding: 2.5rem;
+  padding: 2rem 2.5rem;
   background: rgba(15, 15, 20, 0.6);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 112, 0, 0.1);
@@ -2373,6 +2373,14 @@ section {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+}
+
+.faq-item.active {
+  background: rgba(20, 20, 25, 0.8);
+  border-color: rgba(255, 112, 0, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .faq-item::before {
@@ -2387,14 +2395,8 @@ section {
   transition: opacity 0.4s;
 }
 
-.faq-item:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255, 112, 0, 0.4);
-  background: rgba(20, 20, 25, 0.8);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 112, 0, 0.1);
-}
-
-.faq-item:hover::before {
+.faq-item:hover::before,
+.faq-item.active::before {
   opacity: 1;
 }
 
@@ -2411,26 +2413,41 @@ section {
   transition: 0.3s;
 }
 
-.faq-item:hover .faq-icon {
-  transform: scale(1.1) rotate(5deg);
+.faq-item.active .faq-icon {
   background: var(--primary);
   color: #fff;
+  transform: rotate(45deg);
   box-shadow: 0 0 15px var(--primary-glow);
 }
 
 .faq-content h4 {
   font-family: var(--font-accent);
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  margin-bottom: 0;
   color: #fff;
   letter-spacing: 0.5px;
   line-height: 1.4;
+  transition: margin 0.3s;
+}
+
+.faq-item.active .faq-content h4 {
+  margin-bottom: 1rem;
 }
 
 .faq-content p {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.6;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-content p {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 0.5rem;
 }
 
 /* Responsive FAQ */
