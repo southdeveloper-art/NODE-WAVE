@@ -678,11 +678,27 @@ function initLoginModal() {
   const modalClose = document.getElementById('modal-close');
 
   if (loginTrigger && loginModal) {
+    const googleLoginBtn = document.getElementById('google-login');
+
     loginTrigger.addEventListener('click', (e) => {
       e.preventDefault();
       loginModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
+
+    const initiateGoogleLogin = () => {
+      // Placeholder Client ID - User needs to update this
+      const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+      const REDIRECT_URI = window.location.origin;
+      const SCOPE = 'email profile';
+      const AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent(SCOPE)}`;
+
+      window.location.href = AUTH_URL;
+    };
+
+    if (googleLoginBtn) {
+      googleLoginBtn.addEventListener('click', initiateGoogleLogin);
+    }
 
     const closeModal = () => {
       loginModal.classList.remove('active');
