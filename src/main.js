@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.prepend(gridDiv);
 
   let particles = [];
-  const particleCount = 60;
+  const particleCount = 100;
   let mouse = { x: -9999, y: -9999 };
 
   window.addEventListener('mousemove', e => {
@@ -42,19 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
       this.vx = (Math.random() - 0.5) * 0.5;
       this.vy = (Math.random() - 0.5) * 0.5;
       this.radius = Math.random() * 2 + 1;
+      this.ox = this.x; // origin x
+      this.oy = this.y; // origin y
     }
 
     update() {
-      // Mouse repulsion wave
+      // Strong mouse repulsion wave
       const dx = this.x - mouse.x;
       const dy = this.y - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const repelRadius = 120;
+      const repelRadius = 200;
       if (dist < repelRadius && dist > 0) {
         const force = (repelRadius - dist) / repelRadius;
-        this.x += (dx / dist) * force * 3;
-        this.y += (dy / dist) * force * 3;
+        this.vx += (dx / dist) * force * 2;
+        this.vy += (dy / dist) * force * 2;
       }
+
+      // Damping so velocity doesn't grow forever
+      this.vx *= 0.92;
+      this.vy *= 0.92;
 
       this.x += this.vx;
       this.y += this.vy;
@@ -62,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
       if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
+
 
     draw() {
       ctx.beginPath();
