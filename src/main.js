@@ -384,28 +384,28 @@ function initDDoS() {
     }
 
     function buildClean(H) {
-      // Smooth, rolling ocean-like waves
+      // Smooth, rolling ocean-like waves - High velocity
       return Array.from({ length: N }, (_, i) => {
         const x = i / (N - 1);
-        // Base rolling motion
-        const base = Math.sin(x * Math.PI * 1.5 + t * 0.012);
-        // High frequency detail (low amplitude)
-        const detail = 0.15 * Math.sin(x * Math.PI * 3.7 - t * 0.025);
-        // Slow swelling motion
-        const swell = 0.5 + 0.5 * Math.sin(t * 0.005);
+        // Base rolling motion - Significantly faster
+        const base = Math.sin(x * Math.PI * 1.5 + t * 0.045);
+        // High frequency detail - Significantly faster
+        const detail = 0.15 * Math.sin(x * Math.PI * 3.7 - t * 0.09);
+        // Slow swelling motion - Slightly faster
+        const swell = 0.5 + 0.5 * Math.sin(t * 0.015);
 
         return H * 0.5 + (H * 0.25 * base + H * 0.05 * detail) * swell;
       });
     }
 
     function buildMal(H) {
-      // Sharper, more aggressive but structured "malicious" waves
+      // Sharper, more aggressive but structured "malicious" waves - High velocity
       return Array.from({ length: N }, (_, i) => {
         const x = i / (N - 1);
-        // Sharp peaks using absolute value on sine
-        const peaks = Math.abs(Math.sin(x * Math.PI * 2.8 + t * 0.035));
-        // Turbulent secondary wave
-        const turbulence = 0.3 * Math.sin(x * Math.PI * 6.2 - t * 0.045);
+        // Sharp peaks - Significantly increased speed
+        const peaks = Math.abs(Math.sin(x * Math.PI * 2.8 + t * 0.15));
+        // Turbulent secondary wave - Significantly increased speed
+        const turbulence = 0.3 * Math.sin(x * Math.PI * 6.2 - t * 0.25);
 
         return H * 0.2 + H * 0.3 * peaks + H * 0.05 * turbulence;
       });
