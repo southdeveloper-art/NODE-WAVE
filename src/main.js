@@ -724,7 +724,12 @@ function initLoginModal() {
 
     const initiateGoogleLogin = () => {
       const CLIENT_ID = '469545887730-l6dge91uq17a5s86rhph8il8h830o6n1.apps.googleusercontent.com';
-      const REDIRECT_URI = window.location.origin + window.location.pathname;
+      // Standardize REDIRECT_URI to match console entries (strip trailing slash)
+      let REDIRECT_URI = window.location.origin + window.location.pathname;
+      if (REDIRECT_URI.endsWith('/')) {
+        REDIRECT_URI = REDIRECT_URI.slice(0, -1);
+      }
+
       const SCOPE = 'email profile';
       const AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=${encodeURIComponent(SCOPE)}`;
 
