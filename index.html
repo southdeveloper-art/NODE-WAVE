@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Node Wave | Where Latency Bends</title>
+  <meta name="description"
+    content="High-performance game server hosting with AMD Ryzen 9, DDR5 RAM, and Enterprise DDoS protection. Experience the wave.">
+</head>
+
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="navbar">
+      <div class="container nav-content">
+        <div class="logo">
+          <span class="text-orange">NODE</span>WAVE
+        </div>
+        <nav class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#servers">Game Servers</a>
+          <a href="#vps">VPS</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="nav-cta">
+          <a href="#" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
+          <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title reveal">WHERE <span class="text-orange">LATENCY</span> BENDS</h1>
+          <p class="hero-subtitle reveal">Unleash the full potential of your community with Ryzen 9000 series powered
+            infrastructure. Low ping, zero lag, enterprise reliability.</p>
+          <div class="hero-btns reveal">
+            <a href="#servers" class="btn btn-primary">Deploy Server Now</a>
+            <a href="#features" class="btn btn-outline">Performance Specs</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-bg-glow"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <h2 class="section-title reveal">ELITE <span class="text-orange">HARDWARE</span></h2>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon">🚀</div>
+            <h3>RYZEN 9000 SERIES</h3>
+            <p>We only use the top tier. Next-gen performance ensures your game logic never misses a tick.</p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🛡️</div>
+            <h3>ENTERPRISE DDOS</h3>
+            <p>Protected by Enterprise Game DDoS Protection. Keep your players online even during the heaviest attacks.
+            </p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">⚡</div>
+            <h3>DDR5 MEMORY</h3>
+            <p>Next-gen memory bandwidth for mod-heavy servers. More mods, more players, more stability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section id="specs" class="specs hub-layout">
+      <div class="container">
+        <h2 class="section-title reveal">PERFORMANCE <span class="text-orange">HUB</span></h2>
+
+        <div class="hub-container reveal">
+          <!-- Central Hub Image -->
+          <div class="hub-center">
+            <img src="./ryzen_9000_core_visual_1772666461432.png" alt="Ryzen 9000 Core" class="hub-image">
+            <div class="hub-glow"></div>
+          </div>
+
+          <!-- Spec Branches -->
+          <div class="spec-node tl">
+            <div class="node-content">
+              <span class="node-label">PROCESSOR</span>
+              <h3>RYZEN 9000</h3>
+              <p>High-Frequency Enterprise Grade</p>
+              <div class="node-data">16C / 32T @ 5.7GHz</div>
+            </div>
+            <div class="node-line"></div>
+          </div>
+
+          <div class="spec-node tr">
+            <div class="node-content">
+              <span class="node-label">ARCHITECTURE</span>
+              <h3>ZEN 5 CORE</h3>
+              <p>Dedicated Infrastructure</p>
+              <div class="node-data">AMD 9000 SERIES</div>
+            </div>
+            <div class="node-line"></div>
+          </div>
+
+          <div class="spec-node bl">
+            <div class="node-content">
+              <span class="node-label">MEMORY</span>
+              <h3>64GB DDR5</h3>
+              <p>Ultra-Low Latency ECC</p>
+              <div class="node-data">5600 MT/s SPEED</div>
+            </div>
+            <div class="node-line"></div>
+          </div>
+
+          <div class="spec-node br">
+            <div class="node-content">
+              <span class="node-label">SECURITY</span>
+              <h3>ENTERPRISE DDOS</h3>
+              <p>Advance L3/L4/L7 On Custom Ports</p>
+              <div class="node-data">200+ Tbps Mitigation</div>
+            </div>
+            <div class="node-line"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Unique HUD Dashboard Section -->
+    <section id="dashboard" class="dashboard hud-theme">
+      <div class="container">
+        <h2 class="section-title reveal">SYSTEM <span class="text-orange">TELEMETRY</span></h2>
+
+        <div class="hud-outer reveal">
+          <!-- HUD Decorative Frame -->
+          <div class="hud-frame">
+            <div class="corner-tl"></div>
+            <div class="corner-tr"></div>
+            <div class="corner-bl"></div>
+            <div class="corner-br"></div>
+            <div class="scanline"></div>
+          </div>
+
+          <div class="hud-inner">
+            <!-- HUD Header -->
+            <div class="hud-header">
+              <div class="hud-proc-info">
+                <span class="hud-tag">ID: R9-9950X</span>
+                <h3>RYZEN 9 9950X</h3>
+                <div class="hud-cpu-freq">
+                  <span class="freq-label">BOOST FREQ</span>
+                  <span class="freq-val text-orange">5.7 <small>GHz</small></span>
+                </div>
+                <div class="hud-load-bar">
+                  <div class="load-fill" id="hud-load-fill" style="width: 75%"></div>
+                </div>
+              </div>
+              <div class="hud-status-node">
+                <div class="pulse-ring"></div>
+                <span class="status-label">LINKED</span>
+              </div>
+            </div>
+
+            <div class="hud-main-grid">
+              <!-- Left: Gauges -->
+              <div class="hud-side">
+                <div class="hud-gauge">
+                  <svg class="gauge-svg" viewBox="0 0 100 100">
+                    <circle class="gauge-bg" cx="50" cy="50" r="45" />
+                    <circle class="gauge-fill" id="mem-gauge" cx="50" cy="50" r="45"
+                      style="stroke-dasharray: 283; stroke-dashoffset: 140;" />
+                  </svg>
+                  <div class="gauge-content">
+                    <span id="mem-val">30.1</span>
+                    <label>RAM GB</label>
+                  </div>
+                </div>
+                <div class="hud-gauge">
+                  <svg class="gauge-svg" viewBox="0 0 100 100">
+                    <circle class="gauge-bg" cx="50" cy="50" r="45" />
+                    <circle class="gauge-fill" id="storage-gauge" cx="50" cy="50" r="45"
+                      style="stroke-dasharray: 283; stroke-dashoffset: 60;" />
+                  </svg>
+                  <div class="gauge-content">
+                    <span id="storage-val">840</span>
+                    <label>NVME GB</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Center: Hex Grid -->
+              <div class="hud-center-node">
+                <div class="hex-grid" id="hex-threads">
+                  <!-- JS will fill with 32 hex hexagons -->
+                </div>
+                <div class="hud-data-label">32 LOGICAL CORES ACTIVE</div>
+              </div>
+
+              <!-- Right: Pulse Wave -->
+              <div class="hud-side">
+                <div class="hud-wave-container">
+                  <div class="wave-header">NETWORK PULSE</div>
+                  <canvas id="pulse-canvas"></canvas>
+                  <div class="wave-footer"><span id="net-io-val">1.4</span> GBPS</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HUD Bottom: Logs (animated by JS) -->
+            <div class="hud-terminal" id="hud-terminal"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DDoS Mitigation Section -->
+    <section id="ddos-mitigation" class="ddos-section">
+      <div class="container">
+        <div class="ddos-landing reveal">
+          <div class="shield-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 2 15 12 22 22 15 22 7 12 2"></polygon>
+            </svg>
+            NW-SHIELD CORE <span class="dot"></span> ACTIVE MATRIX
+          </div>
+          <h2 class="ddos-title">AUTONOMOUS<br><span class="text-orange-glow">THREAT SCRUBBING</span></h2>
+          <p class="ddos-lead">Neural L3/L4/L7 packet inspection for mission-critical infrastructure.<br>
+            <strong>210+Tbps</strong> global edge capacity. <strong>&lt;1ms</strong> mitigation latency.
+          </p>
+
+          <div class="mitigated-counter">
+            <span class="label">THREATS NEUTRALIZED TODAY</span>
+            <div class="counter-val" id="ddos-counter">324,629</div>
+          </div>
+        </div>
+
+        <!-- Global Mitigation Center -->
+        <div class="mitigation-center reveal">
+          <div class="mc-header">
+            <div class="mc-title-group">
+              <span class="tag">LIVE THREAT INTELLIGENCE</span>
+              <h3>Global Mitigation Center</h3>
+            </div>
+            <div class="mc-stats">
+              <div class="mc-stat-item">
+                <label>INGRESS PEAK</label>
+                <span>45.1 <small>Gbps</small></span>
+              </div>
+              <div class="mc-stat-item">
+                <label>PACKETS/SEC</label>
+                <span>1.2 <small>Mpps</small></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mc-hud-layout">
+            <!-- Left Column: Vector & Logs -->
+            <div class="mc-hud-left">
+              <div class="mc-hud-panel vector-panel">
+                <div class="panel-header">NW-VECTOR TRACKING</div>
+                <div class="globe-container">
+                  <div class="vector-globe" id="vector-globe">
+                    <!-- Inline Shield Icon -->
+                    <svg class="globe-center-img" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255, 112, 0, 0.2)"
+                        stroke="#FF7000" />
+                      <circle cx="12" cy="11" r="3" fill="#FF7000" />
+                    </svg>
+                  </div>
+                </div>
+                <div class="attack-origins">
+                  <div class="origin-item"><span>CN</span>
+                    <div class="bar-wrap">
+                      <div class="bar" style="width: 80%"></div>
+                    </div>
+                  </div>
+                  <div class="origin-item"><span>RU</span>
+                    <div class="bar-wrap">
+                      <div class="bar" style="width: 45%"></div>
+                    </div>
+                  </div>
+                  <div class="origin-item"><span>BR</span>
+                    <div class="bar-wrap">
+                      <div class="bar" style="width: 30%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mc-hud-panel log-panel">
+                <div class="panel-header">SYS.LOG // LIVE</div>
+                <div class="scrub-logs" id="scrub-logs"></div>
+              </div>
+            </div>
+
+            <!-- Right Column: Massive Graph -->
+            <div class="mc-hud-right">
+              <div class="mc-hud-panel monitor-panel">
+                <div class="panel-header">
+                  TRAFFIC INTERSECTION
+                  <div class="mc-legend">
+                    <span class="leg-clean">CLEAN</span>
+                    <span class="leg-mal">MALICIOUS</span>
+                  </div>
+                </div>
+                <div class="traffic-graph-container">
+                  <canvas id="traffic-monitor"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Attack Spectrum HUD -->
+        <div class="attack-spectrum reveal">
+          <div class="osi-hud-container">
+            <!-- Left Info Panel -->
+            <div class="osi-left">
+              <h2 class="osi-title">OSI THREAT<br>CLASSIFICATION</h2>
+              <p class="osi-lead">Autonomous matrix categorizing and neutralizing multi-vector attacks layer by layer.
+              </p>
+
+              <div class="threat-shard mt-8">
+                <div class="shard-marker">L3/L4</div>
+                <div class="shard-data">
+                  <h4>VOLUMETRIC & PROTOCOL</h4>
+                  <p>UDP Flood, SYN Flood, ICMP Flood</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Central Radar Focus -->
+            <div class="osi-center">
+              <div class="radar-housing">
+                <!-- Structural rings exactly like requested -->
+                <div class="radar-ring outer"></div>
+                <div class="radar-ring inner"></div>
+                <div class="radar-crosshair horizontal"></div>
+                <div class="radar-crosshair vertical"></div>
+                <!-- The actual graph -->
+                <canvas id="threat-radar"></canvas>
+              </div>
+              <div class="radar-readout">SIGNATURE ANALYSIS : ACTIVE</div>
+            </div>
+
+            <!-- Right Info Panel -->
+            <div class="osi-right">
+              <div class="threat-shard mb-12">
+                <div class="shard-marker">L7</div>
+                <div class="shard-data">
+                  <h4>APPLICATION LAYER</h4>
+                  <p>HTTP/S Flood, Slowloris, BGP Hijacking</p>
+                </div>
+              </div>
+
+              <div class="threat-shard">
+                <div class="shard-marker">ENG</div>
+                <div class="shard-data">
+                  <h4>ADVANCED INJECTION</h4>
+                  <p>SQL Injection, XSS, API Abuse</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cluster Status Section -->
+    <section id="cluster-status" class="cluster-status-section">
+      <!-- Full width background canvas -->
+      <canvas id="global-telemetry-canvas" class="telemetry-bg"></canvas>
+
+      <div class="container relative z-10 reveal">
+        <div class="cluster-header text-center mb-8 border-none"
+          style="border-bottom:none; justify-content:center; flex-direction:column; gap:10px;">
+          <h2 class="sys-title">LIVE CLUSTER TELEMETRY</h2>
+          <div class="live-pulse justify-center mt-2">
+            <span class="dot"></span> ACTIVE DASHBOARD
+          </div>
+        </div>
+
+        <div class="unique-telemetry-hud">
+
+          <div class="hud-side left-side">
+            <div class="hud-data-point left-align">
+              <div class="point-value text-primary" id="nodes-online">6</div>
+              <div class="point-label">ACTIVE NODES</div>
+              <div class="point-line right-line"></div>
+            </div>
+            <div class="hud-data-point left-align">
+              <div class="point-value" id="peak-throughput">9.8 <small>Gbps</small></div>
+              <div class="point-label">PEAK THROUGHPUT</div>
+              <div class="point-line right-line"></div>
+            </div>
+          </div>
+
+          <div class="hud-center-core">
+            <div class="core-ring">
+              <div class="core-inner">
+                <div class="core-value text-orange"><span id="live-throughput">8.4</span></div>
+                <div class="core-unit">Gbps</div>
+              </div>
+            </div>
+            <div class="core-label">GLOBAL THROUGHPUT</div>
+          </div>
+
+          <div class="hud-side right-side">
+            <div class="hud-data-point right-align">
+              <div class="point-line left-line"></div>
+              <div class="point-value compute-val">96 Cores</div>
+              <div class="point-label">COMPUTE MATRIX</div>
+            </div>
+            <div class="hud-data-point right-align">
+              <div class="point-line left-line"></div>
+              <div class="point-value text-primary"><span id="cluster-latency">0.8</span> <small>ms</small></div>
+              <div class="point-label">AVG LATENCY</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="hud-bottom-info text-center mt-12 text-muted text-sm font-mono tracking-widest"
+          style="font-family: 'Courier New', monospace; letter-spacing: 3px; color: var(--text-muted); margin-top: 4rem;">
+          [ REGION: FRA &bull; DE ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ AUTO-SCALING: ENABLED ]
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Game Servers -->
+    <section id="servers" class="servers">
+      <div class="container">
+        <h2 class="section-title reveal">SUPPORTED <span class="text-orange">GAMES</span></h2>
+        <div class="game-grid">
+          <!-- Minecraft -->
+          <div class="game-card reveal">
+            <div class="game-img"
+              style="background-image: url('https://wallpapercave.com/wp/NjGW245.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="game-info">
+              <h3>MINECRAFT</h3>
+            </div>
+          </div>
+          <!-- FiveM -->
+          <div class="game-card reveal">
+            <div class="game-img"
+              style="background-image: url('https://brandlogovector.com/wp-content/uploads/2022/03/FiveM-Icon-Logo-Small-150x150.png'); background-size: contain; background-position: center; background-repeat: no-repeat; padding: 2rem;">
+            </div>
+            <div class="game-info">
+              <h3>FIVEM</h3>
+            </div>
+          </div>
+          <!-- Rust -->
+          <div class="game-card reveal">
+            <div class="game-img"
+              style="background-image: url('https://logodix.com/logo/700930.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="game-info">
+              <h3>RUST</h3>
+            </div>
+          </div>
+          <!-- ARK -->
+          <div class="game-card reveal">
+            <div class="game-img"
+              style="background-image: url('https://wallpapercave.com/wp/wp1958807.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="game-info">
+              <h3>ARK: SURVIVAL</h3>
+            </div>
+          </div>
+          <!-- Palworld -->
+          <div class="game-card reveal">
+            <div class="game-img"
+              style="background-image: url('https://images8.alphacoders.com/135/thumb-440-1352211.webp'); background-size: cover; background-position: center;">
+            </div>
+            <div class="game-info">
+              <h3>PALWORLD</h3>
+            </div>
+          </div>
+          <!-- Assetto -->
+          <div class="game-card reveal">
+            <div class="game-img"
+              style="background-image: url('https://assettocorsa.gg/wp-content/uploads/ace_complex_white.svg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="game-info">
+              <h3>ASSETTO CORSA</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand reveal">
+          <div class="logo"><span class="text-orange">NODE</span>WAVE</div>
+          <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
+            communities worldwide.</p>
+        </div>
+        <div class="footer-links reveal">
+          <h4>NETWORKS</h4>
+          <a href="#">Game Hosting</a>
+          <a href="#">VPS Solutions</a>
+          <a href="#">VDS Hosting</a>
+          <a href="#">Dedicated</a>
+        </div>
+        <div class="footer-links reveal">
+          <h4>SUPPORT</h4>
+          <a href="#">Knowledgebase</a>
+          <a href="#">Discord Support</a>
+          <a href="#">Billing Portal</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom container reveal">
+        <p>&copy; 2026 Node Wave Hosting. All rights reserved. Designed with passion for gamers.</p>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
