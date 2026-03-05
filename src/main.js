@@ -363,13 +363,7 @@ function initDDoS() {
     const ctx = trafficCanvas.getContext('2d');
     let t = 0;
     const N = 100;
-    const PHI = 1.6180339887;  // golden ratio — guarantees no visible period
-    const E = 2.7182818284;
     const PI2 = Math.PI * 2;
-
-    // Noise seed per point so each x has an independent drift
-    const noiseSeedC = Array.from({ length: N }, () => Math.random() * 1000);
-    const noiseSeedM = Array.from({ length: N }, () => Math.random() * 1000);
 
     function wave(i, t,
       a1, f1, s1,
@@ -390,26 +384,30 @@ function initDDoS() {
     }
 
     function buildClean(H) {
-      // Big rolling wave — amplitude modulated so it swells and falls
+      // Smooth, rolling ocean-like waves
       return Array.from({ length: N }, (_, i) => {
-        const x = i / N;
-        const envelope = 0.5 + 0.5 * Math.sin(x * Math.PI * 1.3 + t * 0.007);
-        const wave1 = Math.sin(x * Math.PI * 2.1 + t * 0.013) * envelope;
-        const wave2 = 0.3 * Math.sin(x * Math.PI * 4.7 + t * 0.021 + PHI);
-        return H * 0.55 + H * 0.28 * wave1 + H * 0.07 * wave2;
+        const x = i / (N - 1);
+        // Base rolling motion
+        const base = Math.sin(x * Math.PI * 1.5 + t * 0.012);
+        // High frequency detail (low amplitude)
+        const detail = 0.15 * Math.sin(x * Math.PI * 3.7 - t * 0.025);
+        // Slow swelling motion
+        const swell = 0.5 + 0.5 * Math.sin(t * 0.005);
+
+        return H * 0.5 + (H * 0.25 * base + H * 0.05 * detail) * swell;
       });
     }
 
     function buildMal(H) {
-      // Choppier waves — faster, more turbulent, lower baseline
+      // Sharper, more aggressive but structured "malicious" waves
       return Array.from({ length: N }, (_, i) => {
-        const x = i / N;
-        // Main chop wave
-        const chop = Math.sin(x * Math.PI * 3.7 + t * 0.029) *
-          (0.4 + 0.6 * Math.sin(x * Math.PI * 1.9 + t * 0.017 + E));
-        // Secondary smaller wave going the other direction
-        const cross = 0.35 * Math.sin(x * Math.PI * 5.3 - t * 0.021 + PHI);
-        return H * 0.30 + H * 0.20 * chop + H * 0.08 * cross;
+        const x = i / (N - 1);
+        // Sharp peaks using absolute value on sine
+        const peaks = Math.abs(Math.sin(x * Math.PI * 2.8 + t * 0.035));
+        // Turbulent secondary wave
+        const turbulence = 0.3 * Math.sin(x * Math.PI * 6.2 - t * 0.045);
+
+        return H * 0.2 + H * 0.3 * peaks + H * 0.05 * turbulence;
       });
     }
 

@@ -1057,7 +1057,7 @@ section {
 .status-dot {
   width: 6px;
   height: 6px;
-  background: var(--primary);
+  background: var(--primary) !important;
   border-radius: 50%;
   box-shadow: 0 0 8px var(--primary);
   animation: blink 1.5s infinite;
@@ -1258,7 +1258,7 @@ section {
 }
 
 .text-green {
-  color: var(--primary);
+  color: var(--primary) !important;
 }
 
 .bg-orange {
@@ -2518,20 +2518,20 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 2.2rem;
   width: 100%;
 }
 
 .mobile-nav-links a {
   font-family: var(--font-accent);
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
   text-decoration: none;
   color: var(--secondary);
-  letter-spacing: 4px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   transition: var(--transition);
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .mobile-nav-links a:hover {
@@ -2548,11 +2548,12 @@ section {
 }
 
 .mobile-cta .btn {
-  width: 80%;
-  max-width: 300px;
-  padding: 1.1rem;
-  font-size: 1rem;
-  border-radius: 8px;
+  width: 65%;
+  max-width: 260px;
+  padding: 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px rgba(255, 112, 0, 0.2);
 }
 
 /* Base Responsive Overrides */
