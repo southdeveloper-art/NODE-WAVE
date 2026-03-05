@@ -137,7 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn("Dashboard initialization failed:", e);
   }
 
-  // 5. Smooth Scroll
+  // 5. Login Modal Logic
+  initLoginModal();
+
+  // 6. Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -667,3 +670,41 @@ function initBootLog() {
   nextLine();
 }
 
+
+// Login Modal Toggle Logic
+function initLoginModal() {
+  const loginTrigger = document.getElementById('login-trigger');
+  const loginModal = document.getElementById('login-modal');
+  const modalClose = document.getElementById('modal-close');
+
+  if (loginTrigger && loginModal) {
+    loginTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeModal = () => {
+      loginModal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
+
+    // Close on overlay click
+    loginModal.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        closeModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && loginModal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
+}
