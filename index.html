@@ -34,10 +34,9 @@
           <span class="text-orange">NODE</span> WAVE
         </div>
         <nav class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#servers">Game Servers</a>
+          <a href="/gcs/">Game Compute Servers</a>
+          <a href="/gds/">Game Dedicated Servers</a>
           <a href="#vps">Support</a>
-          <a href="#contact">Contact</a>
         </nav>
         <div class="nav-cta" id="nav-cta">
           <a href="#" id="login-trigger" class="btn btn-outline"
@@ -61,10 +60,9 @@
       <!-- Mobile Menu Overlay -->
       <div class="mobile-menu" id="mobile-menu">
         <nav class="mobile-nav-links">
-          <a href="#features">Features</a>
-          <a href="#servers">Game Servers</a>
+          <a href="/gcs/">Game Compute Servers</a>
+          <a href="/gds/">Game Dedicated Servers</a>
           <a href="#vps">Support</a>
-          <a href="#contact">Contact</a>
           <div class="mobile-cta">
             <a href="#" class="btn btn-primary">Sign Up</a>
           </div>
@@ -80,42 +78,15 @@
           <p class="hero-subtitle reveal">Unleash the full potential of your community with Ryzen 9 9950x powered
             infrastructure with DDR5 6000MT/s memory, NVMe storage and a protected 10Gbps backbone.</p>
           <div class="hero-btns reveal">
-            <a href="#servers" class="btn btn-primary">Deploy Server Now</a>
-            <a href="#features" class="btn btn-outline">Performance Specs</a>
+            <a href="/plans/" class="btn btn-primary">Deploy Server Now</a>
+            <a href="#specs" class="btn btn-outline">Performance Specs</a>
           </div>
         </div>
       </div>
       <div class="hero-bg-glow"></div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-      <div class="container">
-        <h2 class="section-title reveal">What We <span class="text-orange">Offer</span></h2>
-        <div class="features-grid">
-          <div class="feature-card reveal">
-            <img src="./gcs_icon.webp" alt="GCS" class="feature-icon" loading="lazy">
-            <h3>GCS — Game Compute Servers</h3>
-            <p>Shared high-frequency compute resources optimized for game workloads.</p>
-            <a href="/gcs/" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">View Plans</a>
-          </div>
-          <div class="feature-card reveal">
-            <img src="./gds_icon.webp" alt="GDS" class="feature-icon" loading="lazy">
-            <h3>GDS — Game Dedicated Servers</h3>
-            <p>Exclusive compute resources reserved for a single client.</p>
-            <a href="/gds/" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">View Plans</a>
-          </div>
-          <div class="feature-card reveal">
-            <img src="./ddos_icon.webp" alt="DDoS Protection" class="feature-icon" loading="lazy">
-            <h3>Game Dedicated DDoS Protection</h3>
-            <p>Advanced Multilayer Mitigation With L3/L4/L7 Protected Game Servers With 210tbps+ global filtering
-              capacity</p>
-            <a href="/mitigation/" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">View
-              Mitigation</a>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- Specifications Section -->
     <section id="specs" class="specs hub-layout">
@@ -180,82 +151,130 @@
 
         <div class="hud-outer reveal">
           <!-- HUD Decorative Frame -->
-          <div class="hud-frame">
-            <div class="corner-tl"></div>
-            <div class="corner-tr"></div>
-            <div class="corner-bl"></div>
-            <div class="corner-br"></div>
-            <div class="scanline"></div>
-          </div>
+          <div class="hud-inner diag-panel">
 
-          <div class="hud-inner">
-            <!-- HUD Header -->
-            <div class="hud-header">
-              <div class="hud-proc-info">
-                <span class="hud-tag">ID: R9-9950X</span>
-                <h3>RYZEN 9 9950X</h3>
-                <div class="hud-cpu-freq">
-                  <span class="freq-label">BOOST FREQ</span>
-                  <span class="freq-val text-orange">5.7 <small>GHz</small></span>
-                </div>
-                <div class="hud-load-bar">
-                  <div class="load-fill" id="hud-load-fill" style="width: 75%"></div>
-                </div>
+            <div class="diag-header">
+              <div class="diag-title">
+                <span class="diag-icon">⚡</span>
+                <span>NODE COMPUTE CLUSTER // R9-9950X</span>
               </div>
-              <div class="hud-status-node">
-                <div class="pulse-ring"></div>
-                <span class="status-label">LINKED</span>
+              <div class="diag-status">
+                <span class="status-dot"></span>
+                <span>SECURE UPLINK STATUS: OPTIMAL</span>
               </div>
             </div>
 
-            <div class="hud-main-grid">
-              <!-- Left: Gauges -->
-              <div class="hud-side">
-                <div class="hud-gauge">
-                  <svg class="gauge-svg" viewBox="0 0 100 100">
-                    <circle class="gauge-bg" cx="50" cy="50" r="45" />
-                    <circle class="gauge-fill" id="mem-gauge" cx="50" cy="50" r="45"
-                      style="stroke-dasharray: 283; stroke-dashoffset: 140;" />
-                  </svg>
-                  <div class="gauge-content">
-                    <span id="mem-val">30.1</span>
-                    <label>RAM GB</label>
-                  </div>
-                </div>
-                <div class="hud-gauge">
-                  <svg class="gauge-svg" viewBox="0 0 100 100">
-                    <circle class="gauge-bg" cx="50" cy="50" r="45" />
-                    <circle class="gauge-fill" id="storage-gauge" cx="50" cy="50" r="45"
-                      style="stroke-dasharray: 283; stroke-dashoffset: 60;" />
-                  </svg>
-                  <div class="gauge-content">
-                    <span id="storage-val">840</span>
-                    <label>NVME GB</label>
-                  </div>
+            <div class="diag-grid">
+
+              <!-- Left: Core Load Array -->
+              <div class="diag-block load-array-block">
+                <div class="block-title">LOGICAL CORE ARRAY [32T]</div>
+                <div class="load-array" id="core-array">
+                  <!-- JS will generate 32 load bars -->
                 </div>
               </div>
 
-              <!-- Center: Hex Grid -->
-              <div class="hud-center-node">
-                <div class="hex-grid" id="hex-threads">
-                  <!-- JS will fill with 32 hex hexagons -->
+              <!-- Center: System Memory & Storage Specs -->
+              <div class="diag-block specs-block">
+                <div class="spec-row">
+                  <div class="spec-label">BASE CLOCK</div>
+                  <div class="spec-val">4.3 <small>GHz</small></div>
                 </div>
-                <div class="hud-data-label">32 LOGICAL CORES ACTIVE</div>
+                <div class="spec-row">
+                  <div class="spec-label">BOOST CLOCK</div>
+                  <div class="spec-val text-orange">5.7 <small>GHz</small></div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">MEMORY ALLOC</div>
+                  <div class="spec-val" id="diag-mem">32.4 <small>GB / 64 GB</small></div>
+                </div>
+                <div class="spec-row">
+                  <div class="spec-label">NVME USAGE</div>
+                  <div class="spec-val" id="diag-storage">841 <small>GB / 2 TB</small></div>
+                </div>
               </div>
 
-              <!-- Right: Pulse Wave -->
-              <div class="hud-side">
-                <div class="hud-wave-container">
-                  <div class="wave-header">NETWORK PULSE</div>
-                  <canvas id="pulse-canvas"></canvas>
-                  <div class="wave-footer"><span id="net-io-val">1.4</span> GBPS</div>
+              <!-- Right: Live Network Traffic Graph -->
+              <div class="diag-block net-block">
+                <div class="block-title">INGRESS / EGRESS <span class="text-orange" id="diag-net-val">1.4 Gbps</span>
+                </div>
+                <canvas id="diag-net-canvas"></canvas>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Guaranteed Resources Section -->
+          <div class="guaranteed-resources-wrapper reveal">
+            <div class="gr-card">
+              <div class="gr-header">
+                <div class="gr-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                  </svg>
+                </div>
+                <h3>Guaranteed Resources</h3>
+              </div>
+              <p class="gr-desc">
+                No noisy neighbors. 100% of the CPU and RAM allocation is reserved exclusively for your workloads.
+                Experience consistent, predictable performance 24/7.
+              </p>
+
+              <div class="gr-metrics">
+                <div class="gr-metric-box">
+                  <span class="gr-metric-label">CPU STEAL</span>
+                  <span class="gr-metric-val text-green">0.0%</span>
+                  <div class="gr-bar-track">
+                    <div class="gr-bar-fill" style="width: 2%"></div>
+                  </div>
+                </div>
+                <div class="gr-metric-box">
+                  <span class="gr-metric-label">MEMORY CONTENTION</span>
+                  <span class="gr-metric-val text-green">None</span>
+                  <div class="gr-bar-track">
+                    <div class="gr-bar-fill" style="width: 0%"></div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- HUD Bottom: Logs (animated by JS) -->
-            <div class="hud-terminal" id="hud-terminal"></div>
+            <div class="gr-card secondary-feature">
+              <div class="gr-header">
+                <div class="gr-icon-box" style="background: rgba(255, 112, 0, 0.1); color: var(--primary);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 8v4l3 3"></path>
+                  </svg>
+                </div>
+                <h3>100% Uptime SLA</h3>
+              </div>
+              <p class="gr-desc">
+                Built on enterprise-grade redundant infrastructure. We guarantee your instances stay online, backed by
+                our comprehensive Service Level Agreement.
+              </p>
+              <div class="gr-metrics single-metric">
+                <div class="gr-metric-box">
+                  <span class="gr-metric-label">CURRENT NETWORK UPTIME</span>
+                  <span class="gr-metric-val text-orange">99.999%</span>
+                  <div class="gr-bar-track">
+                    <div class="gr-bar-fill bg-orange" style="width: 99.99%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -329,6 +348,19 @@
       </div>
     </section>
 
+    <!-- DDoS Banner After System Telemetry -->
+    <section class="container ddos-banner" style="position: relative; z-index: 10; margin-bottom: 2rem;">
+      <div class="ddos-banner-card reveal">
+        <img src="/ddos_icon.webp" alt="DDoS Protection" class="ddos-banner-icon" loading="lazy">
+        <div class="ddos-banner-content">
+          <h3>GAME DEDICATED DDOS PROTECTION</h3>
+          <p>Advanced Multilayer Mitigation With L3/L4/L7 Protected Game Servers With 210tbps+ global filtering capacity
+            designed to keep your servers online 24/7 without fail.</p>
+          <a href="/mitigation/" class="btn btn-primary">VIEW MITIGATION DETAILS</a>
+        </div>
+      </div>
+    </section>
+
     <!-- Game Servers -->
     <section id="servers" class="servers">
       <div class="container">
@@ -392,111 +424,23 @@
       </div>
     </section>
 
-    <!-- Infrastructure FAQ -->
-    <section id="faq" class="faq-section">
-      <div class="container">
-        <h2 class="section-title reveal">INFRASTRUCTURE <span class="text-orange">FAQ</span></h2>
-
-        <div class="faq-grid">
-          <div class="faq-item reveal">
-            <div class="faq-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                <line x1="6" y1="18" x2="6.01" y2="18"></line>
-              </svg>
-            </div>
-            <div class="faq-content">
-              <h4>Are your servers resold from another provider?</h4>
-              <p>No. NodeWave operates its own compute infrastructure. Our servers run on privately managed nodes
-                powered by Ryzen 9000 series processors, DDR5 memory, and NVMe storage. Each node is integrated into our
-                cluster architecture and monitored through live telemetry to ensure stable performance.</p>
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <div class="faq-content">
-              <h4>How are our servers protected from DDoS attacks?</h4>
-              <p>All NodeWave servers are protected by dedicated multi-layer DDoS mitigation. Incoming traffic is
-                filtered through a global mitigation network with 210 Tbps+ filtering capacity before reaching our
-                infrastructure, defending against SYN floods, UDP amplification, and more.</p>
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-              </svg>
-            </div>
-            <div class="faq-content">
-              <h4>What is the difference between GCS and GDS servers?</h4>
-              <p>GCS (Game Compute Servers) provide shared compute resources optimized for scalable game hosting. GDS
-                (Game Dedicated Servers) provide exclusive compute resources reserved for a single client, delivering
-                maximum performance and isolation for demanding workloads.</p>
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                </path>
-              </svg>
-            </div>
-            <div class="faq-content">
-              <h4>Where are your servers located?</h4>
-              <p>Our primary infrastructure is located in Frankfurt, Germany, one of the largest network hubs in Europe.
-                This provides excellent connectivity and low latency across the continent due to its proximity to the
-                major internet exchange operated by DE-CIX.</p>
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 19V5M5 12l7-7 7 7"></path>
-              </svg>
-            </div>
-            <div class="faq-content">
-              <h4>Can I upgrade my server resources later?</h4>
-              <p>Yes. Our infrastructure is built on clustered compute nodes, allowing resources to be adjusted as your
-                needs grow. You can upgrade CPU allocation, memory, or storage without migrating to a completely new
-                server, helping your community scale smoothly.</p>
-            </div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                <rect x="9" y="9" width="6" height="6"></rect>
-                <line x1="9" y1="1" x2="9" y2="4"></line>
-                <line x1="15" y1="1" x2="15" y2="4"></line>
-                <line x1="9" y1="20" x2="9" y2="23"></line>
-                <line x1="15" y1="20" x2="15" y2="23"></line>
-                <line x1="20" y1="9" x2="23" y2="9"></line>
-                <line x1="20" y1="15" x2="23" y2="15"></line>
-                <line x1="1" y1="9" x2="4" y2="9"></line>
-                <line x1="1" y1="15" x2="4" y2="15"></line>
-              </svg>
-            </div>
-            <div class="faq-content">
-              <h4>What hardware powers your servers?</h4>
-              <p>NodeWave servers run on high-frequency AMD Ryzen 9 9950X processors, DDR5 6000MT/s memory, and NVMe
-                storage.
-                These components deliver strong single-thread performance and fast storage access needed for stable game
-                server performance.</p>
-            </div>
-          </div>
+    <!-- Infrastructure FAQ Banner -->
+    <section class="container ddos-banner" style="margin-top: 3rem; margin-bottom: 5rem;">
+      <div class="ddos-banner-card reveal" style="border-color: rgba(255,255,255,0.1); flex-direction: row-reverse;">
+        <div class="ddos-banner-icon"
+          style="display: flex; justify-content: center; align-items: center; width: 200px; height: 200px; background: rgba(255,112,0,0.05); border-radius: 50%; border: 1px dashed rgba(255,112,0,0.3);">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div class="ddos-banner-content">
+          <h3>INFRASTRUCTURE <span class="text-orange">FAQ</span></h3>
+          <p>Have questions about our hardware, mitigation, or network architecture? We've compiled detailed answers
+            about how NodeWave operates its global compute clusters and protects your community.</p>
+          <a href="/faq/" class="btn btn-outline" style="border-color: rgba(255,255,255,0.2); color: white;">VIEW FULL
+            FAQ</a>
         </div>
       </div>
     </section>

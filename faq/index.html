@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/webp" href="/logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Node Wave | Mitigation Center</title>
+    <title>Node Wave | Infrastructure FAQ</title>
 
     <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,8 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap"
         rel="stylesheet">
-    <meta name="description"
-        content="Advanced L3/L4/L7 DDoS mitigation for game servers. 210+ Tbps global filtering capacity with <1ms latency.">
+    <meta name="description" content="Common questions about our hardware, network, and operations at NodeWave.">
     <noscript>
         <style>
             .reveal {
@@ -23,6 +22,7 @@
             }
         </style>
     </noscript>
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 
 <body>
@@ -45,7 +45,7 @@
                     <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
                         style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
                 </div>
-                <div class="user-profile-nav" id="user-profile-nav">
+                <div class="user-profile-nav" id="user-profile-nav" style="display:none;">
                     <div class="user-avatar" id="user-avatar-initials">UN</div>
                     <div class="user-info-text">
                         <span class="user-nav-name" id="user-nav-name">User Name</span>
@@ -71,156 +71,128 @@
             </div>
         </header>
 
-        <!-- DDoS Mitigation Section -->
-        <section id="ddos-mitigation" class="ddos-section" style="padding-top: 150px;">
+        <section id="faq" class="faq-section" style="padding-top: 150px; min-height: 80vh;">
             <div class="container">
-                <div class="ddos-landing reveal">
-                    <div class="shield-badge">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="12 2 2 7 2 15 12 22 22 15 22 7 12 2"></polygon>
-                        </svg>
-                        NW-SHIELD CORE <span class="dot"></span> ACTIVE MATRIX
-                    </div>
-                    <h2 class="ddos-title">AUTONOMOUS<br><span class="text-orange-glow">THREAT SCRUBBING</span></h2>
-                    <p class="ddos-lead">Neural L3/L4/L7 packet inspection for mission-critical infrastructure.<br>
-                        <strong>210+Tbps</strong> global edge capacity. <strong>&lt;1ms</strong> mitigation latency.
-                    </p>
+                <h2 class="section-title reveal">INFRASTRUCTURE <span class="text-orange">FAQ</span></h2>
 
-                    <div class="mitigated-counter">
-                        <span class="label">THREATS NEUTRALIZED TODAY</span>
-                        <div class="counter-val" id="ddos-counter">324,808</div>
-                    </div>
-                </div>
-
-                <!-- Global Mitigation Center -->
-                <div class="mitigation-center reveal">
-                    <div class="mc-header">
-                        <div class="mc-title-group">
-                            <span class="tag">LIVE THREAT INTELLIGENCE</span>
-                            <h3>Global Mitigation Center</h3>
+                <div class="faq-grid" style="margin-top: 4rem;">
+                    <div class="faq-item reveal">
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                            </svg>
                         </div>
-                        <div class="mc-stats">
-                            <div class="mc-stat-item">
-                                <label>INGRESS PEAK</label>
-                                <span id="live-ingress">45.1 <small>Gbps</small></span>
-                            </div>
-                            <div class="mc-stat-item">
-                                <label>PACKETS/SEC</label>
-                                <span id="live-packets">1.2 <small>Mpps</small></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mc-hud-layout">
-                        <!-- Left Column: Vector & Logs -->
-                        <div class="mc-hud-left">
-                            <div class="mc-hud-panel vector-panel">
-                                <div class="panel-header">NW-VECTOR TRACKING</div>
-                                <div class="globe-container">
-                                    <div class="vector-globe" id="vector-globe">
-                                        <!-- Inline Shield Icon -->
-                                        <svg class="globe-center-img" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="1.5">
-                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                                                fill="rgba(255, 112, 0, 0.2)" stroke="#FF7000" />
-                                            <circle cx="12" cy="11" r="3" fill="#FF7000" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="attack-origins">
-                                    <div class="origin-item"><span>CN</span>
-                                        <div class="bar-wrap">
-                                            <div class="bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="origin-item"><span>RU</span>
-                                        <div class="bar-wrap">
-                                            <div class="bar" style="width: 45%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="origin-item"><span>BR</span>
-                                        <div class="bar-wrap">
-                                            <div class="bar" style="width: 30%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mc-hud-panel log-panel">
-                                <div class="panel-header">SYS.LOG // LIVE</div>
-                                <div class="scrub-logs" id="scrub-logs"></div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column: Massive Graph -->
-                        <div class="mc-hud-right">
-                            <div class="mc-hud-panel monitor-panel">
-                                <div class="panel-header">
-                                    TRAFFIC INTERSECTION
-                                    <div class="mc-legend">
-                                        <span class="leg-clean">CLEAN</span>
-                                        <span class="leg-mal">MALICIOUS</span>
-                                    </div>
-                                </div>
-                                <div class="traffic-graph-container">
-                                    <canvas id="traffic-monitor"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Attack Spectrum HUD -->
-                <div class="attack-spectrum reveal">
-                    <div class="osi-hud-container">
-                        <!-- Left Info Panel -->
-                        <div class="osi-left">
-                            <h2 class="osi-title">OSI THREAT<br>CLASSIFICATION</h2>
-                            <p class="osi-lead">Autonomous matrix categorizing and neutralizing multi-vector attacks
-                                layer by layer.
+                        <div class="faq-content">
+                            <h4>Are your servers resold from another provider?</h4>
+                            <p>No. NodeWave operates its own compute infrastructure. Our servers run on privately
+                                managed nodes
+                                powered by Ryzen 9000 series processors, DDR5 memory, and NVMe storage. Each node is
+                                integrated into our
+                                cluster architecture and monitored through live telemetry to ensure stable performance.
                             </p>
-
-                            <div class="threat-shard mt-8">
-                                <div class="shard-marker">L3/L4</div>
-                                <div class="shard-data">
-                                    <h4>VOLUMETRIC & PROTOCOL</h4>
-                                    <p>UDP Flood, SYN Flood, ICMP Flood</p>
-                                </div>
-                            </div>
                         </div>
+                    </div>
 
-                        <!-- Central Radar Focus -->
-                        <div class="osi-center">
-                            <div class="radar-housing">
-                                <!-- Structural rings exactly like requested -->
-                                <div class="radar-ring outer"></div>
-                                <div class="radar-ring inner"></div>
-                                <div class="radar-crosshair horizontal"></div>
-                                <div class="radar-crosshair vertical"></div>
-                                <!-- The actual graph -->
-                                <canvas id="threat-radar"></canvas>
-                            </div>
-                            <div class="radar-readout">SIGNATURE ANALYSIS : ACTIVE</div>
+                    <div class="faq-item reveal">
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
                         </div>
+                        <div class="faq-content">
+                            <h4>How are our servers protected from DDoS attacks?</h4>
+                            <p>All NodeWave servers are protected by dedicated multi-layer DDoS mitigation. Incoming
+                                traffic is
+                                filtered through a global mitigation network with 210 Tbps+ filtering capacity before
+                                reaching our
+                                infrastructure, defending against SYN floods, UDP amplification, and more.</p>
+                        </div>
+                    </div>
 
-                        <!-- Right Info Panel -->
-                        <div class="osi-right">
-                            <div class="threat-shard mb-12">
-                                <div class="shard-marker">L7</div>
-                                <div class="shard-data">
-                                    <h4>APPLICATION LAYER</h4>
-                                    <p>HTTP/S Flood, Slowloris, BGP Hijacking</p>
-                                </div>
-                            </div>
+                    <div class="faq-item reveal">
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="faq-content">
+                            <h4>What is the difference between GCS and GDS servers?</h4>
+                            <p>GCS (Game Compute Servers) provide shared compute resources optimized for scalable game
+                                hosting. GDS
+                                (Game Dedicated Servers) provide exclusive compute resources reserved for a single
+                                client, delivering
+                                maximum performance and isolation for demanding workloads.</p>
+                        </div>
+                    </div>
 
-                            <div class="threat-shard">
-                                <div class="shard-marker">ENG</div>
-                                <div class="shard-data">
-                                    <h4>ADVANCED INJECTION</h4>
-                                    <p>SQL Injection, XSS, API Abuse</p>
-                                </div>
-                            </div>
+                    <div class="faq-item reveal">
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="faq-content">
+                            <h4>Where are your servers located?</h4>
+                            <p>Our primary infrastructure is located in Frankfurt, Germany, one of the largest network
+                                hubs in Europe.
+                                This provides excellent connectivity and low latency across the continent due to its
+                                proximity to the
+                                major internet exchange operated by DE-CIX.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 19V5M5 12l7-7 7 7"></path>
+                            </svg>
+                        </div>
+                        <div class="faq-content">
+                            <h4>Can I upgrade my server resources later?</h4>
+                            <p>Yes. Our infrastructure is built on clustered compute nodes, allowing resources to be
+                                adjusted as your
+                                needs grow. You can upgrade CPU allocation, memory, or storage without migrating to a
+                                completely new
+                                server, helping your community scale smoothly.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item reveal">
+                        <div class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                                <rect x="9" y="9" width="6" height="6"></rect>
+                                <line x1="9" y1="1" x2="9" y2="4"></line>
+                                <line x1="15" y1="1" x2="15" y2="4"></line>
+                                <line x1="9" y1="20" x2="9" y2="23"></line>
+                                <line x1="15" y1="20" x2="15" y2="23"></line>
+                                <line x1="20" y1="9" x2="23" y2="9"></line>
+                                <line x1="20" y1="15" x2="23" y2="15"></line>
+                                <line x1="1" y1="9" x2="4" y2="9"></line>
+                                <line x1="1" y1="15" x2="4" y2="15"></line>
+                            </svg>
+                        </div>
+                        <div class="faq-content">
+                            <h4>What hardware powers your servers?</h4>
+                            <p>NodeWave servers run on high-frequency AMD Ryzen 9 9950X processors, DDR5 6000MT/s
+                                memory, and NVMe
+                                storage.
+                                These components deliver strong single-thread performance and fast storage access needed
+                                for stable game
+                                server performance.</p>
                         </div>
                     </div>
                 </div>

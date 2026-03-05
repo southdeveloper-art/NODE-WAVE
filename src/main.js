@@ -154,76 +154,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // HUD Dashboard Logic
 function initHUD() {
-  const hexGrid = document.getElementById('hex-threads');
-  const hudLoadFill = document.getElementById('hud-load-fill');
-  const memGauge = document.getElementById('mem-gauge');
-  const storageGauge = document.getElementById('storage-gauge');
-  const memVal = document.getElementById('mem-val');
-  const storageVal = document.getElementById('storage-val');
-  const netIoVal = document.getElementById('net-io-val');
-  const hudLogLive = document.getElementById('hud-log-live');
-  const pulseCanvas = document.getElementById('pulse-canvas');
+  const coreArray = document.getElementById('core-array');
+  const netCanvas = document.getElementById('diag-net-canvas');
+  const netVal = document.getElementById('diag-net-val');
 
-  if (hexGrid) {
+  if (coreArray) {
+    // Generate 32 core bars
     for (let i = 0; i < 32; i++) {
-      const hex = document.createElement('div');
-      hex.className = 'hex-box';
-      hexGrid.appendChild(hex);
+      const bar = document.createElement('div');
+      bar.className = 'core-bar';
+      const fill = document.createElement('div');
+      fill.className = 'core-fill';
+      bar.appendChild(fill);
+      coreArray.appendChild(bar);
     }
-    const hexagons = document.querySelectorAll('.hex-box');
-    const ctx = pulseCanvas.getContext('2d');
-    let points = Array(50).fill(50);
+    const coreFills = document.querySelectorAll('.core-fill');
+
+    let ctx = null;
+    let points = Array(50).fill(20);
+
+    if (netCanvas) {
+      ctx = netCanvas.getContext('2d');
+      // Set canvas size
+      netCanvas.width = netCanvas.offsetWidth;
+      netCanvas.height = netCanvas.offsetHeight;
+    }
 
     function updateHUD() {
-      let activeCount = 0;
-      hexagons.forEach(hex => {
-        const active = Math.random() > 0.4;
-        if (active) {
-          hex.classList.add('active');
-          activeCount++;
+      // Update core loads (Blocky active/inactive style)
+      coreFills.forEach(fill => {
+        // Core is active 60% of the time
+        const isActive = Math.random() > 0.4;
+
+        // If active, assign a high or medium load color
+        if (isActive) {
+          const isHighLoad = Math.random() > 0.8;
+          if (isHighLoad) {
+            fill.style.background = '#ff4d4d'; // Red for high load
+            fill.style.boxShadow = '0 0 10px #ff4d4d';
+            fill.style.opacity = '1';
+          } else {
+            fill.style.background = 'var(--primary)'; // Orange normal
+            fill.style.boxShadow = '0 0 5px rgba(255, 112, 0, 0.5)';
+            fill.style.opacity = '0.8';
+          }
         } else {
-          hex.classList.remove('active');
+          // Inactive core
+          fill.style.background = 'rgba(255, 255, 255, 0.1)';
+          fill.style.boxShadow = 'none';
+          fill.style.opacity = '0.3';
         }
       });
-      const load = Math.round((activeCount / 32) * 100);
-      if (hudLoadFill) hudLoadFill.style.width = `${load}%`;
 
-      const mem = (30 + Math.random() * 5).toFixed(1);
-      if (memVal) memVal.textContent = mem;
-      if (memGauge) memGauge.style.strokeDashoffset = 283 - (283 * (mem / 64));
+      // Update Network Canvas
+      if (ctx && netCanvas) {
+        points.push(10 + Math.random() * (netCanvas.height - 20));
+        points.shift();
 
-      const storage = (840 + Math.random() * 2).toFixed(0);
-      if (storageVal) storageVal.textContent = storage;
-      if (storageGauge) storageGauge.style.strokeDashoffset = 283 - (283 * (storage / 1000));
+        const currentNet = (1.2 + Math.random() * 0.8).toFixed(1);
+        if (netVal) netVal.textContent = `${currentNet} Gbps`;
 
-      points.push(Math.random() * 80 + 10);
-      points.shift();
-      const net = (1.2 + Math.random() * 0.6).toFixed(1);
-      if (netIoVal) netIoVal.textContent = net;
+        ctx.clearRect(0, 0, netCanvas.width, netCanvas.height);
 
-      ctx.clearRect(0, 0, pulseCanvas.width, pulseCanvas.height);
-      ctx.beginPath();
-      ctx.strokeStyle = '#FF7000';
-      ctx.lineWidth = 2;
-      ctx.moveTo(0, points[0]);
-      for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(i * (pulseCanvas.width / 49), points[i]);
+        // Draw Grid
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 112, 0, 0.1)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < netCanvas.width; i += 20) {
+          ctx.moveTo(i, 0); ctx.lineTo(i, netCanvas.height);
+        }
+        for (let i = 0; i < netCanvas.height; i += 20) {
+          ctx.moveTo(0, i); ctx.lineTo(netCanvas.width, i);
+        }
+        ctx.stroke();
+
+        // Draw Aggressive Step Graph
+        ctx.beginPath();
+        ctx.strokeStyle = '#FF7000';
+        ctx.lineWidth = 2;
+        ctx.moveTo(0, points[0]);
+        for (let i = 1; i < points.length; i++) {
+          const prevX = (i - 1) * (netCanvas.width / 49);
+          const currX = i * (netCanvas.width / 49);
+          // Step logic: horizontal line then vertical line to new point
+          ctx.lineTo(currX, points[i - 1]);
+          ctx.lineTo(currX, points[i]);
+        }
+        ctx.stroke();
+
+        // Fill under step graph
+        ctx.lineTo(netCanvas.width, netCanvas.height);
+        ctx.lineTo(0, netCanvas.height);
+        ctx.fillStyle = 'rgba(255, 112, 0, 0.2)';
+        ctx.fill();
+
+        // Add sweeping scanner line over the graph
+        const scanLineX = (Date.now() / 10) % netCanvas.width;
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 1;
+        ctx.moveTo(scanLineX, 0);
+        ctx.lineTo(scanLineX, netCanvas.height);
+        ctx.stroke();
       }
-      ctx.stroke();
 
-      if (Math.random() > 0.8 && hudLogLive) {
-        const logs = ["> OPTIMIZING...", "> HANDSHAKE VERIFIED", "> PACKET INJECTED", "> CORE STABILIZED", "> UPLINK: OPTIMAL"];
-        const div = document.createElement('div');
-        div.textContent = logs[Math.floor(Math.random() * logs.length)];
-        hudLogLive.prepend(div);
-        if (hudLogLive.children.length > 5) hudLogLive.lastElementChild.remove();
+      // Randomly fluctuate memory and storage slightly for realism
+      const memElem = document.getElementById('diag-mem');
+      if (memElem && Math.random() > 0.5) {
+        const mem = (32.0 + Math.random() * 2).toFixed(1);
+        memElem.innerHTML = `${mem} <small>GB / 64 GB</small>`;
       }
     }
 
-    pulseCanvas.width = pulseCanvas.offsetWidth;
-    pulseCanvas.height = pulseCanvas.offsetHeight;
     setInterval(updateHUD, 1000);
     updateHUD();
+
+    window.addEventListener('resize', () => {
+      if (netCanvas) {
+        netCanvas.width = netCanvas.offsetWidth;
+        netCanvas.height = netCanvas.offsetHeight;
+      }
+    });
   }
 }
 
