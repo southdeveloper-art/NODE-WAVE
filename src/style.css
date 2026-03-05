@@ -381,7 +381,11 @@ section {
 
 /* DDoS Rectangle Banner */
 .ddos-banner {
-  margin-top: 10rem;
+  margin-top: 2rem;
+}
+
+#servers {
+  padding-bottom: 2rem;
 }
 
 .ddos-banner-card {
