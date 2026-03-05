@@ -1875,3 +1875,170 @@ section {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ===== GLOBAL MOBILE FIXES ===== */
+@media (max-width: 768px) {
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* NAV */
+  .nav-links {
+    display: none;
+  }
+
+  /* HERO */
+  .hero-content {
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 12vw, 5rem);
+    letter-spacing: -2px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  /* FEATURES / HUB */
+  .hub-grid,
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .performance-hub {
+    grid-template-columns: 1fr;
+  }
+
+  .hub-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* GAME SERVERS */
+  .game-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* DDOS SECTION */
+  .ddos-landing {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .monitor-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .traffic-monitor-wrap {
+    height: 200px;
+  }
+
+  /* OSI HUD */
+  .radar-housing {
+    width: 280px;
+    height: 280px;
+  }
+
+  /* SYSTEM TELEMETRY */
+  .hud-main-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hud-side {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .hud-gauge {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hud-load-bar {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hud-terminal {
+    font-size: 0.75rem;
+  }
+
+  /* CLUSTER HUD */
+  .unique-telemetry-hud {
+    flex-direction: column !important;
+    gap: 2rem;
+  }
+
+  .hud-core-center {
+    width: 200px !important;
+    height: 200px !important;
+  }
+
+  /* PRICING / PLANS */
+  .plans-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* SECTION TITLES */
+  section h2,
+  .section-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    letter-spacing: -1px;
+  }
+
+  /* FOOTER */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hud-side {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .radar-housing {
+    width: 240px;
+    height: 240px;
+  }
+
+  .osi-hud-container {
+    gap: 2rem;
+  }
+}
