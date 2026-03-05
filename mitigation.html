@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Wave | DDoS Mitigation</title>
+    <meta name="description"
+        content="Advanced L3/L4/L7 DDoS mitigation for game servers. 210+ Tbps global filtering capacity with <1ms latency.">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="navbar">
+            <div class="container nav-content">
+                <div class="logo">
+                    <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
+                        WAVE</a>
+                </div>
+                <nav class="nav-links">
+                    <a href="/#features">Features</a>
+                    <a href="/#servers">Game Servers</a>
+                    <a href="/#vps">VPS</a>
+                    <a href="/#contact">Contact</a>
+                </nav>
+                <div class="nav-cta">
+                    <a href="#" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
+                    <a href="#" class="btn btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu" id="mobile-menu">
+                <nav class="mobile-nav-links">
+                    <a href="/#features">Features</a>
+                    <a href="/#servers">Game Servers</a>
+                    <a href="/#vps">VPS</a>
+                    <a href="/#contact">Contact</a>
+                    <div class="mobile-cta">
+                        <a href="#" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- DDoS Mitigation Section -->
+        <section id="ddos-mitigation" class="ddos-section" style="padding-top: 150px;">
+            <div class="container">
+                <div class="ddos-landing reveal">
+                    <div class="shield-badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="12 2 2 7 2 15 12 22 22 15 22 7 12 2"></polygon>
+                        </svg>
+                        NW-SHIELD CORE <span class="dot"></span> ACTIVE MATRIX
+                    </div>
+                    <h2 class="ddos-title">AUTONOMOUS<br><span class="text-orange-glow">THREAT SCRUBBING</span></h2>
+                    <p class="ddos-lead">Neural L3/L4/L7 packet inspection for mission-critical infrastructure.<br>
+                        <strong>210+Tbps</strong> global edge capacity. <strong>&lt;1ms</strong> mitigation latency.
+                    </p>
+
+                    <div class="mitigated-counter">
+                        <span class="label">THREATS NEUTRALIZED TODAY</span>
+                        <div class="counter-val" id="ddos-counter">324,808</div>
+                    </div>
+                </div>
+
+                <!-- Global Mitigation Center -->
+                <div class="mitigation-center reveal">
+                    <div class="mc-header">
+                        <div class="mc-title-group">
+                            <span class="tag">LIVE THREAT INTELLIGENCE</span>
+                            <h3>Global Mitigation Center</h3>
+                        </div>
+                        <div class="mc-stats">
+                            <div class="mc-stat-item">
+                                <label>INGRESS PEAK</label>
+                                <span>45.1 <small>Gbps</small></span>
+                            </div>
+                            <div class="mc-stat-item">
+                                <label>PACKETS/SEC</label>
+                                <span>1.2 <small>Mpps</small></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mc-hud-layout">
+                        <!-- Left Column: Vector & Logs -->
+                        <div class="mc-hud-left">
+                            <div class="mc-hud-panel vector-panel">
+                                <div class="panel-header">NW-VECTOR TRACKING</div>
+                                <div class="globe-container">
+                                    <div class="vector-globe" id="vector-globe">
+                                        <!-- Inline Shield Icon -->
+                                        <svg class="globe-center-img" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                                fill="rgba(255, 112, 0, 0.2)" stroke="#FF7000" />
+                                            <circle cx="12" cy="11" r="3" fill="#FF7000" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="attack-origins">
+                                    <div class="origin-item"><span>CN</span>
+                                        <div class="bar-wrap">
+                                            <div class="bar" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="origin-item"><span>RU</span>
+                                        <div class="bar-wrap">
+                                            <div class="bar" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="origin-item"><span>BR</span>
+                                        <div class="bar-wrap">
+                                            <div class="bar" style="width: 30%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mc-hud-panel log-panel">
+                                <div class="panel-header">SYS.LOG // LIVE</div>
+                                <div class="scrub-logs" id="scrub-logs"></div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Massive Graph -->
+                        <div class="mc-hud-right">
+                            <div class="mc-hud-panel monitor-panel">
+                                <div class="panel-header">
+                                    TRAFFIC INTERSECTION
+                                    <div class="mc-legend">
+                                        <span class="leg-clean">CLEAN</span>
+                                        <span class="leg-mal">MALICIOUS</span>
+                                    </div>
+                                </div>
+                                <div class="traffic-graph-container">
+                                    <canvas id="traffic-monitor"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attack Spectrum HUD -->
+                <div class="attack-spectrum reveal">
+                    <div class="osi-hud-container">
+                        <!-- Left Info Panel -->
+                        <div class="osi-left">
+                            <h2 class="osi-title">OSI THREAT<br>CLASSIFICATION</h2>
+                            <p class="osi-lead">Autonomous matrix categorizing and neutralizing multi-vector attacks
+                                layer by layer.
+                            </p>
+
+                            <div class="threat-shard mt-8">
+                                <div class="shard-marker">L3/L4</div>
+                                <div class="shard-data">
+                                    <h4>VOLUMETRIC & PROTOCOL</h4>
+                                    <p>UDP Flood, SYN Flood, ICMP Flood</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Central Radar Focus -->
+                        <div class="osi-center">
+                            <div class="radar-housing">
+                                <!-- Structural rings exactly like requested -->
+                                <div class="radar-ring outer"></div>
+                                <div class="radar-ring inner"></div>
+                                <div class="radar-crosshair horizontal"></div>
+                                <div class="radar-crosshair vertical"></div>
+                                <!-- The actual graph -->
+                                <canvas id="threat-radar"></canvas>
+                            </div>
+                            <div class="radar-readout">SIGNATURE ANALYSIS : ACTIVE</div>
+                        </div>
+
+                        <!-- Right Info Panel -->
+                        <div class="osi-right">
+                            <div class="threat-shard mb-12">
+                                <div class="shard-marker">L7</div>
+                                <div class="shard-data">
+                                    <h4>APPLICATION LAYER</h4>
+                                    <p>HTTP/S Flood, Slowloris, BGP Hijacking</p>
+                                </div>
+                            </div>
+
+                            <div class="threat-shard">
+                                <div class="shard-marker">ENG</div>
+                                <div class="shard-data">
+                                    <h4>ADVANCED INJECTION</h4>
+                                    <p>SQL Injection, XSS, API Abuse</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand reveal">
+                    <div class="logo"><span class="text-orange">NODE</span>WAVE</div>
+                    <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
+                        communities worldwide.</p>
+                </div>
+                <div class="footer-links reveal">
+                    <h4>NETWORKS</h4>
+                    <a href="#">Game Hosting</a>
+                    <a href="#">VPS Solutions</a>
+                    <a href="#">VDS Hosting</a>
+                    <a href="#">Dedicated</a>
+                </div>
+                <div class="footer-links reveal">
+                    <h4>SUPPORT</h4>
+                    <a href="#">Knowledgebase</a>
+                    <a href="#">Discord Support</a>
+                    <a href="#">Billing Portal</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+            <div class="footer-bottom container reveal">
+                <p>&copy; 2026 Node Wave Hosting. All rights reserved. Designed with passion for gamers.</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

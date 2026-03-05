@@ -141,9 +141,32 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', revealOnScroll);
   revealOnScroll();
 
-  // Initialize HUD and DDoS
+  // Mobile Menu Logic
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // Initialize HUD, DDoS, and Telemetry
   initHUD();
   initDDoS();
+  initGlobalTelemetry();
+  initBootLog();
 });
 
 // HUD Dashboard Logic
@@ -566,10 +589,10 @@ function initGlobalTelemetry() {
 
     // Update numbers
     const liveThroughput = document.getElementById('live-throughput');
-    if (liveThroughput && Math.random() > 0.8) {
+    if (liveThroughput) {
       const current = parseFloat(liveThroughput.innerText);
-      let next = current + (Math.random() - 0.5) * 0.4;
-      if (next < 5) next = 5;
+      let next = current + (Math.random() - 0.5) * 0.2;
+      if (next < 7) next = 7;
       if (next > 9.8) next = 9.8;
       liveThroughput.innerText = next.toFixed(1);
     }
@@ -579,17 +602,22 @@ function initGlobalTelemetry() {
       latencyText.innerText = (0.5 + Math.random() * 0.6).toFixed(1);
     }
 
+    const uptimeText = document.getElementById('cluster-uptime');
+    if (uptimeText) {
+      // Start from 21 days ago relative to March 5th, 2026
+      const startDate = new Date('2026-02-12T00:00:00Z');
+      const now = new Date();
+      const diffTime = Math.abs(now - startDate);
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      uptimeText.innerText = `${diffDays} Days`;
+    }
+
     requestAnimationFrame(draw);
   }
 
+  // Initial call
   draw();
 }
-
-// Initialize all canvases
-setTimeout(() => {
-  initRadarAndTraffic();
-  initGlobalTelemetry();
-}, 500);
 
 // ─── Boot Log Typewriter ───────────────────────────────────────────────
 function initBootLog() {
@@ -628,7 +656,6 @@ function initBootLog() {
 
   function nextLine() {
     if (lineIdx >= lines.length) {
-      // Loop: clear and restart after 5s
       setTimeout(() => {
         terminal.innerHTML = '';
         lineIdx = 0;
@@ -644,4 +671,3 @@ function initBootLog() {
   nextLine();
 }
 
-setTimeout(initBootLog, 800);
