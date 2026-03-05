@@ -1,17 +1,8 @@
 import './style.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Background GIF/Video Effect
-  const videoWrap = document.createElement('div');
-  videoWrap.className = 'bg-video-wrap';
-  const bgImg = document.createElement('img');
-  bgImg.src = 'https://cdn.discordapp.com/attachments/1406728433811329186/1478886383836991570/Animated_Hosting_Company_Logo_Generated.gif?ex=69aa07c6&is=69a8b646&hm=1076ab8e2cb1c2f086869a13b2c7be8f2b9980d96c3dff18e8918203c234a356&';
-  videoWrap.appendChild(bgImg);
-  document.body.prepend(videoWrap);
 
-  const overlay = document.createElement('div');
-  overlay.className = 'bg-overlay';
-  document.body.prepend(overlay);
+
 
   // Background Canvas Effect
   const canvas = document.createElement('canvas');
