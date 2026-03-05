@@ -8,6 +8,8 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
+                gcs: resolve(__dirname, 'gcs/index.html'),
+                gds: resolve(__dirname, 'gds/index.html'),
                 mitigation: resolve(__dirname, 'mitigation/index.html')
             }
         }
