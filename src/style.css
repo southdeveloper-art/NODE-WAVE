@@ -791,8 +791,22 @@ section {
 
 .footer-brand p {
   color: var(--text-muted);
-  max-width: 350px;
+  max-width: 450px;
   font-size: 1.1rem;
+}
+
+.footer-copyright {
+  display: inline-block;
+  font-size: 0.8rem !important;
+  margin-top: 1.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(255, 112, 0, 0.05);
+  border-left: 2px solid var(--primary);
+  color: var(--primary) !important;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 0 4px 4px 0;
 }
 
 .footer-links h4 {
