@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/webp" href="/logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | NodeWave</title>
     <link rel="stylesheet" href="/src/style.css">
@@ -124,20 +125,48 @@
 
     <!-- Header -->
     <header class="navbar">
-        <div class="container nav-content">
-            <div class="logo">
-                <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
-                    WAVE</a>
-            </div>
-            <div class="user-profile-nav" id="user-profile-nav">
-                <div class="user-avatar" id="user-avatar-initials">AD</div>
-                <div class="user-info-text">
-                    <span class="user-nav-name" id="user-nav-name">Admin</span>
-                    <span class="user-nav-username" id="user-nav-username">Dashboard</span>
+            <div class="container nav-content">
+                <div class="logo">
+                    <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
+                        WAVE</a>
                 </div>
+                <nav class="nav-links">
+                    <a href="/gcs/">Game Compute Servers</a>
+                    <a href="/gds/">Game Dedicated Servers</a>
+                    <a href="/#vps">Support</a>
+                </nav>
+                <div class="nav-cta" id="nav-cta">
+                    <a href="#" id="login-trigger" class="btn btn-outline"
+                        style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
+                    <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
+                        style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
+                </div>
+                <div class="user-profile-nav" id="user-profile-nav">
+                    <div class="user-avatar" id="user-avatar-initials">UN</div>
+                    <div class="user-info-text">
+                        <span class="user-nav-name" id="user-nav-name">User Name</span>
+                        <span class="user-nav-username" id="user-nav-username">@username</span>
+                    </div>
+                </div>
+                <button class="mobile-toggle" id="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-        </div>
-    </header>
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu" id="mobile-menu">
+                <nav class="mobile-nav-links">
+                    <a href="/#features">Features</a>
+                    <a href="/gcs/">Game Compute Servers</a>
+                    <a href="/gds/">Game Dedicated Servers</a>
+                    <a href="/#vps">Support</a>
+                    <div class="mobile-cta">
+                        <a href="/plans/" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
     <main class="container admin-page">
         <!-- Access Denied -->

@@ -2,56 +2,168 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/webp" href="/logo.webp" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Import Map MUST be first before module scripts -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Node Wave | Mitigation Center</title>
-
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/src/assets/logo.svg">
     <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap"
         rel="stylesheet">
-    <meta name="description"
-        content="Advanced L3/L4/L7 DDoS mitigation for game servers. 210+ Tbps global filtering capacity with <1ms latency.">
-    <noscript>
-        <style>
-            .reveal {
-                opacity: 1 !important;
-                transform: none !important;
+    <link rel="stylesheet" href="/src/style.css">
+    <!-- Tailwind for utilities -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF7000',
+                        dark: '#050505',
+                        darker: '#000000',
+                    }
+                }
             }
-        </style>
-    </noscript>
+        }
+    </script>
+    <style>
+        .shield-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            min-height: 450px;
+        }
+
+        .shield-core {
+            position: relative;
+            z-index: 10;
+            animation: levitate 5s ease-in-out infinite;
+        }
+
+        .shield-core img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 25px rgba(255, 112, 0, 0.7));
+        }
+
+        .energy-field {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 320px;
+            height: 320px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 112, 0, 0.3) 0%, transparent 70%);
+            animation: pulse-field 3s infinite alternate ease-in-out;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .deflection-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(255, 112, 0, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 112, 0, 0.5), inset 0 0 20px rgba(255, 112, 0, 0.5);
+            opacity: 0;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .ring-1 {
+            animation: deflect 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        }
+
+        .ring-2 {
+            animation: deflect 3s cubic-bezier(0.16, 1, 0.3, 1) infinite 1.5s;
+        }
+
+        @keyframes levitate {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(1deg);
+                filter: drop-shadow(0 0 45px rgba(255, 112, 0, 0.9));
+            }
+        }
+
+        @keyframes pulse-field {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.4);
+                opacity: 1;
+            }
+        }
+
+        @keyframes deflect {
+            0% {
+                width: 150px;
+                height: 150px;
+                opacity: 1;
+                border-width: 3px;
+            }
+
+            100% {
+                width: 600px;
+                height: 600px;
+                opacity: 0;
+                border-width: 1px;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-dark text-white font-sans selection:bg-primary selection:text-white overflow-x-hidden">
     <div id="app">
         <!-- Header -->
         <header class="navbar">
             <div class="container nav-content">
                 <div class="logo">
-                    <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
-                        WAVE</a>
+                    <span class="text-orange">NODE</span> WAVE
                 </div>
                 <nav class="nav-links">
                     <a href="/gcs/">Game Compute Servers</a>
                     <a href="/gds/">Game Dedicated Servers</a>
                     <a href="/#vps">Support</a>
-                </nav>
-                <div class="nav-cta" id="nav-cta">
-                    <a href="#" id="login-trigger" class="btn btn-outline"
-                        style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
-                    <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
-                        style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
-                </div>
-                <div class="user-profile-nav" id="user-profile-nav">
-                    <div class="user-avatar" id="user-avatar-initials">UN</div>
-                    <div class="user-info-text">
-                        <span class="user-nav-name" id="user-nav-name">User Name</span>
-                        <span class="user-nav-username" id="user-nav-username">@username</span>
+                    <div class="nav-cta" id="nav-cta">
+                        <a href="#" id="login-trigger" class="btn btn-outline"
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
+                        <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
                     </div>
-                </div>
+                    <div class="user-profile-nav" id="user-profile-nav">
+                        <div class="user-avatar" id="user-avatar-initials">UN</div>
+                        <div class="user-info-text">
+                            <span class="user-nav-name" id="user-nav-name">User Name</span>
+                            <span class="user-nav-username" id="user-nav-username">@username</span>
+                        </div>
+                    </div>
+                </nav>
                 <button class="mobile-toggle" id="mobile-toggle">
                     <span></span>
                     <span></span>
@@ -64,168 +176,108 @@
                     <a href="/gcs/">Game Compute Servers</a>
                     <a href="/gds/">Game Dedicated Servers</a>
                     <a href="/#vps">Support</a>
-                    <div class="mobile-cta">
-                        <a href="/plans/" class="btn btn-primary">Sign Up</a>
-                    </div>
+                    <hr style="border: 0; border-top: 1px solid rgba(255,112,0,0.2); margin: 1rem 0;">
+                    <a href="#" class="login-trigger">Login</a>
                 </nav>
             </div>
         </header>
 
-        <!-- DDoS Mitigation Section -->
-        <section id="ddos-mitigation" class="ddos-section" style="padding-top: 150px;">
-            <div class="container">
-                <div class="ddos-landing reveal">
-                    <div class="shield-badge">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="12 2 2 7 2 15 12 22 22 15 22 7 12 2"></polygon>
-                        </svg>
-                        NW-SHIELD CORE <span class="dot"></span> ACTIVE MATRIX
-                    </div>
-                    <h2 class="ddos-title">AUTONOMOUS<br><span class="text-orange-glow">THREAT SCRUBBING</span></h2>
-                    <p class="ddos-lead">Neural L3/L4/L7 packet inspection for mission-critical infrastructure.<br>
-                        <strong>210+Tbps</strong> global edge capacity. <strong>&lt;1ms</strong> mitigation latency.
+        <main class="mt-24">
+            <!-- ILLUSTRATIVE HERO -->
+            <section class="tempest-hero section-padding text-center">
+                <div class="container reveal">
+
+                    <h1 class="hero-title uppercase font-black"
+                        style="font-size: clamp(3rem, 10vw, 7rem); line-height: 1.1;">DDOS<br><span
+                            class="text-orange">DEFENSE</span></h1>
+                    <p class="hero-subtitle mx-auto mt-8 opacity-90 text-lg leading-relaxed" style="max-width: 900px;">
+                        <span class="text-orange font-black">17Tbit Game DDoS Protection</span> // <span
+                            class="uppercase font-bold tracking-tight">L3/L4 & L7 Shielding</span><br>
+                        Bot stressers, HTTPS floods, and malicious fake join requests are neutralized instantly by our
+                        always-on scrubbing environment. Experience 24/7 guaranteed uptime with zero latency overhead.
                     </p>
-
-                    <div class="mitigated-counter">
-                        <span class="label">THREATS NEUTRALIZED TODAY</span>
-                        <div class="counter-val" id="ddos-counter">324,808</div>
-                    </div>
                 </div>
+            </section>
 
-                <!-- Global Mitigation Center -->
-                <div class="mitigation-center reveal">
-                    <div class="mc-header">
-                        <div class="mc-title-group">
-                            <span class="tag">LIVE THREAT INTELLIGENCE</span>
-                            <h3>Global Mitigation Center</h3>
-                        </div>
-                        <div class="mc-stats">
-                            <div class="mc-stat-item">
-                                <label>INGRESS PEAK</label>
-                                <span id="live-ingress">45.1 <small>Gbps</small></span>
-                            </div>
-                            <div class="mc-stat-item">
-                                <label>PACKETS/SEC</label>
-                                <span id="live-packets">1.2 <small>Mpps</small></span>
+            <!-- ILLUSTRATIVE DDOS SYSTEM -->
+            <section class="tempest-system section-padding bg-darker overflow-hidden border-y border-white/5">
+                <div class="container reveal">
+                    <div class="flex flex-col md:flex-row items-center gap-16">
+                        <div class="w-full md:w-1/2 illustration-wrapper shield-wrapper">
+                            <div class="energy-field"></div>
+                            <div class="deflection-ring ring-1"></div>
+                            <div class="deflection-ring ring-2"></div>
+                            <div class="shield-core">
+                                <img src="/src/assets/brain/ddos_shield_transparent.png" alt="DDoS Protection System"
+                                    class="mx-auto">
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mc-hud-layout">
-                        <!-- Left Column: Vector & Logs -->
-                        <div class="mc-hud-left">
-                            <div class="mc-hud-panel vector-panel">
-                                <div class="panel-header">NW-VECTOR TRACKING</div>
-                                <div class="globe-container">
-                                    <div class="vector-globe" id="vector-globe">
-                                        <!-- Inline Shield Icon -->
-                                        <svg class="globe-center-img" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="1.5">
-                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                                                fill="rgba(255, 112, 0, 0.2)" stroke="#FF7000" />
-                                            <circle cx="12" cy="11" r="3" fill="#FF7000" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="attack-origins">
-                                    <div class="origin-item"><span>CN</span>
-                                        <div class="bar-wrap">
-                                            <div class="bar" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="origin-item"><span>RU</span>
-                                        <div class="bar-wrap">
-                                            <div class="bar" style="width: 45%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="origin-item"><span>BR</span>
-                                        <div class="bar-wrap">
-                                            <div class="bar" style="width: 30%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mc-hud-panel log-panel">
-                                <div class="panel-header">SYS.LOG // LIVE</div>
-                                <div class="scrub-logs" id="scrub-logs"></div>
-                            </div>
-                        </div>
-
-                        <!-- Right Column: Massive Graph -->
-                        <div class="mc-hud-right">
-                            <div class="mc-hud-panel monitor-panel">
-                                <div class="panel-header">
-                                    TRAFFIC INTERSECTION
-                                    <div class="mc-legend">
-                                        <span class="leg-clean">CLEAN</span>
-                                        <span class="leg-mal">MALICIOUS</span>
-                                    </div>
-                                </div>
-                                <div class="traffic-graph-container">
-                                    <canvas id="traffic-monitor"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Attack Spectrum HUD -->
-                <div class="attack-spectrum reveal">
-                    <div class="osi-hud-container">
-                        <!-- Left Info Panel -->
-                        <div class="osi-left">
-                            <h2 class="osi-title">OSI THREAT<br>CLASSIFICATION</h2>
-                            <p class="osi-lead">Autonomous matrix categorizing and neutralizing multi-vector attacks
-                                layer by layer.
+                        <div class="w-full md:w-1/2">
+                            <span class="tag-label uppercase tracking-widest text-primary font-black text-sm">Autonomous
+                                Defense</span>
+                            <h2 class="section-title text-5xl font-black mt-4 mb-6 uppercase">Intelligent<br><span
+                                    class="text-orange">Anycast</span> Matrix</h2>
+                            <p class="section-desc opacity-70 mb-8 text-lg">
+                                Our DDoS mitigation doesn't just block traffic; it intelligently analyzes every packet
+                                in real-time. Using a globally distributed anycast network, we ingest and scrub massive
+                                volumetric attacks before they ever reach your server.
                             </p>
-
-                            <div class="threat-shard mt-8">
-                                <div class="shard-marker">L3/L4</div>
-                                <div class="shard-data">
-                                    <h4>VOLUMETRIC & PROTOCOL</h4>
-                                    <p>UDP Flood, SYN Flood, ICMP Flood</p>
-                                </div>
-                            </div>
+                            <ul class="feature-list space-y-4">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-2 h-2 bg-primary"></div>
+                                    <span class="font-bold uppercase tracking-wider text-sm">17Tbps+ Total Network
+                                        Capacity</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-2 h-2 bg-primary"></div>
+                                    <span class="font-bold uppercase tracking-wider text-sm">Deep Packet Inspection
+                                        (DPI)</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-2 h-2 bg-primary"></div>
+                                    <span class="font-bold uppercase tracking-wider text-sm">Sub-Millisecond Edge
+                                        Scrubbing</span>
+                                </li>
+                            </ul>
                         </div>
+                    </div>
+                </div>
+            </section>
 
-                        <!-- Central Radar Focus -->
-                        <div class="osi-center">
-                            <div class="radar-housing">
-                                <!-- Structural rings exactly like requested -->
-                                <div class="radar-ring outer"></div>
-                                <div class="radar-ring inner"></div>
-                                <div class="radar-crosshair horizontal"></div>
-                                <div class="radar-crosshair vertical"></div>
-                                <!-- The actual graph -->
-                                <canvas id="threat-radar"></canvas>
-                            </div>
-                            <div class="radar-readout">SIGNATURE ANALYSIS : ACTIVE</div>
+            <!-- ILLUSTRATIVE NETWORK -->
+            <section class="tempest-network section-padding bg-dark overflow-hidden">
+                <div class="container reveal">
+                    <div class="flex flex-col md:flex-row-reverse items-center gap-16">
+                        <div class="w-full md:w-1/2 illustration-wrapper" style="position: relative; height: 600px;">
+                            <canvas id="globe-3d-canvas" style="width: 100%; height: 100%;"></canvas>
                         </div>
-
-                        <!-- Right Info Panel -->
-                        <div class="osi-right">
-                            <div class="threat-shard mb-12">
-                                <div class="shard-marker">L7</div>
-                                <div class="shard-data">
-                                    <h4>APPLICATION LAYER</h4>
-                                    <p>HTTP/S Flood, Slowloris, BGP Hijacking</p>
+                        <div class="w-full md:w-1/2">
+                            <span class="tag-label uppercase tracking-widest text-primary font-black text-sm">Strategic
+                                Backbone</span>
+                            <h2 class="section-title text-5xl font-black mt-4 mb-6 uppercase">Global<br><span
+                                    class="text-orange">Edge</span> Presence</h2>
+                            <p class="section-desc opacity-70 mb-8 text-lg">
+                                With 20+ global points of presence (PoPs), Node Wave ensures your users always connect
+                                to the nearest scrubbing center. Our low-latency backbone cross-connects provide the
+                                stability required for competitive gaming environments.
+                            </p>
+                            <div class="stats-grid grid grid-cols-2 gap-6">
+                                <div class="stat-item border-l-2 border-primary pl-4">
+                                    <div class="stat-val text-3xl font-black">20+</div>
+                                    <div class="stat-label uppercase tracking-widest text-xs opacity-50">Global PoPs
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="threat-shard">
-                                <div class="shard-marker">ENG</div>
-                                <div class="shard-data">
-                                    <h4>ADVANCED INJECTION</h4>
-                                    <p>SQL Injection, XSS, API Abuse</p>
+                                <div class="stat-item border-l-2 border-primary pl-4">
+                                    <div class="stat-val text-3xl font-black">&lt;1ms</div>
+                                    <div class="stat-label uppercase tracking-widest text-xs opacity-50">Internal
+                                        Switching</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <!-- Footer -->
         <footer class="footer">
@@ -258,20 +310,23 @@
                 </div>
             </div>
         </footer>
-        <!-- Login Modal -->
+
+        <!-- Login & Onboarding Modal -->
         <div class="modal-overlay" id="login-modal">
-            <div class="login-modal">
+            <div class="modal-content">
                 <button class="modal-close" id="modal-close">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
+
                 <!-- Login View -->
                 <div id="login-view-content">
                     <div class="modal-header">
-                        <h2>Connect to NodeWave</h2>
+                        <h2>Connect to <span class="text-orange">NodeWave</span></h2>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Secure access to
+                            your gaming infrastructure</p>
                     </div>
                     <button class="google-login-btn" id="google-login">
                         <svg class="google-icon" viewBox="0 0 48 48">
@@ -287,7 +342,6 @@
                             <path fill="#34A853"
                                 d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
                             </path>
-                            <path fill="none" d="M0 0h48v48H0z"></path>
                         </svg>
                         Continue with Google
                     </button>
@@ -314,6 +368,7 @@
                     </div>
                     <button class="save-profile-btn" id="save-profile">Save & Continue</button>
                 </div>
+
                 <div class="modal-footer">
                     Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
                         rel="noopener noreferrer"
@@ -323,6 +378,314 @@
         </div>
     </div>
     <script type="module" src="/src/main.js"></script>
+    <script>
+        // Simple reveal animation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        // --- Three.js Globe Setup ---
+        const canvas = document.getElementById('globe-3d-canvas');
+        if (canvas) {
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            camera.position.z = 15;
+
+            // --- Group to hold the entire rotating earth system ---
+            const globeGroup = new THREE.Group();
+            scene.add(globeGroup);
+
+            // --- 1. The Point Cloud "Data Earth" (No Image) ---
+            const radius = 5;
+
+            const pointsGeometry = new THREE.BufferGeometry();
+            const numPoints = 6000; // Dense network dots
+            const positions = new Float32Array(numPoints * 3);
+            const colors = new Float32Array(numPoints * 3);
+
+            const colorCore = new THREE.Color(0xff4400); // Deep orange
+            const colorEdge = new THREE.Color(0xff9900); // Bright orange
+
+            for (let i = 0; i < numPoints; i++) {
+                // Mix of surface points and internal points
+                const isSurface = Math.random() > 0.4;
+                let r = isSurface ? radius : (radius * Math.pow(Math.random(), 0.5));
+
+                // Keep very center clear
+                if (!isSurface && r < 1.0) r = 1.0 + Math.random();
+
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos((Math.random() * 2) - 1);
+
+                const x = r * Math.sin(phi) * Math.cos(theta);
+                const y = r * Math.sin(phi) * Math.sin(theta);
+                const z = r * Math.cos(phi);
+
+                positions[i * 3] = x;
+                positions[i * 3 + 1] = y;
+                positions[i * 3 + 2] = z;
+
+                const depthProfile = r / radius;
+                const mixedColor = colorCore.clone().lerp(colorEdge, depthProfile);
+                colors[i * 3] = mixedColor.r;
+                colors[i * 3 + 1] = mixedColor.g;
+                colors[i * 3 + 2] = mixedColor.b;
+            }
+
+            pointsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            pointsGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // Custom glowing dot texture via Canvas lookup (prevents square particle artifacts)
+            const canvas2D = document.createElement('canvas');
+            canvas2D.width = 32; canvas2D.height = 32;
+            const ctx = canvas2D.getContext('2d');
+            const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 32, 32);
+            const pointTexture = new THREE.CanvasTexture(canvas2D);
+
+            const pointsMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                map: pointTexture,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                transparent: true,
+                opacity: 0.5
+            });
+
+            const pointCloud = new THREE.Points(pointsGeometry, pointsMaterial);
+            globeGroup.add(pointCloud);
+
+            // --- 2. Base Inner Core Glow (The "Energy" of the network) ---
+            const glowGeo = new THREE.SphereGeometry(radius * 0.95, 32, 32);
+            const glowMat = new THREE.MeshBasicMaterial({
+                color: 0xff3300,
+                transparent: true,
+                opacity: 0.04,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+            globeGroup.add(glowMesh);
+
+            // Backwards compatibility alias for the rest of the script 
+            // since we removed the solid 'globe' mesh.
+            const globe = globeGroup;
+
+            // --- PoP Data (3D coordinates) ---
+            const pops = [];
+            for (let i = 0; i < 60; i++) {
+                const phi = Math.random() * Math.PI * 2;
+                const theta = Math.acos(2 * Math.random() - 1);
+                const radius = 5;
+                const x = radius * Math.sin(theta) * Math.cos(phi);
+                const y = radius * Math.sin(theta) * Math.sin(phi);
+                const z = radius * Math.cos(theta);
+                pops.push(new THREE.Vector3(x, y, z));
+            }
+
+            // --- Visible Nodes (Static on Surface) ---
+            const popGeo = new THREE.SphereGeometry(0.04, 8, 8);
+            const popMat = new THREE.MeshBasicMaterial({ color: 0xff8800, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
+            pops.forEach(p => {
+                const mesh = new THREE.Mesh(popGeo, popMat);
+                mesh.position.copy(p);
+                globe.add(mesh);
+            });
+
+            // --- Animation State ---
+            const comets = [];
+            const ripples = [];
+
+            function createRipple(pos) {
+                for (let i = 0; i < 2; i++) {
+                    const ringGeo = new THREE.RingGeometry(0.1, 0.15, 32);
+                    const ringMat = new THREE.MeshBasicMaterial({ color: 0xff7000, transparent: true, opacity: 0.8, side: THREE.DoubleSide });
+                    const ring = new THREE.Mesh(ringGeo, ringMat);
+                    ring.position.copy(pos);
+                    ring.lookAt(new THREE.Vector3(0, 0, 0));
+                    globe.add(ring);
+
+                    ripples.push({
+                        mesh: ring,
+                        startTime: performance.now() + (i * 200),
+                        life: 1.2
+                    });
+                }
+            }
+
+            // --- Comet Class (Thick Volumetric Beams) ---
+            class Comet {
+                constructor(isArc) {
+                    this.isArc = isArc;
+                    this.p1 = pops[Math.floor(Math.random() * pops.length)];
+                    this.p2 = pops[Math.floor(Math.random() * pops.length)];
+
+                    // Ensure decent travel distance
+                    while (this.p1.distanceTo(this.p2) < 3.0) {
+                        this.p2 = pops[Math.floor(Math.random() * pops.length)];
+                    }
+
+                    if (this.isArc) {
+                        const mid = new THREE.Vector3().addVectors(this.p1, this.p2).multiplyScalar(0.5);
+                        const dist = this.p1.distanceTo(this.p2);
+                        const normal = mid.clone().normalize();
+                        mid.add(normal.multiplyScalar(dist * 0.3)); // Arc height
+                        this.curve = new THREE.CatmullRomCurve3([this.p1, mid, this.p2]);
+                    } else {
+                        // Straight chord through interior (like Pond5)
+                        this.curve = new THREE.LineCurve3(this.p1, this.p2);
+                    }
+
+                    this.progress = 0;
+                    this.speed = (Math.random() * 0.4 + 0.6);
+                    this.tailLength = isArc ? 15 : 20;
+                    this.meshes = [];
+
+                    const baseSize = isArc ? 0.08 : 0.05;
+                    const color = isArc ? 0xffaa00 : 0xff4400;
+
+                    for (let i = 0; i < this.tailLength; i++) {
+                        const geo = new THREE.SphereGeometry(baseSize, 8, 8);
+                        const mat = new THREE.MeshBasicMaterial({
+                            color: color,
+                            transparent: true,
+                            opacity: 1 - (i / this.tailLength),
+                            blending: THREE.AdditiveBlending,
+                            depthWrite: false
+                        });
+                        const mesh = new THREE.Mesh(geo, mat);
+
+                        mesh.position.copy(this.p1);
+                        mesh.scale.setScalar(1 - (i / this.tailLength) * 0.8);
+                        mesh.visible = false; // Hide initially
+
+                        // Bloom on the head
+                        if (i === 0) {
+                            const glow = new THREE.Mesh(
+                                new THREE.SphereGeometry(baseSize * 4, 16, 16),
+                                new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false })
+                            );
+                            mesh.add(glow);
+                        }
+
+                        this.meshes.push(mesh);
+                        globe.add(mesh); // Attach to globe frame of reference
+                    }
+
+                    createRipple(this.p1);
+                }
+
+                update(dt) {
+                    this.progress += this.speed * dt;
+                    let isDone = false;
+
+                    if (this.progress > 1.0 + (this.tailLength * 0.02)) {
+                        isDone = true;
+                        createRipple(this.p2);
+                    }
+
+                    for (let i = 0; i < this.tailLength; i++) {
+                        const t = this.progress - (i * 0.015);
+                        if (t < 0) {
+                            this.meshes[i].position.copy(this.p1);
+                            this.meshes[i].visible = false;
+                        } else if (t > 1) {
+                            this.meshes[i].position.copy(this.p2);
+                            this.meshes[i].visible = false;
+                        } else {
+                            this.meshes[i].position.copy(this.curve.getPoint(t));
+                            this.meshes[i].visible = true;
+                        }
+                    }
+
+                    return isDone;
+                }
+
+                destroy() {
+                    this.meshes.forEach(m => {
+                        globe.remove(m);
+                        m.geometry.dispose();
+                        m.material.dispose();
+                    });
+                }
+            }
+
+            // Spawn massive density of beams
+            function spawnComets() {
+                // 60% chance internal chord, 40% chance surface arc
+                comets.push(new Comet(Math.random() > 0.6));
+            }
+
+            let lastTime = performance.now();
+            function animate() {
+                requestAnimationFrame(animate);
+                const now = performance.now();
+                const dt = (now - lastTime) / 1000;
+                lastTime = now;
+
+                // Stable rotation
+                globe.rotation.y += 0.001 * dt * 60;
+
+                // Update Comets
+                for (let i = comets.length - 1; i >= 0; i--) {
+                    if (comets[i].update(dt)) {
+                        comets[i].destroy();
+                        comets.splice(i, 1);
+                    }
+                }
+
+                // Update Ripples
+                for (let i = ripples.length - 1; i >= 0; i--) {
+                    const r = ripples[i];
+                    const activeTime = (now - r.startTime) / 1000;
+                    if (activeTime < 0) continue;
+
+                    if (activeTime > r.life) {
+                        globe.remove(r.mesh);
+                        r.mesh.geometry.dispose();
+                        r.mesh.material.dispose();
+                        ripples.splice(i, 1);
+                    } else {
+                        const p = activeTime / r.life; // 0 to 1
+                        r.mesh.scale.setScalar(1 + p * 3);
+                        r.mesh.material.opacity = 0.8 * (1 - p);
+                    }
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+            setInterval(spawnComets, 200); // Super high frequency
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                const width = canvas.clientWidth;
+                const height = canvas.clientHeight;
+                renderer.setSize(width, height, false);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+        }
+    </script>
 </body>
 
 </html>

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Node Wave | Where Latency Bends</title>
   <meta name="description"
-    content="High-performance game server hosting with AMD Ryzen 9, DDR5 6000MT/s RAM, and Enterprise DDoS protection. Experience the wave.">
+    content="High-performance game server hosting with AMD Ryzen 9, DDR5 5600MT/s RAM, and Enterprise DDoS protection. Experience the wave.">
 
   <!-- Font Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,12 +31,13 @@
     <header class="navbar">
       <div class="container nav-content">
         <div class="logo">
-          <span class="text-orange">NODE</span> WAVE
+          <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
+            WAVE</a>
         </div>
         <nav class="nav-links">
           <a href="/gcs/">Game Compute Servers</a>
           <a href="/gds/">Game Dedicated Servers</a>
-          <a href="#vps">Support</a>
+          <a href="/#vps">Support</a>
         </nav>
         <div class="nav-cta" id="nav-cta">
           <a href="#" id="login-trigger" class="btn btn-outline"
@@ -60,9 +61,10 @@
       <!-- Mobile Menu Overlay -->
       <div class="mobile-menu" id="mobile-menu">
         <nav class="mobile-nav-links">
+          <a href="/#features">Features</a>
           <a href="/gcs/">Game Compute Servers</a>
           <a href="/gds/">Game Dedicated Servers</a>
-          <a href="#vps">Support</a>
+          <a href="/#vps">Support</a>
           <div class="mobile-cta">
             <a href="/plans/" class="btn btn-primary">Sign Up</a>
           </div>
@@ -75,8 +77,11 @@
       <div class="container">
         <div class="hero-content">
           <h1 class="hero-title reveal">WHERE <span class="text-orange">LATENCY</span> BENDS</h1>
-          <p class="hero-subtitle reveal">Unleash the full potential of your community with Ryzen 9 9950x powered
-            infrastructure with DDR5 6000MT/s memory, NVMe storage and a protected 10Gbps backbone.</p>
+          <p class="hero-subtitle reveal">Unleash the full potential of your community with <span
+              class="text-orange font-bold" style="font-weight: 800;">Ryzen 9 9950X3D</span> powered
+            infrastructure with DDR5 5600MT/s memory, NVMe storage and a protected 10G/20Gbps backbone and <span
+              class="text-orange font-bold" style="font-weight: 800;">17Tbit Game Dedicated DDoS Protection</span> for
+            custom ports mainly focused for FiveM, Rust, Minecraft and all our supported games.</p>
           <div class="hero-btns reveal">
             <a href="/plans/" class="btn btn-primary">Deploy Server Now</a>
             <a href="#specs" class="btn btn-outline">Performance Specs</a>
@@ -93,59 +98,73 @@
       <div class="container">
         <h2 class="section-title reveal">PERFORMANCE <span class="text-orange">HUB</span></h2>
 
-        <div class="hub-container reveal">
+        <div class="hub-container pyramid-layout reveal">
           <div class="hub-center reveal">
             <div class="hub-visual">
               <img src="/ryzen_9000_core_visual.webp" alt="Ryzen 9000" class="core-img">
               <div class="core-pulse"></div>
             </div>
           </div>
-          <!-- Spec Branches -->
-          <div class="spec-node tl">
-            <div class="node-content">
-              <span class="node-label">PROCESSOR</span>
-              <h3>RYZEN 9000</h3>
-              <p>High-Frequency Enterprise Grade</p>
-              <div class="node-data">16C / 32T @ 5.6GHz</div>
+
+          <!-- Row 1: Two Boxes -->
+          <div class="hub-row top-row">
+            <div class="spec-node tl">
+              <div class="node-content">
+                <span class="node-label">PROCESSOR</span>
+                <h3>MASSIVE 3D V-CACHE</h3>
+                <p>Powered by AMD 3D V-Cache delivering massive L3 cache for ultra-low latency and superior game server
+                  performance.</p>
+                <div class="node-data">128MB+ L3 CACHE</div>
+              </div>
             </div>
-            <div class="node-line"></div>
+
+            <div class="spec-node tr">
+              <div class="node-content">
+                <span class="node-label">PERFORMANCE</span>
+                <h3>EXTREME SINGLE-CORE</h3>
+                <p>Up to 5.7GHz boost clock ensuring maximum single-thread performance for demanding game servers.</p>
+                <div class="node-data">5.7GHz BOOST CLOCK</div>
+              </div>
+            </div>
           </div>
 
-          <div class="spec-node tr">
-            <div class="node-content">
-              <span class="node-label">ARCHITECTURE</span>
-              <h3>ZEN 5 CORE</h3>
-              <p>Dedicated Infrastructure</p>
-              <div class="node-data">AMD 9000 SERIES</div>
+          <!-- Row 2: Three Boxes -->
+          <div class="hub-row bottom-row">
+            <div class="spec-node bl">
+              <div class="node-content">
+                <span class="node-label">ARCHITECTURE</span>
+                <h3>ZEN 5 CORE</h3>
+                <p>Built on AMD Zen 5 architecture for next-generation compute efficiency and performance.</p>
+                <div class="node-data">NEXT-GEN IPC</div>
+              </div>
             </div>
-            <div class="node-line"></div>
-          </div>
 
-          <div class="spec-node bl">
-            <div class="node-content">
-              <span class="node-label">MEMORY</span>
-              <h3>64GB DDR5 6000MT/s</h3>
-              <p>Ultra-Low Latency ECC</p>
-              <div class="node-data">6000 MT/s SPEED</div>
+            <div class="spec-node bc">
+              <div class="node-content text-center">
+                <span class="node-label text-orange">GAMING-OPTIMIZED</span>
+                <h3>DOMINATE WORKLOADS</h3>
+                <p>X3D CPUs dominate gaming workloads with benchmarks proving significant advantages over competitors.
+                </p>
+                <div class="node-data">MAXIMUM TICKRATE STABILITY</div>
+              </div>
             </div>
-            <div class="node-line"></div>
-          </div>
 
-          <div class="spec-node br">
-            <div class="node-content">
-              <span class="node-label">SECURITY</span>
-              <h3>ENTERPRISE DDOS</h3>
-              <p>Advance L3/L4/L7 On Custom Ports</p>
-              <div class="node-data">200+ Tbps Mitigation</div>
+            <div class="spec-node br">
+              <div class="node-content">
+                <span class="node-label">CAPACITY</span>
+                <h3>HIGH CORE COUNT</h3>
+                <p>16 cores and 32 threads deliver extreme multi-tenant performance for high-density virtual servers.
+                </p>
+                <div class="node-data">16C / 32T DENSITY</div>
+              </div>
             </div>
-            <div class="node-line"></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Unique HUD Dashboard Section -->
-    <section id="dashboard" class="dashboard hud-theme">
+    <section id="dashboard" class="dashboard hud-theme" style="margin-top: 12rem;">
       <div class="container">
         <h2 class="section-title reveal">SYSTEM <span class="text-orange">TELEMETRY</span></h2>
 
@@ -156,7 +175,7 @@
             <div class="diag-header">
               <div class="diag-title">
                 <span class="diag-icon">⚡</span>
-                <span>NODE COMPUTE CLUSTER // R9-9950X</span>
+                <span>NODE COMPUTE CLUSTER // R9-9950X3D</span>
               </div>
               <div class="diag-status">
                 <span class="status-dot"></span>
@@ -354,7 +373,7 @@
         <img src="/ddos_icon.webp" alt="DDoS Protection" class="ddos-banner-icon" loading="lazy">
         <div class="ddos-banner-content">
           <h3>GAME DEDICATED DDOS PROTECTION</h3>
-          <p>Advanced Multilayer Mitigation With L3/L4/L7 Protected Game Servers With 210tbps+ global filtering capacity
+          <p>Advanced Multilayer Mitigation With L3/L4/L7 Protected Game Servers With 17Tbit global filtering capacity
             designed to keep your servers online 24/7 without fail.</p>
           <a href="/mitigation/" class="btn btn-primary">VIEW MITIGATION DETAILS</a>
         </div>
@@ -452,7 +471,8 @@
           <div class="logo"><span class="text-orange">NODE</span>WAVE</div>
           <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
             communities worldwide.</p>
-          <p class="footer-copyright">&copy; 2026 Node Wave Hosting. All rights reserved. Designed with passion for
+          <p class="footer-copyright">&copy; 2026 Node Wave Hosting. All rights reserved. Designed with
+            passion for
             gamers.</p>
           <div class="footer-credit">
             Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
@@ -474,7 +494,6 @@
           <a href="#">Contact Us</a>
         </div>
       </div>
-
     </footer>
     <!-- Login & Onboarding Modal -->
     <div class="modal-overlay" id="login-modal">
