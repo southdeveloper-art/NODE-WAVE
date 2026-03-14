@@ -1329,6 +1329,16 @@ section {
   .section-title {
     font-size: 3rem;
   }
+
+  /* Force plans to stack one by one on mobile */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  section {
+    padding: 5rem 0 !important;
+  }
 }
 
 /* HUD Dashboard Section */
