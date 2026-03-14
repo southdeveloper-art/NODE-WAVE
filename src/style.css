@@ -146,9 +146,39 @@ body.has-side-rails {
   to { opacity: 0.9; }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1600px) {
   .side-rail {
-    display: none; /* Hide on smaller screens where there is no empty space */
+    display: none; /* Hide earlier to prevent overlap with content */
+  }
+}
+
+.mobile-hide {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
+/* Node Shield Homepage Grid */
+.ns-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 1100px) {
+  .ns-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .ns-grid > div:nth-child(2) {
+    order: -1; /* Move shield to top */
+    margin: 0 auto;
   }
 }
 
