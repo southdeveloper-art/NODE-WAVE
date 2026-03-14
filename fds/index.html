@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/webp" href="/logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NodeWave | GCS - Game Compute Servers</title>
+    <title>NodeWave | FDS - FiveM Dedicated Servers</title>
     <meta name="description"
-        content="High-performance GCS game server plans powered by Ryzen 9 9950X3D series processors.">
+        content="Dedicated FiveM server hosting with Ryzen 9 9950X3D processors and 20Gbps networking.">
 
     <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
         html, body { background: #000 !important; color: #fff !important; }
         body { opacity: 0; transition: opacity 0.2s ease-in; }
         body.loaded { opacity: 1; }
-        .container { max-width: 1500px !important; }
+        .container { max-width: 1400px !important; }
     </style>
 </head>
 
@@ -110,13 +110,8 @@
             <div class="container">
                 <div class="text-center mb-12 reveal">
                     <h1 class="hero-title" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">NODEWAVE <span
-                            class="text-orange">GCS</span></h1>
-                    <p class="hero-subtitle" style="margin: 0 auto 3rem;">Powered by Ryzen 9950X3D series processors with
-                        high-speed DDR5 5600MT/s memory and NVMe storage, GCS nodes deliver reliable performance for
-                        small to
-                        medium servers. All traffic is filtered through our 17Tbit global Game DDoS mitigation network
-                        to
-                        protect against any large attack vectors and maintain server stability.</p>
+                            class="text-orange">FDS</span></h1>
+                    <p class="hero-subtitle" style="margin: 0 auto 3rem;">Engineered for high-population FiveM communities, our FDS nodes leverage Ryzen 9 9950X3D processors with dedicated CPU allocation for absolute single-core dominance. Combined with a 20Gbps backbone and 17Tbit Game DDoS mitigation, your city stays online, always.</p>
                 </div>
 
                 <!-- Region Selection -->
@@ -168,13 +163,12 @@
                     </div>
                 </div>
 
-                <!-- GCS Pricing Grid (Frankfurt) -->
+                <!-- FDS Pricing Grid (Frankfurt) -->
                 <div id="plans-fra" class="plans-container">
-                    <div class="features-grid" style="grid-template-columns: repeat(5, 1fr);">
+                    <div class="features-grid" style="grid-template-columns: repeat(4, 1fr);">
                         <!-- Plan 1 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -182,16 +176,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">V-Cache Enabled</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">2 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€20
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">2 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€65
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -200,11 +193,13 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     8GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    120GB NVMe</li>
+                                    200GB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
@@ -212,7 +207,6 @@
                         <!-- Plan 2 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -220,92 +214,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Low-Latency Core</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">3 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€30
-                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
-                                </div>
-                            </div>
-                            <ul
-                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10GB DDR5 5600MT/s</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    160GB NVMe</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
-                        </div>
-
-                        <!-- Plan 3 -->
-                        <div class="feature-card reveal"
-                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
-                            <div class="processor-info"
-                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
-                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
-                                    style="width: 40px; height: 40px; object-fit: contain;">
-                                <div style="text-align: left;">
-                                    <div
-                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
-                                </div>
-                            </div>
-
-                            <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">4 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€40
-                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
-                                </div>
-                            </div>
-                            <ul
-                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    12GB DDR5 5600MT/s</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    200GB NVMe</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
-                        </div>
-
-                        <!-- Plan 4 -->
-                        <div class="feature-card reveal"
-                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
-                            <div class="processor-info"
-                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
-                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
-                                    style="width: 40px; height: 40px; object-fit: contain;">
-                                <div style="text-align: left;">
-                                    <div
-                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
-                                </div>
-                            </div>
-
-                            <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">5 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€50
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">4 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€120
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -314,60 +231,20 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     16GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    260GB NVMe</li>
+                                    400GB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
-                        <!-- Plan 5 (Most Popular) -->
-                        <div class="feature-card reveal"
-                            style="padding: 2.5rem 2rem; border: 1px solid var(--primary); background: rgba(255,112,0,0.03);">
-                            <div
-                                style="position: absolute; top: 0; right: 0; background: var(--primary); color: #000; padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 900; border-bottom-left-radius: 4px;">
-                                MOST POPULAR ⭐</div>
-                            <!-- Processor Detail -->
-                            <div class="processor-info"
-                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
-                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
-                                    style="width: 40px; height: 40px; object-fit: contain;">
-                                <div style="text-align: left;">
-                                    <div
-                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
-                                </div>
-                            </div>
-
-                            <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">6 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€60
-                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
-                                </div>
-                            </div>
-                            <ul
-                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    20GB DDR5 5600MT/s</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    320GB NVMe</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
-                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
-                        </div>
-
-                        <!-- Plan 6 -->
+                        <!-- Plan 3 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -375,16 +252,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Optimized Tickrate</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">8 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€80
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">6 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€175
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -393,19 +269,23 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     24GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    420GB NVMe</li>
+                                    600GB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
-                        <!-- Plan 7 -->
+                        <!-- Plan 4 -->
                         <div class="feature-card reveal"
-                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
+                            style="padding: 2.5rem 2rem; border: 1px solid var(--primary); background: rgba(255,112,0,0.03);">
+                            <div
+                                style="position: absolute; top: 0; right: 0; background: var(--primary); color: #000; padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 900; border-bottom-left-radius: 4px;">
+                                CITY GRADE ⭐</div>
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -413,16 +293,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Ultra-Low Latency</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">10 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€99
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">8 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€235
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -431,19 +310,20 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     32GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    550GB NVMe</li>
+                                    800GB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    Global Anycast Edge</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
-                        <!-- Plan 8 -->
+                        <!-- Plan 5 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -451,16 +331,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">V-Cache Enabled</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">12 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€120
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">10 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€290
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -469,19 +348,20 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     40GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    700GB NVMe</li>
+                                    1TB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
-                        <!-- Plan 9 -->
+                        <!-- Plan 6 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -489,16 +369,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Extreme Single-Core</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">14 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€135
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">12 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€360
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -507,19 +386,20 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     48GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    850GB NVMe</li>
+                                    1.2TB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
-                        <!-- Plan 10 -->
+                        <!-- Plan 7 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
-                            <!-- Processor Detail -->
                             <div class="processor-info"
                                 style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
                                 <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
@@ -527,16 +407,15 @@
                                 <div style="text-align: left;">
                                     <div
                                         style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
-                                        Processor</div>
+                                        FiveM Grade</div>
                                     <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
-                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Clock
-                                        Speed: 4.3GHz - 5.7GHz</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">V-Cache Enabled</div>
                                 </div>
                             </div>
 
                             <div class="pricing-header">
-                                <h3 style="font-size: 1.4rem; color: var(--primary);">16 vCPU</h3>
-                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€159
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">14 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€420
                                     <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
                                 </div>
                             </div>
@@ -545,24 +424,62 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     56GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    1TB NVMe</li>
+                                    1.4TB Gen4 NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    10Gbit network</li>
+                                    20Gbit Network Link</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    17Tbit Game Ddos Protection</li>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
+                        </div>
+
+                        <!-- Plan 8 -->
+                        <div class="feature-card reveal"
+                            style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
+                            <div class="processor-info"
+                                style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; padding: 0.8rem; background: rgba(255,112,0,0.05); border-radius: 8px; border: 1px solid rgba(255,112,0,0.1);">
+                                <img src="/ryzen_9000_core_visual.webp" alt="AMD Ryzen 9"
+                                    style="width: 40px; height: 40px; object-fit: contain;">
+                                <div style="text-align: left;">
+                                    <div
+                                        style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                        FiveM Grade</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Ryzen 9 9950X3D</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">V-Cache Enabled</div>
+                                </div>
+                            </div>
+
+                            <div class="pricing-header">
+                                <h3 style="font-size: 1.4rem; color: var(--primary);">16 Dedicated Cores</h3>
+                                <div class="price" style="font-size: 2.2rem; font-weight: 900; margin: 1rem 0;">€470
+                                    <small style="font-size: 1rem; color: var(--text-muted);">/ month</small>
+                                </div>
+                            </div>
+                            <ul
+                                style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    64GB DDR5 5600MT/s</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    1.6TB Gen4 NVMe</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    20Gbit Network Link</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    FiveM Port-Specific Mitigation</li>
+                                <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
+                                    Built-in AntiCheat System</li>
                             </ul>
                             <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Coming Soon Placeholder -->
                 <div id="plans-soon" class="plans-container reveal"
                     style="display: none; text-align: center; padding: 5rem 2rem; background: rgba(10,10,10,0.4); border-radius: 12px; border: 1px dashed var(--glass-border);">
                     <h2 class="text-orange" style="font-size: 2.5rem; margin-bottom: 1rem;">COMING SOON</h2>
-                    <p class="text-muted" style="font-size: 1.2rem;">We are currently scaling our infrastructure to this
-                        region. Stay tuned for updates!</p>
+                    <p class="text-muted" style="font-size: 1.2rem;">We are currently scaling our infrastructure for FiveM specific mitigation in this region.</p>
                 </div>
 
                 <script>

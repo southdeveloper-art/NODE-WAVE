@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NodeWave | GDS - Game Dedicated Servers</title>
     <meta name="description"
-        content="Dedicated game server hosting with Ryzen 9 9950X processors and 20Gbps networking.">
+        content="Dedicated game server hosting with Ryzen 9 9950X3D processors and 20Gbps networking.">
 
     <!-- Font Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,9 +23,38 @@
             }
         </style>
     </noscript>
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        html, body { background: #000 !important; color: #fff !important; }
+        body { opacity: 0; transition: opacity 0.2s ease-in; }
+        body.loaded { opacity: 1; }
+        .container { max-width: 1400px !important; }
+    </style>
 </head>
 
-<body>
+<body class="has-side-rails">
+    <!-- Side Decor Rails to fill empty space -->
+    <div class="side-rail left-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">0x00A</span>
+            <span class="marker">NODE_TX</span>
+            <span class="marker active">SYS_OK</span>
+            <span class="marker">0x00B</span>
+            <span class="marker">NET_LINK</span>
+        </div>
+    </div>
+
+    <div class="side-rail right-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">PORT_9950</span>
+            <span class="marker">DDoS_PROT</span>
+            <span class="marker">LAT_1MS</span>
+            <span class="marker active">BEND_WAVE</span>
+            <span class="marker">CAP_17TB</span>
+        </div>
+    </div>
     <div id="app">
         <!-- Header -->
         <header class="navbar">
@@ -35,38 +64,43 @@
                         WAVE</a>
                 </div>
                 <nav class="nav-links">
-                    <a href="/gcs/">Game Compute Servers</a>
-                    <a href="/gds/">Game Dedicated Servers</a>
-                    <a href="/#vps">Support</a>
+                    <a href="/gcs/">GAME COMPUTE SERVERS</a>
+                    <a href="/gds/">GAME DEDICATED SERVERS</a>
+                    <a href="/fds/">FIVEM DEDICATED SERVERS</a>
+                    <a href="/discord-bot/">DISCORD BOT HOSTING</a>
+                    <a href="/#vps">SUPPORT</a>
                 </nav>
-                <div class="nav-cta" id="nav-cta">
-                    <a href="#" id="login-trigger" class="btn btn-outline"
-                        style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
-                    <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
-                        style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
-                </div>
-                <div class="user-profile-nav" id="user-profile-nav">
-                    <div class="user-avatar" id="user-avatar-initials">UN</div>
-                    <div class="user-info-text">
-                        <span class="user-nav-name" id="user-nav-name">User Name</span>
-                        <span class="user-nav-username" id="user-nav-username">@username</span>
+                <div class="nav-right">
+                    <div class="nav-cta" id="nav-cta">
+                        <a href="#" id="login-trigger" class="btn btn-outline"
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">LOGIN</a>
+                        <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">SIGN UP</a>
                     </div>
+                    <div class="user-profile-nav" id="user-profile-nav">
+                        <div class="user-avatar" id="user-avatar-initials">UN</div>
+                        <div class="user-info-text">
+                            <span class="user-nav-name" id="user-nav-name">User Name</span>
+                            <span class="user-nav-username" id="user-nav-username">@username</span>
+                        </div>
+                    </div>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
-                <button class="mobile-toggle" id="mobile-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
             <!-- Mobile Menu Overlay -->
             <div class="mobile-menu" id="mobile-menu">
                 <nav class="mobile-nav-links">
-                    <a href="/#features">Features</a>
-                    <a href="/gcs/">Game Compute Servers</a>
-                    <a href="/gds/">Game Dedicated Servers</a>
-                    <a href="/#vps">Support</a>
+                    <a href="/gcs/">GAME COMPUTE SERVERS</a>
+                    <a href="/gds/">GAME DEDICATED SERVERS</a>
+                    <a href="/fds/">FIVEM DEDICATED SERVERS</a>
+                    <a href="/discord-bot/">DISCORD BOT HOSTING</a>
+                    <a href="/#vps">SUPPORT</a>
                     <div class="mobile-cta">
-                        <a href="/plans/" class="btn btn-primary">Sign Up</a>
+                        <a href="/plans/" class="btn btn-primary">SIGN UP</a>
                     </div>
                 </nav>
             </div>
@@ -134,7 +168,7 @@
 
                 <!-- GDS Pricing Grid (Frankfurt) -->
                 <div id="plans-fra" class="plans-container">
-                    <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <div class="features-grid" style="grid-template-columns: repeat(4, 1fr);">
                         <!-- Plan 1 -->
                         <div class="feature-card reveal"
                             style="padding: 2.5rem 2rem; border-top: 2px solid var(--glass-border);">
@@ -162,7 +196,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    8GB DDR5</li>
+                                    8GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     200GB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -170,7 +204,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 2 -->
@@ -200,7 +234,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    16GB DDR5</li>
+                                    16GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     400GB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -208,7 +242,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 3 -->
@@ -238,7 +272,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    24GB DDR5</li>
+                                    24GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     600GB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -246,7 +280,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 4 (Most Popular) -->
@@ -279,7 +313,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    32GB DDR5</li>
+                                    32GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     800GB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -287,7 +321,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 5 -->
@@ -317,7 +351,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    40GB DDR5</li>
+                                    40GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     1TB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -325,7 +359,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 6 -->
@@ -355,7 +389,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    48GB DDR5</li>
+                                    48GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     1.2TB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -363,7 +397,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 7 -->
@@ -393,7 +427,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    56GB DDR5</li>
+                                    56GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     1.4TB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -401,7 +435,7 @@
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     17Tbit Game Ddos Protection</li>
                             </ul>
-                            <a href="#" class="btn btn-primary" style="width: 100%;">Order Now</a>
+                            <a href="#" class="btn btn-primary" style="width: 100%;">ORDER NOW</a>
                         </div>
 
                         <!-- Plan 8 -->
@@ -431,7 +465,7 @@
                             <ul
                                 style="margin: 2rem 0; color: var(--text-muted); font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
-                                    64GB DDR5</li>
+                                    64GB DDR5 5600MT/s</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
                                     1.6TB NVMe</li>
                                 <li><span class="text-orange" style="-webkit-text-fill-color: var(--primary);">•</span>
@@ -492,12 +526,10 @@
         <footer class="footer">
             <div class="container footer-grid">
                 <div class="footer-brand reveal">
-                    <div class="logo"><span class="text-orange">NODE</span>WAVE</div>
+                    <div class="logo"><span class="text-orange">NODE</span> WAVE</div>
                     <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
                         communities worldwide.</p>
-                    <p class="footer-copyright">&copy; 2026 Node Wave Hosting. All rights reserved. Designed with
-                        passion for
-                        gamers.</p>
+                    <p class="footer-copyright">© 2026 NODE WAVE HOSTING. ALL RIGHTS RESERVED.<br>DESIGNED WITH PASSION FOR GAMERS.</p>
                     <div class="footer-credit">
                         Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
                             rel="noopener noreferrer">rocky._.dev</a>
@@ -505,10 +537,10 @@
                 </div>
                 <div class="footer-links reveal">
                     <h4>NETWORKS</h4>
-                    <a href="#">Game Hosting</a>
-                    <a href="#">VPS Solutions</a>
-                    <a href="#">VDS Hosting</a>
-                    <a href="#">Dedicated</a>
+                    <a href="/gcs/">Compute Servers</a>
+                    <a href="/gds/">Dedicated Servers</a>
+                    <a href="/fds/">FiveM Dedicated</a>
+                    <a href="/discord-bot/">Discord Bot Hosting</a>
                 </div>
                 <div class="footer-links reveal">
                     <h4>SUPPORT</h4>
@@ -519,7 +551,8 @@
                 </div>
             </div>
         </footer>
-        <!-- Login Modal -->
+
+        <!-- Login & Onboarding Modal -->
         <div class="modal-overlay" id="login-modal">
             <div class="login-modal">
                 <button class="modal-close" id="modal-close">
@@ -529,6 +562,7 @@
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
+
                 <!-- Login View -->
                 <div id="login-view-content">
                     <div class="modal-header">
@@ -558,8 +592,9 @@
                 <div id="onboarding-view-content" class="onboarding-form">
                     <div class="modal-header">
                         <h2>Complete Profile</h2>
-                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Join the
-                            NodeWave community</p>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Join the NodeWave
+                            community
+                        </p>
                     </div>
                     <div class="input-group">
                         <label>FULL NAME</label>
@@ -575,6 +610,7 @@
                     </div>
                     <button class="save-profile-btn" id="save-profile">Save & Continue</button>
                 </div>
+
                 <div class="modal-footer">
                     Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
                         rel="noopener noreferrer"

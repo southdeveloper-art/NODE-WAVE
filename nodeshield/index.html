@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodeWave | NODE SHIELD — FiveM AntiCheat</title>
+    <meta name="description"
+        content="NODE SHIELD is NodeWave's built-in FiveM AntiCheat engine. Real-time memory scanning, script injection detection, auto-ban, and 99.8% cheat detection rate — included free with every FiveM server.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap"
+        rel="stylesheet">
+    <noscript>
+        <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+    </noscript>
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        html, body { background: #000 !important; color: #fff !important; }
+        body { opacity: 0; transition: opacity 0.2s ease-in; }
+        body.loaded { opacity: 1; }
+
+        @keyframes shield-pulse {
+            0%   { transform: scale(0.9); opacity: 0.7; }
+            50%  { transform: scale(1.06); opacity: 0.25; }
+            100% { transform: scale(1.18); opacity: 0; }
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--primary); }
+            50%       { opacity: 0.4; box-shadow: 0 0 2px var(--primary); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-12px); }
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .ns-hero { text-align: center; padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+
+        /* Video background styling */
+        .ns-hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15; /* Dimmed video background to make text pop */
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Overlay to fade out edges of video bg toward center */
+        .ns-hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 85% 70% at 50% 50%, transparent 30%, #000 90%);
+            pointer-events: none;
+        }
+        @keyframes circuit-drift {
+            from { background-position: 0 0; }
+            to   { background-position: 400px 400px; }
+        }
+        .ns-badge {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: rgba(255,112,0,0.08); border: 1px solid rgba(255,112,0,0.25);
+            border-radius: 100px; padding: 0.4rem 1.2rem;
+            font-size: 0.75rem; font-family: 'Outfit', sans-serif; font-weight: 700;
+            letter-spacing: 3px; color: var(--primary); margin-bottom: 1.5rem;
+            text-shadow: 0 0 12px rgba(255,112,0,0.4);
+        }
+        .ns-badge span {
+            width: 7px; height: 7px; background: var(--primary); border-radius: 50%;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        .ns-hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900; text-transform: uppercase;
+            letter-spacing: -0.03em; line-height: 1;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255,112,0,0.2);
+        }
+        .ns-hero h1 span {
+            background: linear-gradient(135deg, var(--primary), #FFB000);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ns-hero p {
+            color: rgba(255, 255, 255, 0.95); font-size: 1.15rem;
+            max-width: 620px; margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .ns-hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 5rem; }
+
+        /* Shield Visual */
+        .ns-shield-wrap {
+            position: relative; width: 220px; height: 220px;
+            margin: 0 auto; animation: float 5s ease-in-out infinite;
+        }
+        .ns-shield-wrap .ring {
+            position: absolute; border-radius: 50%;
+            border: 1px solid rgba(255,112,0,0.2);
+        }
+        .ns-shield-wrap .ring-1 { width: 220px; height: 220px; top:0; left:0; animation: shield-pulse 3s ease-out infinite 0s; }
+        .ns-shield-wrap .ring-2 { width: 170px; height: 170px; top:25px; left:25px; animation: shield-pulse 3s ease-out infinite 1s; }
+        .ns-shield-wrap .ring-3 { width: 120px; height: 120px; top:50px; left:50px; animation: shield-pulse 3s ease-out infinite 2s; }
+        .ns-shield-core {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            background: radial-gradient(circle at 40% 35%, rgba(255,112,0,0.3), rgba(255,80,0,0.05));
+            border: 2px solid var(--primary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 50px rgba(255,112,0,0.35), inset 0 0 30px rgba(255,112,0,0.06);
+        }
+
+        /* Stats row */
+        .ns-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin: 4rem 0; }
+        .ns-stat {
+            background: rgba(255,112,0,0.04); border: 1px solid rgba(255,112,0,0.14);
+            border-radius: 16px; padding: 1.8rem 2.5rem; text-align: center; min-width: 160px;
+        }
+        .ns-stat .val { font-family: 'Outfit', sans-serif; font-size: 2.4rem; font-weight: 900; color: var(--primary); }
+        .ns-stat .lbl { font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); letter-spacing: 1.5px; margin-top: 0.3rem; text-transform: uppercase; }
+
+        /* Feature grid */
+        .ns-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 5rem 0; }
+        .ns-feature-card {
+            background: rgba(8,8,8,0.8); border: 1px solid rgba(255,112,0,0.1);
+            border-radius: 20px; padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .ns-feature-card:hover { border-color: rgba(255,112,0,0.35); transform: translateY(-4px); }
+        .ns-feature-icon {
+            width: 50px; height: 50px; background: rgba(255,112,0,0.1);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+        .ns-feature-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; margin-bottom: 0.7rem; }
+        .ns-feature-card p { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+
+        /* How it works */
+        .ns-steps { display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 4rem auto; }
+        .ns-step { display: flex; gap: 2rem; align-items: flex-start; position: relative; padding-bottom: 3rem; }
+        .ns-step:last-child { padding-bottom: 0; }
+        .ns-step::before {
+            content: '';
+            position: absolute; left: 22px; top: 48px; bottom: 0;
+            width: 1px; background: rgba(255,112,0,0.2);
+        }
+        .ns-step:last-child::before { display: none; }
+        .ns-step-num {
+            width: 46px; height: 46px; border-radius: 50%;
+            background: rgba(255,112,0,0.1); border: 1px solid rgba(255,112,0,0.25);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+            font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--primary); font-size: 1rem;
+        }
+        .ns-step-body h3 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .ns-step-body p { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+
+        /* FAQ */
+        .ns-faq { max-width: 760px; margin: 0 auto; }
+        .ns-faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.07); padding: 1.6rem 0; cursor: pointer;
+        }
+        .ns-faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+        .ns-faq-q {
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem;
+            gap: 1rem;
+        }
+        .ns-faq-q .icon { flex-shrink: 0; color: var(--primary); transition: transform 0.3s; }
+        .ns-faq-a { color: rgba(255, 255, 255, 0.75); font-size: 0.95rem; line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+        .ns-faq-item.open .ns-faq-a { max-height: 400px; padding-top: 0.9rem; }
+        .ns-faq-item.open .icon { transform: rotate(45deg); }
+
+        /* CTA Banner */
+        .ns-cta {
+            background: rgba(255,112,0,0.04); border: 1px solid rgba(255,112,0,0.18);
+            border-radius: 24px; padding: 4rem 3rem; text-align: center; margin: 5rem 0 2rem;
+        }
+        .ns-cta h2 { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; }
+        .ns-cta p { color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.2rem; line-height: 1.7; }
+
+        /* Responsive Fixes for smaller screens */
+        @media (max-width: 900px) {
+            .ns-hero { padding: 6rem 1rem 3rem; }
+            .ns-shield-wrap { transform: scale(0.8); }
+            .ns-stats { gap: 1rem; }
+            .ns-stat { min-width: 120px; padding: 1.2rem; }
+            .ns-stat .val { font-size: 1.8rem; }
+            .side-rail { display: none; } /* Hide side rails on mobile */
+            body.has-side-rails { padding-left: 0; padding-right: 0; }
+            .ns-cta { padding: 3rem 1.5rem; }
+        }
+        @media (max-width: 600px) {
+            .ns-hero-btns { flex-direction: column; width: 100%; gap: 0.8rem; }
+            .ns-hero-btns .btn { width: 100%; }
+            .ns-side-by-side { gap: 2rem; }
+        }
+    </style>
+</head>
+
+<body class="has-side-rails">
+    <!-- Side Decor Rails -->
+    <div class="side-rail left-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">AC_SCAN</span>
+            <span class="marker active">SHIELD_ON</span>
+            <span class="marker">DETECT</span>
+            <span class="marker">BAN_SYS</span>
+            <span class="marker">MEM_CHK</span>
+        </div>
+    </div>
+    <div class="side-rail right-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">0x00AC</span>
+            <span class="marker">NO_CHEATS</span>
+            <span class="marker active">FAIR_PLAY</span>
+            <span class="marker">INJECT_BLK</span>
+            <span class="marker">99.8%</span>
+        </div>
+    </div>
+
+    <div id="app">
+        <!-- Header -->
+        <header class="navbar">
+            <div class="container nav-content">
+                <div class="logo">
+                    <a href="/" style="text-decoration: none; color: inherit;"><span class="text-orange">NODE</span>
+                        WAVE</a>
+                </div>
+                <nav class="nav-links">
+                    <a href="/gcs/">GAME COMPUTE SERVERS</a>
+                    <a href="/gds/">GAME DEDICATED SERVERS</a>
+                    <a href="/fds/">FIVEM DEDICATED SERVERS</a>
+                    <a href="/discord-bot/">DISCORD BOT HOSTING</a>
+                    <a href="/#vps">SUPPORT</a>
+                </nav>
+                <div class="nav-right">
+                    <div class="nav-cta" id="nav-cta">
+                        <a href="#" id="login-trigger" class="btn btn-outline"
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">LOGIN</a>
+                        <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">SIGN UP</a>
+                    </div>
+                    <div class="user-profile-nav" id="user-profile-nav">
+                        <div class="user-avatar" id="user-avatar-initials">UN</div>
+                        <div class="user-info-text">
+                            <span class="user-nav-name" id="user-nav-name">User Name</span>
+                            <span class="user-nav-username" id="user-nav-username">@username</span>
+                        </div>
+                    </div>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="mobile-menu" id="mobile-menu">
+                <nav class="mobile-nav-links">
+                    <a href="/gcs/">GAME COMPUTE SERVERS</a>
+                    <a href="/gds/">GAME DEDICATED SERVERS</a>
+                    <a href="/fds/">FIVEM DEDICATED SERVERS</a>
+                    <a href="/discord-bot/">DISCORD BOT HOSTING</a>
+                    <a href="/#vps">SUPPORT</a>
+                    <div class="mobile-cta">
+                        <a href="/plans/" class="btn btn-primary">SIGN UP</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="ns-hero">
+            <!-- Background Video -->
+            <video class="ns-hero-video" autoplay loop muted playsinline>
+                <source src="/GIF_Creation_Successful.mp4" type="video/mp4">
+            </video>
+            
+            <div style="position: relative; z-index: 10;">
+                <div class="ns-badge"><span></span> BUILT-IN FIVEM ANTICHEAT ENGINE</div>
+                <h1>NODE <span>SHIELD</span></h1>
+                <p>The only FiveM AntiCheat that runs natively inside your server — no third-party launchers, no client mods. Real-time protection from the moment your server starts.</p>
+                <div class="ns-hero-btns">
+                    <a href="/fds/" class="btn btn-primary" style="padding: 0.9rem 2.2rem; font-size: 1rem;">GET PROTECTED NOW</a>
+                    <a href="#how-it-works" class="btn btn-outline" style="padding: 0.9rem 2.2rem; font-size: 1rem;">HOW IT WORKS →</a>
+                </div>
+            </div>
+
+            <!-- Animated Shield -->
+            <div class="ns-shield-wrap">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+                <div class="ns-shield-core">
+                    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"
+                        style="filter: drop-shadow(0 0 12px rgba(255,112,0,0.9));">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255,112,0,0.12)"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="container">
+            <div class="ns-stats reveal">
+                <div class="ns-stat">
+                    <div class="val">99.8%</div>
+                    <div class="lbl">CHEAT DETECTION RATE</div>
+                </div>
+                <div class="ns-stat">
+                    <div class="val">10K+</div>
+                    <div class="lbl">KNOWN EXPLOITS BLOCKED</div>
+                </div>
+                <div class="ns-stat">
+                    <div class="val">&lt;50ms</div>
+                    <div class="lbl">BAN RESPONSE TIME</div>
+                </div>
+                <div class="ns-stat">
+                    <div class="val">0</div>
+                    <div class="lbl">FALSE BAN REPORTED</div>
+                </div>
+                <div class="ns-stat">
+                    <div class="val">24/7</div>
+                    <div class="lbl">ALWAYS-ON SCANNING</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHAT WE DETECT -->
+        <section class="container" style="margin-top: 5rem;">
+            <h2 class="section-title reveal">WHAT WE <span class="text-orange">DETECT</span></h2>
+            <p style="text-align:center; color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem; font-size: 1rem;">
+                NODE SHIELD actively scans for the most common and advanced FiveM cheats in real time, with zero impact on server performance.
+            </p>
+
+            <div class="ns-features reveal">
+                <!-- Card 1 -->
+                <div class="ns-feature-card">
+                    <div class="ns-feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>Speed & Teleport Hacks</h3>
+                    <p>Detects abnormal player velocity and instant position changes. Players using any speed or teleport exploit are flagged and banned instantly.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="ns-feature-card">
+                    <div class="ns-feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </div>
+                    <h3>Script Injection</h3>
+                    <p>Blocks unauthorized Lua script injection attempts at the execution layer. No injected menu or executor can operate undetected inside your server.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="ns-feature-card">
+                    <div class="ns-feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                    </div>
+                    <h3>Memory Manipulation</h3>
+                    <p>Real-time memory scanning identifies unauthorized process reads and writes from external cheat software attached to the FiveM client.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="ns-feature-card">
+                    <div class="ns-feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3>God Mode & Invincibility</h3>
+                    <p>Health state monitoring catches any abnormal invincibility flags set by cheats, including entity invincibility, health regen exploits, and armor overrides.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="ns-feature-card">
+                    <div class="ns-feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <h3>Resource Exploit Detection</h3>
+                    <p>Monitors all active resources for tampered files, unauthorized overwrites, and client-side execution of restricted server-only events.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="ns-feature-card">
+                    <div class="ns-feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3>Weapon & Vehicle Spawning</h3>
+                    <p>Detects unauthorized weapon grants, infinite ammo cheats, blacklisted vehicle spawns, and entity limit bypasses in real time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS & FAQ SIDE BY SIDE -->
+        <section class="container ns-side-by-side" id="how-it-works">
+            
+            <!-- LEFT COLUMN: HOW IT WORKS -->
+            <div>
+                <h2 class="section-title reveal" style="text-align: left;">HOW IT <span class="text-orange">WORKS</span></h2>
+                <div class="ns-steps reveal" style="margin: 2rem 0 0 0; max-width: 100%;">
+                    <div class="ns-step">
+                        <div class="ns-step-num">01</div>
+                        <div class="ns-step-body">
+                            <h3>Server-Side Initialization</h3>
+                            <p>NODE SHIELD loads automatically when your FiveM server starts. No configuration needed — it initializes in the background and begins passive monitoring of all connected clients from the first tick.</p>
+                        </div>
+                    </div>
+                    <div class="ns-step">
+                        <div class="ns-step-num">02</div>
+                        <div class="ns-step-body">
+                            <h3>Real-Time Event & State Monitoring</h3>
+                            <p>Player events, entity states, resource calls, and network packets are continuously analyzed. NODE SHIELD compares live data against a signature database of known cheat patterns and behavioral anomalies.</p>
+                        </div>
+                    </div>
+                    <div class="ns-step">
+                        <div class="ns-step-num">03</div>
+                        <div class="ns-step-body">
+                            <h3>Behavioral Analysis Engine</h3>
+                            <p>Beyond signature matching, our behavioral engine detects zero-day exploits and unknown cheat patterns by looking for statistical anomalies — actions that fall outside normal player behavior ranges.</p>
+                        </div>
+                    </div>
+                    <div class="ns-step">
+                        <div class="ns-step-num">04</div>
+                        <div class="ns-step-body">
+                            <h3>Auto-Ban & Admin Notification</h3>
+                            <p>When a threat is confirmed, the player is automatically banned within milliseconds. Server admins receive a full incident report — cheat type, timestamp, player identifiers, and evidence log — delivered to Discord instantly.</p>
+                        </div>
+                    </div>
+                    <div class="ns-step">
+                        <div class="ns-step-num">05</div>
+                        <div class="ns-step-body">
+                            <h3>Continuous Signature Updates</h3>
+                            <p>The NODE SHIELD signature database is updated regularly as new cheats are discovered. Your server receives updated definitions automatically — no manual updates or restarts required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: FAQ -->
+            <div>
+                <h2 class="section-title reveal" style="text-align: left;">COMMON <span class="text-orange">QUESTIONS</span></h2>
+                <div class="ns-faq reveal" style="margin: 2rem 0 0 0; max-width: 100%;">
+                    <div class="ns-faq-item">
+                        <div class="ns-faq-q">
+                            Does NODE SHIELD require anything to be installed on the client?
+                            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                        <div class="ns-faq-a">No. NODE SHIELD runs entirely server-side. Players do not need to install any software, launcher, or client mod. Protection is transparent and automatic.</div>
+                    </div>
+                    <div class="ns-faq-item">
+                        <div class="ns-faq-q">
+                            Does it affect server performance or tick rate?
+                            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                        <div class="ns-faq-a">NODE SHIELD is engineered for near-zero performance overhead. All scanning operations run asynchronously, so your server tick rate and player experience are completely unaffected.</div>
+                    </div>
+                    <div class="ns-faq-item">
+                        <div class="ns-faq-q">
+                            Can it detect menu-based cheats like Eulen, Lynx, or Hamster?
+                            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                        <div class="ns-faq-a">Yes. NODE SHIELD maintains an active signature library covering most publicly known FiveM menus and cheat executors, including behavioral detection for new and unknown variants.</div>
+                    </div>
+                    <div class="ns-faq-item">
+                        <div class="ns-faq-q">
+                            What happens when a cheater is detected?
+                            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                        <div class="ns-faq-a">The player is kicked and banned automatically in under 50ms. A full incident log (player IDs, cheat type, timestamp) is sent to your configured Discord webhook. All ban data is stored and can be reviewed from your server admin panel.</div>
+                    </div>
+                    <div class="ns-faq-item">
+                        <div class="ns-faq-q">
+                            Is NODE SHIELD included in all FiveM Dedicated Server plans?
+                            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                        <div class="ns-faq-a">Yes. NODE SHIELD is included at no extra cost with every NodeWave FiveM Dedicated Server plan. There is no separate license, no monthly fee, and no activation required.</div>
+                    </div>
+                    <div class="ns-faq-item">
+                        <div class="ns-faq-q">
+                            Can administrators whitelist certain actions to prevent false bans?
+                            <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </div>
+                        <div class="ns-faq-a">Yes. NODE SHIELD supports a built-in ACL (Access Control List) that lets server administrators whitelist trusted scripts, actions, and identifiers — giving you full control over what is flagged or ignored.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container">
+            <div class="ns-cta reveal">
+                <h2>Zero Cheaters. <span class="text-orange">Zero Compromise.</span></h2>
+                <p>NODE SHIELD is included free with every NodeWave FiveM Dedicated Server. No setup. No license fee. Just fair gameplay from day one.</p>
+                <a href="/fds/" class="btn btn-primary" style="padding: 1rem 2.8rem; font-size: 1rem;">GET YOUR FIVEM SERVER</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand reveal">
+                    <div class="logo"><span class="text-orange">NODE</span> WAVE</div>
+                    <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
+                        communities worldwide.</p>
+                    <p class="footer-copyright">© 2026 NODE WAVE HOSTING. ALL RIGHTS RESERVED.<br>DESIGNED WITH PASSION FOR GAMERS.</p>
+                    <div class="footer-credit">
+                        Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
+                            rel="noopener noreferrer">rocky._.dev</a>
+                    </div>
+                </div>
+                <div class="footer-links reveal">
+                    <h4>NETWORKS</h4>
+                    <a href="/gcs/">Compute Servers</a>
+                    <a href="/gds/">Dedicated Servers</a>
+                    <a href="/fds/">FiveM Dedicated</a>
+                    <a href="/discord-bot/">Discord Bot Hosting</a>
+                </div>
+                <div class="footer-links reveal">
+                    <h4>SUPPORT</h4>
+                    <a href="#">Knowledgebase</a>
+                    <a href="#">Discord Support</a>
+                    <a href="#">Billing Portal</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Login Modal -->
+        <div class="modal-overlay" id="login-modal">
+            <div class="login-modal">
+                <button class="modal-close" id="modal-close">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div id="login-view-content">
+                    <div class="modal-header"><h2>Connect to NodeWave</h2></div>
+                    <button class="google-login-btn" id="google-login">
+                        <svg class="google-icon" viewBox="0 0 48 48">
+                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                            <path fill="none" d="M0 0h48v48H0z"></path>
+                        </svg>
+                        Continue with Google
+                    </button>
+                </div>
+                <div id="onboarding-view-content" class="onboarding-form">
+                    <div class="modal-header">
+                        <h2>Complete Profile</h2>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Join the NodeWave community</p>
+                    </div>
+                    <div class="input-group">
+                        <label>FULL NAME</label>
+                        <input type="text" id="full-name" class="onboarding-input" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <label>USERNAME</label>
+                        <input type="text" id="username" class="onboarding-input" placeholder="@username">
+                    </div>
+                    <div class="input-group">
+                        <label>PHONE NUMBER</label>
+                        <input type="text" id="phone-number" class="onboarding-input" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <button class="save-profile-btn" id="save-profile">Save &amp; Continue</button>
+                </div>
+                <div class="modal-footer">
+                    Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
+                        rel="noopener noreferrer"
+                        style="color: var(--primary); text-decoration: none; font-weight: 700;">rocky._.dev</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script>
+        // FAQ accordion — runs after everything including main.js is loaded
+        window.addEventListener('load', function () {
+            var faqContainer = document.querySelector('.ns-faq');
+            if (!faqContainer) return;
+            faqContainer.addEventListener('click', function (e) {
+                var item = e.target.closest('.ns-faq-item');
+                if (!item) return;
+                var isOpen = item.classList.contains('open');
+                document.querySelectorAll('.ns-faq-item').forEach(function (i) {
+                    i.classList.remove('open');
+                });
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+
+</html>

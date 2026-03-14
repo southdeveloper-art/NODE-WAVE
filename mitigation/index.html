@@ -136,9 +136,36 @@
             }
         }
     </style>
+  <style>
+    html, body { background: #000 !important; color: #fff !important; }
+    body { opacity: 0; transition: opacity 0.2s ease-in; }
+    body.loaded { opacity: 1; }
+  </style>
 </head>
 
-<body class="bg-dark text-white font-sans selection:bg-primary selection:text-white overflow-x-hidden">
+<body class="bg-dark text-white font-sans selection:bg-primary selection:text-white overflow-x-hidden has-side-rails">
+    <!-- Side Decor Rails to fill empty space -->
+    <div class="side-rail left-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">0x00A</span>
+            <span class="marker">NODE_TX</span>
+            <span class="marker active">SYS_OK</span>
+            <span class="marker">0x00B</span>
+            <span class="marker">NET_LINK</span>
+        </div>
+    </div>
+
+    <div class="side-rail right-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">PORT_9950</span>
+            <span class="marker">DDoS_PROT</span>
+            <span class="marker">LAT_1MS</span>
+            <span class="marker active">BEND_WAVE</span>
+            <span class="marker">CAP_17TB</span>
+        </div>
+    </div>
     <div id="app">
         <!-- Header -->
         <header class="navbar">
@@ -147,14 +174,18 @@
                     <span class="text-orange">NODE</span> WAVE
                 </div>
                 <nav class="nav-links">
-                    <a href="/gcs/">Game Compute Servers</a>
-                    <a href="/gds/">Game Dedicated Servers</a>
-                    <a href="/#vps">Support</a>
+                    <a href="/gcs/">GAME COMPUTE SERVERS</a>
+                    <a href="/gds/">GAME DEDICATED SERVERS</a>
+                    <a href="/fds/">FIVEM DEDICATED SERVERS</a>
+                    <a href="/discord-bot/">DISCORD BOT HOSTING</a>
+                    <a href="/#vps">SUPPORT</a>
+                </nav>
+                <div class="nav-right">
                     <div class="nav-cta" id="nav-cta">
                         <a href="#" id="login-trigger" class="btn btn-outline"
-                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Login</a>
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">LOGIN</a>
                         <a href="#" id="signup-trigger" class="btn btn-primary login-trigger"
-                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Sign Up</a>
+                            style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">SIGN UP</a>
                     </div>
                     <div class="user-profile-nav" id="user-profile-nav">
                         <div class="user-avatar" id="user-avatar-initials">UN</div>
@@ -163,21 +194,24 @@
                             <span class="user-nav-username" id="user-nav-username">@username</span>
                         </div>
                     </div>
-                </nav>
-                <button class="mobile-toggle" id="mobile-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                    <button class="mobile-toggle" id="mobile-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </div>
             <!-- Mobile Menu Overlay -->
             <div class="mobile-menu" id="mobile-menu">
                 <nav class="mobile-nav-links">
-                    <a href="/gcs/">Game Compute Servers</a>
-                    <a href="/gds/">Game Dedicated Servers</a>
-                    <a href="/#vps">Support</a>
-                    <hr style="border: 0; border-top: 1px solid rgba(255,112,0,0.2); margin: 1rem 0;">
-                    <a href="#" class="login-trigger">Login</a>
+                    <a href="/gcs/">GAME COMPUTE SERVERS</a>
+                    <a href="/gds/">GAME DEDICATED SERVERS</a>
+                    <a href="/fds/">FIVEM DEDICATED SERVERS</a>
+                    <a href="/discord-bot/">DISCORD BOT HOSTING</a>
+                    <a href="/#vps">SUPPORT</a>
+                    <div class="mobile-cta">
+                        <a href="/plans/" class="btn btn-primary">SIGN UP</a>
+                    </div>
                 </nav>
             </div>
         </header>
@@ -283,12 +317,10 @@
         <footer class="footer">
             <div class="container footer-grid">
                 <div class="footer-brand reveal">
-                    <div class="logo"><span class="text-orange">NODE</span>WAVE</div>
+                    <div class="logo"><span class="text-orange">NODE</span> WAVE</div>
                     <p>Node Wave is dedicated to providing high-performance, cost-effective hosting solutions for gaming
                         communities worldwide.</p>
-                    <p class="footer-copyright">&copy; 2026 Node Wave Hosting. All rights reserved. Designed with
-                        passion for
-                        gamers.</p>
+                    <p class="footer-copyright">© 2026 NODE WAVE HOSTING. ALL RIGHTS RESERVED.<br>DESIGNED WITH PASSION FOR GAMERS.</p>
                     <div class="footer-credit">
                         Made by <span class="heart">❤️</span> <a href="https://discord.gg/3VXTcXyRDQ" target="_blank"
                             rel="noopener noreferrer">rocky._.dev</a>
@@ -296,10 +328,10 @@
                 </div>
                 <div class="footer-links reveal">
                     <h4>NETWORKS</h4>
-                    <a href="#">Game Hosting</a>
-                    <a href="#">VPS Solutions</a>
-                    <a href="#">VDS Hosting</a>
-                    <a href="#">Dedicated</a>
+                    <a href="/gcs/">Compute Servers</a>
+                    <a href="/gds/">Dedicated Servers</a>
+                    <a href="/fds/">FiveM Dedicated</a>
+                    <a href="/discord-bot/">Discord Bot Hosting</a>
                 </div>
                 <div class="footer-links reveal">
                     <h4>SUPPORT</h4>
@@ -313,9 +345,10 @@
 
         <!-- Login & Onboarding Modal -->
         <div class="modal-overlay" id="login-modal">
-            <div class="modal-content">
+            <div class="login-modal">
                 <button class="modal-close" id="modal-close">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
@@ -324,9 +357,7 @@
                 <!-- Login View -->
                 <div id="login-view-content">
                     <div class="modal-header">
-                        <h2>Connect to <span class="text-orange">NodeWave</span></h2>
-                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Secure access to
-                            your gaming infrastructure</p>
+                        <h2>Connect to NodeWave</h2>
                     </div>
                     <button class="google-login-btn" id="google-login">
                         <svg class="google-icon" viewBox="0 0 48 48">
@@ -342,6 +373,7 @@
                             <path fill="#34A853"
                                 d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
                             </path>
+                            <path fill="none" d="M0 0h48v48H0z"></path>
                         </svg>
                         Continue with Google
                     </button>
@@ -351,8 +383,9 @@
                 <div id="onboarding-view-content" class="onboarding-form">
                     <div class="modal-header">
                         <h2>Complete Profile</h2>
-                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Join the
-                            NodeWave community</p>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Join the NodeWave
+                            community
+                        </p>
                     </div>
                     <div class="input-group">
                         <label>FULL NAME</label>

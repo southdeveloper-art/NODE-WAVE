@@ -2,22 +2,21 @@ import './style.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("NW-DEBUG: CORE LOADED");
+  document.body.classList.add('loaded');
 
 
-  // 1. Immediate Reveal Logic (Priority)
+  // 1. Optimized Reveal Logic (Intersection Observer)
   const reveals = document.querySelectorAll('.reveal');
-  const revealOnScroll = () => {
-    console.log(`NW-DEBUG: REVEALING ${reveals.length} ELEMENTS`);
-    const triggerBottom = window.innerHeight * 0.95;
-    reveals.forEach(reveal => {
-      const revealTop = reveal.getBoundingClientRect().top;
-      if (revealTop < triggerBottom) {
-        reveal.classList.add('active');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target); // Stop watching once revealed
       }
     });
-  };
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Initial check
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => revealObserver.observe(el));
 
   // 1b. Navbar Scroll State
   const navbar = document.querySelector('.navbar');
@@ -164,6 +163,134 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 6.5 Dynamic Hero Tab Switcher via Quick Nav Bar
+  const qnbItems = document.querySelectorAll('.qnb-item');
+  const heroSection = document.querySelector('.hero');
+  const heroContentContainer = document.querySelector('.hero-content');
+  const heroTitle = document.querySelector('.hero-title');
+  const heroSubtitle = document.querySelector('.hero-subtitle');
+  const heroBtns = document.querySelector('.hero-btns');
+
+  const btnStylePrimary = 'style="background: #FF7000; border-color: #FF7000; color: white; box-shadow: 0 0 25px rgba(255, 112, 0, 0.4);"';
+  const btnStyleOutline = 'style="border: none; padding-left: 0; padding-right: 0;"';
+  const bgGradient = 'linear-gradient(to right, rgba(10, 10, 12, 0.95) 0%, rgba(10, 10, 12, 0.4) 100%)';
+
+  const heroTabData = {
+    'dedicated': {
+      title: '<i>Total <span class="text-orange">Bare Metal</span> Domination</i>',
+      subtitle: 'Stop sharing resources. Our dedicated Ryzen 9 9950X3D nodes provide raw, unvirtualized performance for high-stakes projects and massive player bases.',
+      buttons: `<a href="/gds/" class="btn btn-primary" ${btnStylePrimary}>Browse Servers</a> <a href="/budget/" class="btn btn-outline" ${btnStyleOutline}>Budget Servers &rarr;</a>`,
+      isLong: true,
+      bgImage: `${bgGradient}, url('/dedicated_server_bg.png')`
+    },
+    'fivem': {
+      title: '<i>Unleash <span class="text-orange">Absolute Power</span></i>',
+      subtitle: 'Don\'t settle for less. Our custom-built Ryzen 9 9950X3D nodes deliver the processing power that high-population communities demand. Zero lag, 100% uptime, 17Tbit protection.',
+      buttons: `<a href="/plans/" class="btn btn-primary" ${btnStylePrimary}>Deploy Server Now</a> <a href="#specs" class="btn btn-outline" ${btnStyleOutline}>Performance Specs &rarr;</a>`,
+      isLong: true,
+      bgImage: `${bgGradient}, url('/fivem_server_bg.png')`
+    },
+    'discord': {
+      title: '<i>24/7 <span class="text-orange">Discord Bot</span> Hosting</i>',
+      subtitle: 'Keep your bots online with zero downtime. High-performance containers built to scale with your Discord communities. Enterprise reliability at community prices.',
+      buttons: `<a href="/discord-bot/" class="btn btn-primary" ${btnStylePrimary}>View Bot Plans</a> <a href="#features" class="btn btn-outline" ${btnStyleOutline}>See Features &rarr;</a>`,
+      isLong: true,
+      bgImage: `${bgGradient}, url('/discord_bot_bg.png')`
+    },
+    'network': {
+      title: '<i>17Tbit Global <span class="text-orange">Anycast</span> Network</i>',
+      subtitle: 'Game dedicated DDoS protection spanning across multiple global PoPs ensuring your players stay connected with ultra-low latency and absolute stability.',
+      buttons: `<a href="/network/" class="btn btn-primary" ${btnStylePrimary}>View Network Map</a> <a href="/mitigation/" class="btn btn-outline" ${btnStyleOutline}>Anti-DDoS Specs &rarr;</a>`,
+      isLong: true,
+      bgImage: `${bgGradient}, url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1920')`
+    }
+  };
+
+  if (qnbItems.length > 0 && heroContentContainer) {
+    let currentTabIndex = 0; // FiveM is now first
+    let tabDirection = 1;
+    let autoSwitchInterval;
+
+    const performTabSwitch = (index) => {
+      const item = qnbItems[index];
+      const tabId = item.getAttribute('data-tab');
+      const data = heroTabData[tabId];
+
+      // Remove active state from all
+      qnbItems.forEach(nav => nav.classList.remove('active'));
+      // Add active state to current
+      item.classList.add('active');
+
+      if (data) {
+        // Slide out to the left
+        heroContentContainer.classList.add('exiting');
+
+        setTimeout(() => {
+          // Swap content
+          heroTitle.innerHTML = data.title;
+          heroSubtitle.innerHTML = data.subtitle;
+          heroBtns.innerHTML = data.buttons;
+
+          if (data.isLong) {
+            heroTitle.classList.add('title-long');
+          } else {
+            heroTitle.classList.remove('title-long');
+          }
+
+          // Switch background
+          if (heroSection) {
+            heroSection.style.backgroundImage = data.bgImage;
+          }
+
+          // Reset to right position (instant)
+          heroContentContainer.classList.remove('exiting');
+          heroContentContainer.classList.add('entering');
+          
+          // Force reflow
+          void heroContentContainer.offsetWidth;
+
+          // Slide in from the right
+          heroContentContainer.classList.remove('entering');
+        }, 300);
+      }
+    };
+
+    const startAutoSwitch = () => {
+      if (autoSwitchInterval) clearInterval(autoSwitchInterval);
+      autoSwitchInterval = setInterval(() => {
+        // Update index with ping-pong logic
+        currentTabIndex += tabDirection;
+        
+        if (currentTabIndex >= qnbItems.length - 1) {
+          currentTabIndex = qnbItems.length - 1;
+          tabDirection = -1; // Reverse to left
+        } else if (currentTabIndex <= 0) {
+          currentTabIndex = 0;
+          tabDirection = 1; // Reverse to right
+        }
+        
+        performTabSwitch(currentTabIndex);
+      }, 5000);
+    };
+
+    qnbItems.forEach((item, index) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentTabIndex = index;
+        
+        // Adjust direction based on position
+        if (currentTabIndex === 0) tabDirection = 1;
+        if (currentTabIndex === qnbItems.length - 1) tabDirection = -1;
+        
+        performTabSwitch(currentTabIndex);
+        startAutoSwitch(); // Reset timer on click
+      });
+    });
+
+    // Start the interval
+    startAutoSwitch();
+  }
+
 
   // 7. FAQ Accordion Logic
   function initFAQ() {
@@ -306,46 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // ─── Mouse Ripple Wave ──────────────────────────────────────────────────────
-  (function initRipple() {
-    const rc = document.createElement('canvas');
-    rc.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
-    document.body.appendChild(rc);
-    const rctx = rc.getContext('2d');
-
-    const resize = () => { rc.width = window.innerWidth; rc.height = window.innerHeight; };
-    window.addEventListener('resize', resize);
-    resize();
-
-    const ripples = [];
-    let lastTime = 0;
-
-    window.addEventListener('mousemove', e => {
-      const now = Date.now();
-      if (now - lastTime < 60) return; // emit every 60ms max
-      lastTime = now;
-      ripples.push({ x: e.clientX, y: e.clientY, r: 0, maxR: 80, alpha: 0.6 });
-    });
-
-    function animateRipples() {
-      rctx.clearRect(0, 0, rc.width, rc.height);
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        const rp = ripples[i];
-        rp.r += 3;
-        rp.alpha -= 0.025;
-        if (rp.alpha <= 0) { ripples.splice(i, 1); continue; }
-        rctx.beginPath();
-        rctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
-        rctx.strokeStyle = `rgba(255,112,0,${rp.alpha})`;
-        rctx.lineWidth = 2;
-        rctx.stroke();
-      }
-      requestAnimationFrame(animateRipples);
-    }
-    animateRipples();
-  })();
-
-  // DDoS Mitigation Logic
+  // ─── DDoS Mitigation Logic ──────────────────────────────────────────────────
 
 
 
