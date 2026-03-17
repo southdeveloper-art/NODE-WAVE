@@ -1,8 +1,32 @@
-import './style.css'
+async function loadIncludes() {
+  const includes = document.querySelectorAll('[data-include]');
+  for (const el of includes) {
+    const file = el.getAttribute('data-include');
+    try {
+      const response = await fetch('/' + (file.startsWith('/') ? file.slice(1) : file));
+      if (response.ok) {
+        el.innerHTML = await response.text();
+      }
+    } catch (err) {
+      console.error(`Error loading include ${file}:`, err);
+    }
+  }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("NW-DEBUG: CORE LOADED");
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadIncludes();
+  initLoginModal(); // Initialize modal listeners after includes are loaded
   document.body.classList.add('loaded');
+  initReviews(); // Start reviews synchronization
+
+  window.addEventListener('click', (e) => {
+    const btn = e.target.closest('.order-now-btn');
+    if (btn) {
+      console.log("NW-DEBUG: WINDOW CLICK CAPTURED", btn.getAttribute('data-plan'));
+      // alert("NW-DEBUG: WINDOW CLICK CAPTURED for " + btn.getAttribute('data-plan'));
+      // e.preventDefault(); // Optional: stop navigation if needed
+    }
+  }, true); // Capture phase focus
 
 
   // 1. Optimized Reveal Logic (Intersection Observer)
@@ -151,6 +175,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. Login Modal Logic
   initLoginModal();
+
+  // 5.5 Checkout & Redirect Flow
+  try {
+    initCheckout();
+    if (window.location.pathname.includes('/order/')) {
+        initOrderPage();
+    }
+  } catch (err) {
+    console.error("NW-DEBUG: Order initialization failed", err);
+  }
 
   // 6. Smooth Scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -552,7 +586,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  // Login & Profile Management Logic
+  // Helper to open login modal from anywhere
+  window.openLoginModal = () => {
+    const loginModal = document.getElementById('login-modal');
+    if (loginModal) {
+      loginModal.classList.add('active');
+      const loginView = document.getElementById('login-view-content');
+      const onboardingView = document.getElementById('onboarding-view-content');
+      if (loginView) loginView.style.display = 'block';
+      if (onboardingView) onboardingView.style.display = 'none';
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
   function initLoginModal() {
     const loginTrigger = document.getElementById('login-trigger');
     const loginModal = document.getElementById('login-modal');
@@ -634,10 +680,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (accessDenied) accessDenied.classList.add('active');
 
           // If not logged in at all, prompt for login
-          if (!email && loginModal) {
-            loginModal.classList.add('active');
-            if (loginView) loginView.style.display = 'block';
-            if (onboardingView) onboardingView.style.display = 'none';
+          if (!email) {
+            window.openLoginModal();
           }
         }
       }
@@ -648,10 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginTrigger && loginModal) {
       loginTrigger.addEventListener('click', (e) => {
         e.preventDefault();
-        loginModal.classList.add('active');
-        loginView.style.display = 'block';
-        onboardingView.style.display = 'none';
-        document.body.style.overflow = 'hidden';
+        window.openLoginModal();
       });
 
       const initiateGoogleLogin = () => {
@@ -727,4 +768,169 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+
+  function initCheckout() {
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.order-now-btn');
+      if (btn) {
+        console.log("NW-DEBUG: Order button clicked, redirecting...");
+        e.preventDefault();
+        
+        // 1. Login Check
+        const profile = localStorage.getItem('userProfile');
+        if (!profile) {
+          window.openLoginModal();
+          return;
+        }
+
+        // 2. Extract Plan Info
+        const plan = btn.getAttribute('data-plan') || 'Custom Server';
+        const price = btn.getAttribute('data-price') || '0';
+
+        // 3. Redirect to dedicated order page
+        window.location.href = `/order/?plan=${encodeURIComponent(plan)}&price=${price}`;
+      }
+    });
+  }
+
+  function initOrderPage() {
+    const displayPlan = document.getElementById('display-plan');
+    const displayTotal = document.getElementById('display-total');
+    const billingCycle = document.getElementById('billing-cycle');
+    const payNowBtn = document.getElementById('pay-now-btn');
+
+    if (!displayPlan || !billingCycle || !payNowBtn) return;
+
+    // 1. Parse URL Parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const planName = urlParams.get('plan') || 'Premium Plan';
+    const basePrice = parseFloat(urlParams.get('price')) || 0;
+
+    let currentOrder = { plan: planName, basePrice: basePrice, totalMonths: 1, totalPrice: basePrice };
+
+    // 2. Setup Displays
+    displayPlan.innerText = planName;
+    
+    const updateOrderTotal = () => {
+      let months = parseInt(billingCycle.value);
+      let discount = 1;
+      
+      if (months === 3) discount = 0.95;
+      if (months === 6) discount = 0.90;
+      if (months === 12) discount = 0.80;
+      
+      let totalPrice = (basePrice * months * discount).toFixed(2);
+      currentOrder.totalMonths = months;
+      currentOrder.totalPrice = totalPrice;
+      displayTotal.innerText = `€${totalPrice}`;
+    };
+
+    billingCycle.addEventListener('change', updateOrderTotal);
+    updateOrderTotal(); // Initial run
+
+    // 3. Razorpay Integration
+    payNowBtn.addEventListener('click', () => {
+      if (typeof Razorpay === 'undefined') {
+        alert("Razorpay SDK not loaded! Please check your connection.");
+        return;
+      }
+
+      const email = localStorage.getItem('userEmail') || 'customer@example.com';
+      const profileStr = localStorage.getItem('userProfile');
+      const profile = profileStr ? JSON.parse(profileStr) : { name: 'Customer', phone: '0000000000' };
+
+      const options = {
+        "key": "rzp_live_SSB4VW22k8P3l9", 
+        "amount": Math.round(parseFloat(currentOrder.totalPrice) * 100), 
+        "currency": "EUR",
+        "name": "NodeWave",
+        "description": `Payment for ${currentOrder.plan} (${currentOrder.totalMonths} Month(s))`,
+        "image": "/nw_logo_white.svg",
+        "handler": function (response) {
+          alert(`Success! Payment ID: ${response.razorpay_payment_id}`);
+          window.location.href = '/plans/'; // Return home after success
+        },
+        "prefill": {
+          "name": profile.name,
+          "email": email,
+          "contact": profile.phone
+        },
+        "theme": { "color": "#FF7000" }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  }
 });
+
+// Reviews System
+function initReviews() {
+    const defaultReviews = [
+        { name: "Alex G.", role: "NodeWave User", text: "Best server performance ever!" },
+        { name: "Sarah M.", role: "Community Owner", text: "NodeShield is a lifesaver." },
+        { name: "Mike R.", role: "Developer", text: "Incredibly fast support team." },
+        { name: "Kevin L.", role: "Gamer", text: "Smooth setup, zero downtime." }
+    ];
+
+    let reviews = JSON.parse(localStorage.getItem('nodewave_reviews')) || defaultReviews;
+
+    const reviewsGrid = document.getElementById('reviews-display-grid');
+    const reviewForm = document.getElementById('review-form');
+    const footerTicker = document.querySelector('.reviews-ticker');
+
+    // Update Footer Ticker
+    if (footerTicker) {
+        renderFooterTicker(reviews, footerTicker);
+    }
+
+    // Render Grid (if on reviews page)
+    if (reviewsGrid) {
+        renderReviewsGrid(reviews, reviewsGrid);
+    }
+
+    // Handle Submission
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('review-name').value;
+            const role = document.getElementById('review-role').value;
+            const text = document.getElementById('review-text').value;
+
+            const newReview = { name, role, text };
+            reviews.unshift(newReview);
+            localStorage.setItem('nodewave_reviews', JSON.stringify(reviews));
+
+            reviewForm.reset();
+            
+            // Re-render
+            if (reviewsGrid) renderReviewsGrid(reviews, reviewsGrid);
+            if (footerTicker) renderFooterTicker(reviews, footerTicker);
+            
+            alert('Thank you for your review!');
+        });
+    }
+}
+
+function renderReviewsGrid(reviews, container) {
+    container.innerHTML = reviews.map(rev => `
+        <div class="review-card reveal active">
+            <div class="review-header">
+                <div class="review-avatar">${rev.name.charAt(0)}</div>
+                <div class="review-info">
+                    <h3>${rev.name}</h3>
+                    <p>${rev.role}</p>
+                </div>
+            </div>
+            <div class="review-content">"${rev.text}"</div>
+        </div>
+    `).join('');
+}
+
+function renderFooterTicker(reviews, container) {
+    // Show top 4 for the ticker
+    const tickerReviews = reviews.slice(0, 4);
+    container.innerHTML = tickerReviews.map(rev => `
+        <div class="review-item">"${rev.text}" <span>- ${rev.name}</span></div>
+    `).join('');
+}

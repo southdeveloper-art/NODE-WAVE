@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Wave | Community Reviews</title>
+    <meta name="description" content="Read what our community has to say about Node Wave hosting services.">
+
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        html, body { background: #000 !important; color: #fff !important; }
+        body { opacity: 0; transition: opacity 0.2s ease-in; }
+        body.loaded { opacity: 1; }
+        
+        .reviews-hero {
+            padding: 12rem 0 6rem;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(255, 112, 0, 0.08) 0%, transparent 70%);
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .review-submission {
+            background: rgba(10, 10, 10, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 6rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 8rem;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 112, 0, 0.3);
+            background: rgba(255, 112, 0, 0.02);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .review-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .review-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: #fff;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 112, 0, 0.05);
+        }
+
+        textarea.form-input {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .reviews-hero {
+                padding: 8rem 0 4rem;
+            }
+
+            .review-submission {
+                padding: 1.5rem;
+            }
+
+            #review-form > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="has-side-rails">
+    <div id="app">
+        <header class="navbar" data-include="header.html"></header>
+
+        <section class="reviews-hero">
+            <div class="container">
+                <h1 class="hero-title reveal">WALL OF <span class="text-orange">LOVE</span></h1>
+                <p class="hero-subtitle reveal">Join the thousands of gamers who trust Node Wave for their hosting needs.</p>
+            </div>
+        </section>
+
+        <main class="reviews-container">
+            <section class="review-submission reveal">
+                <h2 class="section-title" style="margin-bottom: 2rem; text-align: left; font-size: 2rem;">SHARE YOUR <span class="text-orange">EXPERIENCE</span></h2>
+                <form id="review-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div class="form-group">
+                            <label for="review-name">FULL NAME</label>
+                            <input type="text" id="review-name" class="form-input" placeholder="e.g. Alex Graham" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-role">SERVICE USED</label>
+                            <input type="text" id="review-role" class="form-input" placeholder="e.g. FiveM Dedicated Server" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-text">YOUR REVIEW</label>
+                        <textarea id="review-text" class="form-input" placeholder="Describe your experience with Node Wave..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="padding: 1.2rem 3rem;">SUBMIT REVIEW</button>
+                </form>
+            </section>
+
+            <div id="reviews-display-grid" class="reviews-grid">
+                <!-- Reviews will be injected here -->
+            </div>
+        </main>
+
+        <footer class="footer" data-include="footer.html"></footer>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

@@ -16,7 +16,14 @@ export default defineConfig({
                 plans: resolve(__dirname, 'plans/index.html'),
                 fds: resolve(__dirname, 'fds/index.html'),
                 nodeshield: resolve(__dirname, 'nodeshield/index.html'),
-                'discord-bot': resolve(__dirname, 'discord-bot/index.html')
+                'discord-bot': resolve(__dirname, 'discord-bot/index.html'),
+                order: resolve(__dirname, 'order/index.html'),
+                about: resolve(__dirname, 'about/index.html'),
+                contact: resolve(__dirname, 'contact/index.html'),
+                privacy: resolve(__dirname, 'privacy/index.html'),
+                terms: resolve(__dirname, 'terms/index.html'),
+                refund: resolve(__dirname, 'refund/index.html'),
+                pricing: resolve(__dirname, 'pricing/index.html')
             }
         }
     },
@@ -25,7 +32,7 @@ export default defineConfig({
             name: 'html-rewrite',
             configureServer(server) {
                 server.middlewares.use((req, res, next) => {
-                    const pages = ['gcs', 'gds', 'mitigation', 'admin', 'faq', 'plans', 'fds', 'nodeshield', 'discord-bot'];
+                    const pages = ['gcs', 'gds', 'mitigation', 'admin', 'faq', 'plans', 'fds', 'nodeshield', 'discord-bot', 'order', 'about', 'contact', 'privacy', 'terms', 'refund', 'pricing'];
                     const url = req.url.split('?')[0];
                     if (pages.includes(url.replace(/\//g, ''))) {
                         req.url = `/${url.replace(/\//g, '')}/index.html`;

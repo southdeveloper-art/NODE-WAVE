@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/logo.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node Wave | Contact Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+    <noscript>
+        <style>
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
+    <style>
+        html, body { background: #000 !important; color: #fff !important; }
+        body { opacity: 0; transition: opacity 0.2s ease-in; }
+        body.loaded { opacity: 1; }
+    </style>
+</head>
+
+<body class="has-side-rails">
+    <!-- Side Decor Rails to fill empty space -->
+    <div class="side-rail left-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">0x00A</span>
+            <span class="marker">NODE_TX</span>
+            <span class="marker active">SYS_OK</span>
+            <span class="marker">0x00B</span>
+            <span class="marker">NET_LINK</span>
+        </div>
+    </div>
+
+    <div class="side-rail right-rail">
+        <div class="rail-line"></div>
+        <div class="rail-markers">
+            <span class="marker">PORT_9950</span>
+            <span class="marker">DDoS_PROT</span>
+            <span class="marker">LAT_1MS</span>
+            <span class="marker active">BEND_WAVE</span>
+            <span class="marker">CAP_17TB</span>
+        </div>
+    </div>
+    <div id="app">
+        <header class="navbar" data-include="header.html"></header>
+
+        <main class="legal-container container" style="padding-top: 150px; padding-bottom: 100px;">
+            <div class="legal-content reveal active" style="background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 112, 0, 0.2); border-radius: 24px; padding: 4rem;">
+                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 2rem;"><span class="text-orange">Contact</span> Us</h1>
+                <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted);">
+                    <p style="margin-bottom: 1.5rem;">Have questions or need assistance? Our support team is here to help you get the best out of your Node Wave experience.</p>
+                    
+                    <div class="support-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                        <div style="background: rgba(255, 112, 0, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255, 112, 0, 0.1);">
+                            <h3 style="color: #fff; margin-bottom: 1rem;">Discord Support</h3>
+                            <p style="margin-bottom: 1rem;">Join our community server for real-time support and updates.</p>
+                            <a href="https://discord.gg/3VXTcXyRDQ" target="_blank" class="btn btn-primary" style="display: inline-block; text-decoration: none;">Join Discord</a>
+                        </div>
+                        <div style="background: rgba(255, 112, 0, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255, 112, 0, 0.1);">
+                            <h3 style="color: #fff; margin-bottom: 1rem;">Email Support</h3>
+                            <p style="margin-bottom: 1rem;">For formal inquiries, reach us at our support email.</p>
+                            <a href="mailto:support@nodewave.in" style="color: var(--primary); font-weight: 700;">support@nodewave.in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer" data-include="footer.html"></footer>
+        
+        <!-- Login & Onboarding Modal (Placeholder or Shared?) -->
+        <!-- For now, we keep the modal in individual pages if they need it, or move to shared. -->
+        <!-- User only asked for header/footer. -->
+
+        <script type="module" src="/src/main.js"></script>
+    </div>
+</body>
+
+</html>
