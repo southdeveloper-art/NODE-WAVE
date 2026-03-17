@@ -23,7 +23,8 @@ export default defineConfig({
                 privacy: resolve(__dirname, 'privacy/index.html'),
                 terms: resolve(__dirname, 'terms/index.html'),
                 refund: resolve(__dirname, 'refund/index.html'),
-                pricing: resolve(__dirname, 'pricing/index.html')
+                pricing: resolve(__dirname, 'pricing/index.html'),
+                reviews: resolve(__dirname, 'reviews/index.html')
             }
         }
     },
@@ -32,7 +33,7 @@ export default defineConfig({
             name: 'html-rewrite',
             configureServer(server) {
                 server.middlewares.use((req, res, next) => {
-                    const pages = ['gcs', 'gds', 'mitigation', 'admin', 'faq', 'plans', 'fds', 'nodeshield', 'discord-bot', 'order', 'about', 'contact', 'privacy', 'terms', 'refund', 'pricing'];
+                    const pages = ['gcs', 'gds', 'mitigation', 'admin', 'faq', 'plans', 'fds', 'nodeshield', 'discord-bot', 'order', 'about', 'contact', 'privacy', 'terms', 'refund', 'pricing', 'reviews'];
                     const url = req.url.split('?')[0];
                     if (pages.includes(url.replace(/\//g, ''))) {
                         req.url = `/${url.replace(/\//g, '')}/index.html`;
