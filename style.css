@@ -309,7 +309,7 @@ nav {
 }
 
 .feature-item h4 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 8px;
 }
 
@@ -391,7 +391,25 @@ footer {
 }
 
 @media (max-width: 992px) {
-    .hero h1 { font-size: 3rem; }
+    .hero { 
+        height: auto; 
+        padding: 160px 0 80px; 
+        text-align: center;
+    }
+    .hero-content { 
+        max-width: 100%; 
+        margin: 0 auto;
+    }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 25px; line-height: 1.2; }
+    .hero p { margin: 0 auto 40px; font-size: 1.1rem; }
+    
+    .hero-content div[style*="display: flex"] {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px !important;
+    }
+
+    .section-title h2 { font-size: 2.2rem; }
     .footer-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 30px;
@@ -432,10 +450,11 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
+    .hero h1 { font-size: 2.2rem; }
     .hero p { font-size: 1rem; }
+    .section-title h2 { font-size: 1.8rem; }
     .section { padding: 60px 0; }
-    .logo img { height: 120px; }
+    .logo img { height: 100px; }
     
     .footer-grid { grid-template-columns: 1fr; }
     .footer-bottom { 
