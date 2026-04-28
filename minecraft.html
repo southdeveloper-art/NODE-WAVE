@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeWave | Minecraft Hosting - Ryzen 9 Performance</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .category-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .toggle-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .toggle-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .mc-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .mc-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+        .mc-ram {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .mc-price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+        .mc-price span {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+        .mc-specs {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .mc-specs li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mc-specs li span {
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Sliding Background Elements -->
+    <div class="bg-container" style="background-image: linear-gradient(rgba(11, 13, 23, 0.6), rgba(11, 13, 23, 0.95)), url('hero_bg.png');"></div>
+
+    <canvas id="bg-canvas"></canvas>
+
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="game.html">Game Hosting</a></li>
+                    <li><a href="vps.html">VPS Hosting</a></li>
+                    <li><a href="dedicated.html">Dedicated Servers</a></li>
+                </ul>
+                <a href="javascript:void(0)" class="btn-login disabled-btn">Coming Soon</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 150px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Minecraft Hosting</h2>
+                    <p>Our Minecraft packages are optimized for every type of server.</p>
+                </div>
+
+                <div class="category-toggle">
+                    <button class="toggle-btn active">Starter</button>
+                    <button class="toggle-btn">Premium</button>
+                    <button class="toggle-btn">Extreme</button>
+                </div>
+
+                <div class="pricing-grid">
+                    <!-- 1GB -->
+                    <div class="mc-card">
+                        <div class="mc-ram">1 GB RAM</div>
+                        <div class="mc-price">€0.50<span>/mo</span></div>
+                        <ul class="mc-specs">
+                            <li>CPU <span>100% Core</span></li>
+                            <li>SSD <span>10 GB NVMe</span></li>
+                            <li>Slots <span>Unlimited</span></li>
+                            <li>Backups <span>Daily</span></li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="width: 100%; text-align: center;">Coming Soon</a>
+                    </div>
+                    <!-- 2GB -->
+                    <div class="mc-card">
+                        <div class="mc-ram">2 GB RAM</div>
+                        <div class="mc-price">€1.00<span>/mo</span></div>
+                        <ul class="mc-specs">
+                            <li>CPU <span>150% Core</span></li>
+                            <li>SSD <span>20 GB NVMe</span></li>
+                            <li>Slots <span>Unlimited</span></li>
+                            <li>Backups <span>Daily</span></li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="width: 100%; text-align: center;">Coming Soon</a>
+                    </div>
+                    <!-- 4GB -->
+                    <div class="mc-card" style="border-color: var(--primary);">
+                        <div class="mc-ram">4 GB RAM</div>
+                        <div class="mc-price">€2.00<span>/mo</span></div>
+                        <ul class="mc-specs">
+                            <li>CPU <span>200% Core</span></li>
+                            <li>SSD <span>40 GB NVMe</span></li>
+                            <li>Slots <span>Unlimited</span></li>
+                            <li>Backups <span>Daily</span></li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="width: 100%; text-align: center;">Coming Soon</a>
+                    </div>
+                    <!-- 8GB -->
+                    <div class="mc-card">
+                        <div class="mc-ram">8 GB RAM</div>
+                        <div class="mc-price">€4.00<span>/mo</span></div>
+                        <ul class="mc-specs">
+                            <li>CPU <span>400% Core</span></li>
+                            <li>SSD <span>80 GB NVMe</span></li>
+                            <li>Slots <span>Unlimited</span></li>
+                            <li>Backups <span>Daily</span></li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="width: 100%; text-align: center;">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                    <p style="color: var(--text-dim); line-height: 1.6; margin-bottom: 20px;">Premium game and web hosting solutions with exceptional performance and 24/7 support.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <i data-lucide="twitter" style="color: var(--text-dim); cursor: pointer;"></i>
+                        <i data-lucide="discord" style="color: var(--text-dim); cursor: pointer;"></i>
+                        <i data-lucide="instagram" style="color: var(--text-dim); cursor: pointer;"></i>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="minecraft.html">Minecraft</a></li>
+                        <li><a href="game.html">Other Games</a></li>
+                        <li><a href="vps.html">VPS Hosting</a></li>
+                        <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Panels</h4>
+                    <ul>
+                        <li><a href="#">Game Panel</a></li>
+                        <li><a href="#">VPS Panel</a></li>
+                        <li><a href="#">Client Area</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NodeWave. All rights reserved.</p>
+                <div class="payment-methods">
+                    <img src="paypal.svg" alt="PayPal">
+                    <img src="mastercard.svg" alt="Mastercard">
+                    <img src="visa.svg" alt="Visa">
+                    <img src="ideal.svg" alt="iDEAL">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

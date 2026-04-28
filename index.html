@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeWave | High Performance Server Hosting</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Dynamic Sliding Background Elements -->
+    <div class="bg-container"></div>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header style="padding: 0;">
+        <!-- Announcement Bar -->
+        <div style="background: var(--primary); color: white; text-align: center; padding: 10px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; width: 100%;">
+            🚀 SPECIAL OFFER: Use code "ENGLISH" for 20% off your first month on all Ryzen 9 Servers!
+        </div>
+        <div class="container" style="padding-top: 20px;">
+            <nav>
+                <a href="index.html" class="logo"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                <ul class="nav-links">
+                    <li><a href="index.html" style="color: white;">Home</a></li>
+                    <li><a href="game.html">Game Hosting</a></li>
+                    <li><a href="vps.html">VPS Hosting</a></li>
+                    <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    <li><a href="fivem.html">FiveM Dedicated</a></li>
+                </ul>
+                <a href="javascript:void(0)" class="btn-login disabled-btn">Coming Soon</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>High-Performance <span>Hosting</span>, Without the Overhead.</h1>
+                    <p>Powered by Ryzen 9 9950X processors and protected by 17Tbit advanced DDoS mitigation — delivering fast, stable, and resilient hosting without unnecessary overhead or inflated costs.</p>
+                    <a href="javascript:void(0)" class="btn-primary disabled-btn">Coming Soon</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="trust-bar">
+            <div class="container">
+                <div class="trust-flex">
+                    <div class="trust-item"><i data-lucide="star" fill="currentColor"></i> Excellent 4.8/5</div>
+                    <div class="trust-item"><i data-lucide="check-circle-2"></i> 15,000+ Customers</div>
+                    <div class="trust-item"><i data-lucide="shield"></i> Enterprise DDoS Protection</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Services</h2>
+                    <p>Everything you need for your online community.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i data-lucide="gamepad-2" class="service-icon"></i>
+                        <h3>Game Hosting</h3>
+                        <p>High performance for Minecraft, Palworld, Rust and more.</p>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="padding: 10px 25px; font-size: 0.9rem;">Coming Soon</a>
+                    </div>
+                    <div class="service-card">
+                        <i data-lucide="server" class="service-icon"></i>
+                        <h3>VPS Hosting</h3>
+                        <p>Powerful VDS and VPS servers on Ryzen 9 hardware.</p>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="padding: 10px 25px; font-size: 0.9rem;">Coming Soon</a>
+                    </div>
+                    <div class="service-card">
+                        <i data-lucide="hard-hat" class="service-icon"></i>
+                        <h3>Dedicated Servers</h3>
+                        <p>Raw hardware power for massive communities.</p>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="padding: 10px 25px; font-size: 0.9rem;">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: rgba(255,255,255,0.01);">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why MC-Node?</h2>
+                </div>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <i data-lucide="cpu"></i>
+                        <div>
+                            <h4>Powerful Hardware</h4>
+                            <p>We exclusively use the latest Intel and AMD Ryzen 9 7950X processors.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="shield-check"></i>
+                        <div>
+                            <h4>DDoS Protection</h4>
+                            <p>All our servers are equipped with enterprise-grade DDoS protection by default.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="headset"></i>
+                        <div>
+                            <h4>24/7 Support</h4>
+                            <p>Our experts are available every day to help you with all your questions.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="zap"></i>
+                        <div>
+                            <h4>Instant Delivery</h4>
+                            <p>After payment, your server is created and delivered immediately.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Got questions? We've got answers.</p>
+                </div>
+                <div class="faq-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+                    <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.3s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem;">
+                            How long does it take to setup my server?
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: var(--text-dim); line-height: 1.6;">
+                            Your server is set up instantly after your payment is confirmed. You will receive an email with your panel credentials within seconds.
+                        </div>
+                    </div>
+                    <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.3s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem;">
+                            Can I upgrade or downgrade my plan later?
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: var(--text-dim); line-height: 1.6;">
+                            Yes! You can upgrade or downgrade your server plan at any time automatically via our client area. Your files and data will remain perfectly safe.
+                        </div>
+                    </div>
+                    <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.3s;">
+                        <div class="faq-question" style="display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem;">
+                            Where are your servers located?
+                            <i data-lucide="chevron-down"></i>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: var(--text-dim); line-height: 1.6;">
+                            Our main datacenter is located in Europe, providing extremely low latency across the entire EU region.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px;"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Premium game and web hosting solutions with exceptional performance and 24/7 support.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="minecraft.html">Minecraft</a></li>
+                        <li><a href="game.html">Other Games</a></li>
+                        <li><a href="vps.html">VPS Hosting</a></li>
+                        <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Socials</h4>
+                    <ul>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Panels</h4>
+                    <ul>
+                        <li><a href="#">Game Panel</a></li>
+                        <li><a href="#">VPS Panel</a></li>
+                        <li><a href="#">Client Area</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NodeWave. All rights reserved.</p>
+                <div class="payment-methods">
+                    <img src="paypal.svg" alt="PayPal">
+                    <img src="mastercard.svg" alt="Mastercard">
+                    <img src="visa.svg" alt="Visa">
+                    <img src="ideal.svg" alt="iDEAL">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

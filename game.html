@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeWave | Game Hosting Assortment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: 0.3s;
+        }
+        .game-card:hover {
+            border-color: var(--primary);
+            background: rgba(0, 123, 255, 0.05);
+        }
+        .game-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        .game-info h3 {
+            font-size: 1.4rem;
+        }
+        .game-info p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .game-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .game-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .game-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        .game-features li i {
+            color: #10b981;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Sliding Background Elements -->
+    <div class="bg-container" style="background-image: linear-gradient(rgba(11, 13, 23, 0.6), rgba(11, 13, 23, 0.95)), url('palworld_hero_bg.png');"></div>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="game.html" style="color: white;">Game Hosting</a></li>
+                    <li><a href="vps.html">VPS Hosting</a></li>
+                    <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    <li><a href="fivem.html">FiveM Dedicated</a></li>
+                </ul>
+                <a href="javascript:void(0)" class="btn-login disabled-btn">Coming Soon</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 150px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Games</h2>
+                    <p>Select a game to view our hosting packages.</p>
+                </div>
+
+                <div class="game-grid">
+                    <!-- Minecraft -->
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-icon"><i data-lucide="box"></i></div>
+                            <div class="game-info">
+                                <h3>Minecraft</h3>
+                                <p>Standard Edition</p>
+                            </div>
+                        </div>
+                        <div class="game-price">Starting at €0.50/mo</div>
+                        <ul class="game-features">
+                            <li><i data-lucide="check"></i> Unlimited slots</li>
+                            <li><i data-lucide="check"></i> Ryzen 9 CPU</li>
+                            <li><i data-lucide="check"></i> NVMe Storage</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center;">Coming Soon</a>
+                    </div>
+
+                    <!-- Palworld -->
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-icon"><i data-lucide="ghost"></i></div>
+                            <div class="game-info">
+                                <h3>Palworld</h3>
+                                <p>Multiplayer Hosting</p>
+                            </div>
+                        </div>
+                        <div class="game-price">Starting at €5.99/mo</div>
+                        <ul class="game-features">
+                            <li><i data-lucide="check"></i> 32 Player slots</li>
+                            <li><i data-lucide="check"></i> High performance</li>
+                            <li><i data-lucide="check"></i> Online instantly</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center;">Coming Soon</a>
+                    </div>
+
+                    <!-- Rust -->
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-icon"><i data-lucide="shield"></i></div>
+                            <div class="game-info">
+                                <h3>Rust</h3>
+                                <p>Hardcore Survival</p>
+                            </div>
+                        </div>
+                        <div class="game-price">Starting at €7.50/mo</div>
+                        <ul class="game-features">
+                            <li><i data-lucide="check"></i> Oxide Support</li>
+                            <li><i data-lucide="check"></i> DDoS Protection</li>
+                            <li><i data-lucide="check"></i> Auto Backups</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center;">Coming Soon</a>
+                    </div>
+
+                    <!-- ARK -->
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-icon"><i data-lucide="tent"></i></div>
+                            <div class="game-info">
+                                <h3>ARK: Survival</h3>
+                                <p>Evolved & Ascended</p>
+                            </div>
+                        </div>
+                        <div class="game-price">Starting at €10.00/mo</div>
+                        <ul class="game-features">
+                            <li><i data-lucide="check"></i> Cluster Support</li>
+                            <li><i data-lucide="check"></i> Fast Deployment</li>
+                            <li><i data-lucide="check"></i> Mod Manager</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center;">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                    <p style="color: var(--text-dim); line-height: 1.6; margin-bottom: 20px;">Premium game and web hosting solutions with exceptional performance and 24/7 support.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <i data-lucide="twitter" style="color: var(--text-dim); cursor: pointer;"></i>
+                        <i data-lucide="discord" style="color: var(--text-dim); cursor: pointer;"></i>
+                        <i data-lucide="instagram" style="color: var(--text-dim); cursor: pointer;"></i>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="minecraft.html">Minecraft</a></li>
+                        <li><a href="game.html">Other Games</a></li>
+                        <li><a href="vps.html">VPS Hosting</a></li>
+                        <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Panels</h4>
+                    <ul>
+                        <li><a href="#">Game Panel</a></li>
+                        <li><a href="#">VPS Panel</a></li>
+                        <li><a href="#">Client Area</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NodeWave. All rights reserved.</p>
+                <div class="payment-methods">
+                    <img src="paypal.svg" alt="PayPal">
+                    <img src="mastercard.svg" alt="Mastercard">
+                    <img src="visa.svg" alt="Visa">
+                    <img src="ideal.svg" alt="iDEAL">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

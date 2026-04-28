@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeWave | VPS Hosting - Ryzen 9 Performance</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+        @media (max-width: 1100px) {
+            .pricing-table {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .pricing-table {
+                grid-template-columns: 1fr;
+            }
+        }
+        .region-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .region-card.available {
+            opacity: 1;
+        }
+        .region-card.selected {
+            background: rgba(255,255,255,0.03) !important;
+            border: 2px solid var(--primary) !important;
+        }
+        .region-card.selected .region-status {
+            color: var(--primary) !important;
+            font-weight: 700;
+        }
+        .region-card:not(.available) {
+            opacity: 0.6;
+            cursor: default;
+        }
+        .region-card.available:hover:not(.selected) {
+            border-color: rgba(0, 123, 255, 0.4);
+            background: rgba(255,255,255,0.02);
+        }
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .price-card.popular {
+            border-color: var(--primary);
+            background: rgba(0, 123, 255, 0.05);
+        }
+        .badge {
+            position: absolute;
+            top: 28px;
+            right: -42px;
+            background: var(--primary);
+            color: white;
+            width: 160px;
+            padding: 8px 0;
+            transform: rotate(45deg);
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+        }
+        .price-card h3 {
+            font-size: 1.5rem;
+        }
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        .price-amount span {
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+        .spec-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .spec-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+        .spec-list li i {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Sliding Background Elements -->
+    <div class="bg-container" style="background-image: linear-gradient(rgba(11, 13, 23, 0.6), rgba(11, 13, 23, 0.95)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');"></div>
+
+    <canvas id="bg-canvas"></canvas>
+
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="game.html">Game Hosting</a></li>
+                    <li><a href="vps.html" style="color: white;">VPS Hosting</a></li>
+                    <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    <li><a href="fivem.html">FiveM Dedicated</a></li>
+                </ul>
+                <a href="javascript:void(0)" class="btn-login disabled-btn">Coming Soon</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" style="padding-top: 150px;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>VPS Hosting</h2>
+                    <p>Our VPS servers run on AMD Ryzen 9 9950X hardware for the best performance.</p>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h2 style="font-size: 2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Select <span style="color: var(--primary);">Region</span></h2>
+                </div>
+
+                <div class="region-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <!-- Frankfurt -->
+                    <div class="region-card available selected" onclick="selectRegion(this)">
+                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 5px; font-weight: 700;">DE</div>
+                        <div style="margin-bottom: 10px;"><img src="https://flagcdn.com/w80/de.png" alt="Germany" style="width: 52px; height: 34px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.4);"></div>
+                        <h4 style="font-size: 1rem; margin-bottom: 5px;">FRANKFURT</h4>
+                        <span class="region-status">ACTIVE NOW</span>
+                    </div>
+                    <!-- Chicago -->
+                    <div class="region-card available" onclick="selectRegion(this)">
+                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 5px; font-weight: 700;">US</div>
+                        <div style="margin-bottom: 10px;"><img src="https://flagcdn.com/w80/us.png" alt="United States" style="width: 52px; height: 34px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.4);"></div>
+                        <h4 style="font-size: 1rem; margin-bottom: 5px;">CHICAGO</h4>
+                        <span class="region-status">AVAILABLE</span>
+                    </div>
+                    <!-- Singapore -->
+                    <div class="region-card available" onclick="selectRegion(this)">
+                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 5px; font-weight: 700;">SG</div>
+                        <div style="margin-bottom: 10px;"><img src="https://flagcdn.com/w80/sg.png" alt="Singapore" style="width: 52px; height: 34px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.4);"></div>
+                        <h4 style="font-size: 1rem; margin-bottom: 5px;">SINGAPORE</h4>
+                        <span class="region-status">AVAILABLE</span>
+                    </div>
+                </div>
+
+                <script>
+                    function selectRegion(element) {
+                        // Remove selected state from all cards
+                        document.querySelectorAll('.region-card').forEach(card => {
+                            card.classList.remove('selected');
+                            const status = card.querySelector('.region-status');
+                            if (status) {
+                                status.innerText = 'AVAILABLE';
+                            }
+                        });
+
+                        // Add selected state to clicked card
+                        element.classList.add('selected');
+                        const activeStatus = element.querySelector('.region-status');
+                        if (activeStatus) {
+                            activeStatus.innerText = 'ACTIVE NOW';
+                        }
+                    }
+                </script>
+
+                <div class="pricing-table">
+                    <!-- Plan 1: 2 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">2 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€20<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 8GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 120GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 2: 3 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">3 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€30<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 160GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 3: 4 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">4 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€40<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 12GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 200GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 4: 5 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">5 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€50<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 16GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 260GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 5: 6 VCPU (Popular) -->
+                    <div class="price-card popular">
+                        <div class="badge">MOST POPULAR 🌟</div>
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">6 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€60<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 20GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 320GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 6: 8 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">8 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€80<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 24GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 420GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 7: 10 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">10 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€99<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 32GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 550GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 8: 12 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">12 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€120<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 40GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 700GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 9: 14 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">14 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€135<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 48GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 850GB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+
+                    <!-- Plan 10: 16 VCPU -->
+                    <div class="price-card">
+                        <div style="background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--border); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                            <i data-lucide="cpu" style="color: var(--primary);"></i>
+                            <div style="text-align: left;">
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 700;">Processor</div>
+                                <div style="font-weight: 700; font-size: 0.9rem;">Ryzen 9 9950X</div>
+                                <div style="font-size: 0.65rem; color: var(--text-dim);">Clock Speed: 4.3GHz - 5.7GHz</div>
+                            </div>
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--primary); text-align: left; margin-bottom: 10px;">16 VCPU</h2>
+                        <div class="price-amount" style="text-align: left;">€159<span> / month</span></div>
+                        <ul class="spec-list">
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 56GB DDR5 5600MT/s</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 1TB NVMe</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 10Gbit network</li>
+                            <li><i data-lucide="check" style="color: var(--primary);"></i> 17Tbit Game DDoS Protection</li>
+                        </ul>
+                        <a href="javascript:void(0)" class="btn-primary disabled-btn" style="text-align: center; width: 100%; margin-top: 10px;">Coming Soon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-block;"><img src="nodewave_logo.png" alt="NodeWave Logo"></a>
+                    <p style="color: var(--text-dim); line-height: 1.6; margin-bottom: 20px;">Premium game and web hosting solutions with exceptional performance and 24/7 support.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <i data-lucide="twitter" style="color: var(--text-dim); cursor: pointer;"></i>
+                        <i data-lucide="discord" style="color: var(--text-dim); cursor: pointer;"></i>
+                        <i data-lucide="instagram" style="color: var(--text-dim); cursor: pointer;"></i>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="minecraft.html">Minecraft</a></li>
+                        <li><a href="game.html">Other Games</a></li>
+                        <li><a href="vps.html">VPS Hosting</a></li>
+                        <li><a href="dedicated.html">Dedicated Servers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Panels</h4>
+                    <ul>
+                        <li><a href="#">Game Panel</a></li>
+                        <li><a href="#">VPS Panel</a></li>
+                        <li><a href="#">Client Area</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NodeWave. All rights reserved.</p>
+                <div class="payment-methods">
+                    <img src="paypal.svg" alt="PayPal">
+                    <img src="mastercard.svg" alt="Mastercard">
+                    <img src="visa.svg" alt="Visa">
+                    <img src="ideal.svg" alt="iDEAL">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
